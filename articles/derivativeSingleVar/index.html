@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="/js/app/configMathjax.js"></script>
+    <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/rainbow-obsidian.css" type="text/css" rel="stylesheet"/>
+    <title>scivey | Numerical Differentiation: Single-Variable</title>
+    <script src="/js/app/article.js"></script>
+  </head>
+  <body>
+    <div id="page-frame">
+      <div id="content-frame">
+        <div id="article-frame">
+          <div id="article-header">
+            <h3>Numerical Differentiation: Single-Variable
+            </h3>
+            <hr>
+          </div>
+          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>(This article assumes some basic familiarity with derivatives, but doesn&#39;t require heavy symbolic manipulation.)</p>
+<p>Consider:</p>
+<p><span id="_placeholder_0"><div class="block-diagram block-diagram-math"><script type="math/tex; mode=display">
+	y = f(x) = 2x^3 + 4x^2 + 2x + 8</script></div></span></p>
+<p>This equation has one dependent variable <script type="math/tex">x</script> and one independent variable <script type="math/tex">y</script>, which is a fancy way of saying that the value of <script type="math/tex">y</script> depends on <script type="math/tex">x</script></p>
+<p>The function <script type="math/tex">f(x)</script> above can tell us the value of <script type="math/tex">y</script> for any given value of <script type="math/tex">x</script>, but in itself that tells us very little about the relationship between the two.  By evaluating <script type="math/tex">f(x)</script> at many points, or equivalently by plotting it out visually, we could gain an idea of the relationship by watching how the output of <script type="math/tex">f(x)</script> changes for a given change in <script type="math/tex">x</script>. (In fact, taken to an extreme and made more formal, that&#39;s exactly what differentiation is.)</p>
+<p>This process would be tedious and, more importantly, too vague to automate.  The step-by-step instructions would boil down to: look at some points on a line, then look at some points that are, y&#39;know, maybe in that general area... and then, uh, I guess just tell me if it&#39;s kind of curvy or what.&quot;  That doesn&#39;t translate so well into code.  We need something more specific.</p>
+<p>That&#39;s where the derivative comes in.  But before we get bogged down in the math, let&#39;s identify the need for the derivative more abstractly.  Imagine we have a function <code>fOfX</code> equivalent to <script type="math/tex">f(x)</script> above, and a function <code>tellMeAboutFx</code> which returns information about the relationship between <code>fOfX</code>&#39;s input and output.  Treating <code>tellMeAboutFx</code> as a black-box, i.e. without thinking about implementation details, what would this function&#39;s inputs and outputs need to be in order to provide useful information?  What would that information be?</p>
+<p>If this is information will be used in an automated context, it isn&#39;t enough to say that the graph is &quot;one of the curvy ones.&quot;  Ideally, we would like a scalar, numeric value.  However, there is no way of precisely defining <script type="math/tex">f(x)</script> above in terms of a single number.  This is true by definition: <script type="math/tex">f(x)</script> is expressed in the form of an algebraic equation <em>because</em> it cannot be defined as a single value.</p>
+<p>If we want a single value but a single value can&#39;t describe the function&#39;s behavior as a whole, the next logical step is to define a value that represents the function&#39;s behavior over part of its length -- say at a single point.  In a two-dimensional function this is the slope, i.e. <script type="math/tex">f(x) / x</script>, and that is exactly what the derivative tells us.  To wrap up all these abstractions, we use the derivative to find out about the relationship between input and output at a point along a function, because the relationship along the whole function is too complicated to express as a single number by definition.  The derivative&#39;s input is a location along the function&#39;s zeros, and its output represents the relationship at that location.</p>
+<p>More formally, The derivative of a function <script type="math/tex">f(x)</script> is a second function which returns the rate of change of <script type="math/tex">f</script> at any point <script type="math/tex">x</script>.  The most &quot;pure&quot; way to do this, in terms of abstract mathematics, is with a small set of symbolic manipulations derived from the fundamental theorem of calculus (especially the infinitesimal).  One of these manipulations, the <em>power rule</em>, states that a term of the form <script type="math/tex">ax^b</script> in a given function  should be replaced with the term <script type="math/tex">bax^{b-1}</script> in that function&#39;s derivative.  Applying that rule to each of the terms in <script type="math/tex">f(x)</script>, we get:</p>
+<p><span id="_placeholder_1"><div class="block-diagram block-diagram-math"><script type="math/tex; mode=display">
+	f(x) = 2x^3 + 4x^2 + 2x + 8 \\
+	f^{\prime}(x) = (3)(2)x^{3-1} + (2)(4)x^{2-1} + (1)(2)x^{1-1} + (0)(8) \\
+	f^{\prime}(x) = 6x^2 + 8x + 2</script></div></span></p>
+<p>This solution is the exact derivative of <script type="math/tex">f(x)</script>.  It&#39;s also messy, time-consuming and error-prone, especially as the number and order of terms in <script type="math/tex">f(x)</script> increases.  Another problem: we often need to determine the derivative of a function based on collected data.  In such cases there are no terms to handle symbolically, because the function itself is an unknown.  Lastly, even with a clean &quot;textbook&quot; function to work with, symbolic manipulation isn&#39;t easily expressed in traditional programming languages.  There are specialized computer algebra systems that are optimized for these domains (e.g. Mathematica, Maxima, SymPy), but they are slower than numeric methods and in many real-world applications are simply unnecessary.</p>
+<p>In traditional programming languages, these problems can be handled more naturally with the finite difference method.  This method relies on the limit definition of the derivative.  Let&#39;s review that briefly.</p>
+<p>We have already stated that the value of a <script type="math/tex">f^{\prime}(x)</script> at <script type="math/tex">x = c</script> is equal to the slope of the line tangent to <script type="math/tex">f(x)</script> at <script type="math/tex">x = c</script>.  The &#39;limit definition&#39; is a different method to reach the same conclusion, but in a way that can be more intuitive when our goal is numerical approximation (where, by definition, we are trying to get an answer within some range of the &#39;true&#39; value).</p>
+<p>Under the limit definition, we examine the slope of a straight line between two points on our original function <script type="math/tex">f(x)</script>.  Since a tangent line to a curve only touches at a single point by definition, it stands to reason that our line will behave more and more like a tangent line as as our two movable points become arbitrarily close.</p>
+<p>As an example: if we draw a line between <script type="math/tex">( c, f(c) )</script> and <script type="math/tex">( (c - 5), f(c - 5) )</script>, there could be a significant difference between the slope of that line and the slope of the line tangent to <script type="math/tex">c, f(c)</script> (depending on the exact function).  Assuming that there is no local maximum or minimum in the range we are examing, then the slope of <script type="math/tex">( c, f(c) )</script> through <script type="math/tex">( (c - 1), f(c-1) )</script> will be closer to the slope of the tangent line.  The slope of <script type="math/tex">( c, f(c) )</script> through <script type="math/tex">( (c - 0.1), f(c - 0.1) )</script> will be even closer, and so on.</p>
+<p>For traditional programming languages, this limit-based method is far more straightforward than symbolic manipulation.  But is it accurate?  Let&#39;s implement the symbolic and numeric derivatives and find out.</p>
+<p>First, we define <script type="math/tex">f(x)</script> and its symbolic derivative:</p>
+<pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">func</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="comment">// 2x^3 + 4x^2 + 2x + 8</span>
+    <span class="keyword">return</span> (<span class="constant numeric">2</span> <span class="keyword operator">*</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">3</span>)) <span class="keyword operator">+</span> (<span class="constant numeric">4</span> <span class="keyword operator">*</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">2</span>)) <span class="keyword operator">+</span> (<span class="constant numeric">2</span> <span class="keyword operator">*</span> x) <span class="keyword operator">+</span> <span class="constant numeric">8</span>;
+}
+
+<span class="storage">var</span> <span class="entity function">funcPrimeSymbolic</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="comment">// 6x^2 + 8x + 2</span>
+    <span class="keyword">return</span> (<span class="constant numeric">6</span> <span class="keyword operator">*</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">2</span>)) <span class="keyword operator">+</span> (<span class="constant numeric">8</span> <span class="keyword operator">*</span> x) <span class="keyword operator">+</span> <span class="constant numeric">2</span>;
+}</code></pre>
+<p>Next we define a function representing the numerical derivative of <code>func</code> in terms of the limit definition, and then compare its output to that of <code>funcPrimeSymbolic.</code></p>
+<pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">funcPrimeNumeric</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="keyword">var</span> _h <span class="keyword operator">=</span> Math.<span class="function call">pow</span>(<span class="constant numeric">2</span>,<span class="keyword operator">-</span><span class="constant numeric">20</span>);
+    <span class="keyword">var</span> y1 <span class="keyword operator">=</span> <span class="function call">func</span>(x <span class="keyword operator">-</span> _h);
+    <span class="keyword">var</span> y2 <span class="keyword operator">=</span> <span class="function call">func</span>(x <span class="keyword operator">+</span> _h);
+    <span class="keyword">return</span> ( (y2 <span class="keyword operator">-</span> y1) / (<span class="constant numeric">2</span> <span class="keyword operator">*</span> _h) )
+}
+
+console.<span class="support method">log</span>( <span class="function call">funcPrimeSymbolic</span>(<span class="constant numeric">10</span>) );    <span class="comment">// 682</span>
+console.<span class="support method">log</span>( <span class="function call">funcPrimeNumeric</span>(<span class="constant numeric">10</span>) );    <span class="comment">// 682</span>
+
+console.<span class="support method">log</span>( <span class="function call">funcPrimeSymbolic</span>(<span class="constant numeric">35</span>) );    <span class="comment">// 7632</span>
+console.<span class="support method">log</span>( <span class="function call">funcPrimeNumeric</span>(<span class="constant numeric">35</span>) );    <span class="comment">// 7632</span>
+
+console.<span class="support method">log</span>( <span class="function call">funcPrimeSymbolic</span>(<span class="constant numeric">5.83</span>) );    <span class="comment">// 252.5734</span>
+console.<span class="support method">log</span>( <span class="function call">funcPrimeNumeric</span>(<span class="constant numeric">5.83</span>) );    <span class="comment">// 252.57339996099472</span></code></pre>
+<p>The symbolic and numerical derivatives are in agreement, other than a small discrepancy at <script type="math/tex">x = 5.83</script> due to the effect of floating point error.  </p>
+<p>We can refactor this code into a more reusable form by making use of Javascript&#39;s first-class functions.  Specifically, we can transform <code>funcPrimeNumeric</code> into a higher-order function which accepts a reference to any continuous function <code>fn</code> and returns a new function representing <code>fn</code>&#39;s first derivative.</p>
+<pre><code class="lang-javascript"><span class="comment">// returns derivative of any single-variable function `fn`</span>
+<span class="storage">var</span> <span class="entity function">differentiate</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn) {
+    <span class="keyword">var</span> _h <span class="keyword operator">=</span> Math.<span class="function call">pow</span>(<span class="constant numeric">2</span>,<span class="keyword operator">-</span><span class="constant numeric">20</span>);     
+        <span class="comment">// also cache _h for efficiency,</span>
+        <span class="comment">// so Math.pow(2,-20) isn&#39;t called</span>
+        <span class="comment">// on each call to `deriv`</span>
+
+    <span class="storage">var</span> <span class="entity function">deriv</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+        <span class="keyword">var</span> y1 <span class="keyword operator">=</span> <span class="function call">fn</span>(x <span class="keyword operator">-</span> _h);
+        <span class="keyword">var</span> y2 <span class="keyword operator">=</span> <span class="function call">fn</span>(x <span class="keyword operator">+</span> _h);
+        <span class="keyword">var</span> slope <span class="keyword operator">=</span> (y2 <span class="keyword operator">-</span> y1) / (<span class="constant numeric">2</span> <span class="keyword operator">*</span> _h);
+        <span class="keyword">return</span> slope;
+    }
+
+    <span class="keyword">return</span> deriv;
+}</code></pre>
+<p>As a sanity-check, compare the function returned by <code>differentiate</code> to our specialized <code>funcPrimeNumeric</code> function implemented earlier:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> derivedFunc <span class="keyword operator">=</span> <span class="function call">differentiate</span>(func);
+
+console.<span class="support method">log</span>( <span class="function call">funcPrimeSymbolic</span>(<span class="constant numeric">10</span>) );    <span class="comment">// 682</span>
+console.<span class="support method">log</span>( <span class="function call">funcPrimeNumeric</span>(<span class="constant numeric">10</span>) );    <span class="comment">// 682</span>
+console.<span class="support method">log</span>( <span class="function call">derivedFunc</span>(<span class="constant numeric">10</span>) );    <span class="comment">// 682</span>
+
+console.<span class="support method">log</span>( <span class="function call">funcPrimeSymbolic</span>(<span class="constant numeric">5.83</span>) );    <span class="comment">// 252.5734</span>
+console.<span class="support method">log</span>( <span class="function call">funcPrimeNumeric</span>(<span class="constant numeric">5.83</span>) );    <span class="comment">// 252.57339996099472</span>
+console.<span class="support method">log</span>( <span class="function call">derivedFunc</span>(<span class="constant numeric">5.83</span>) );        <span class="comment">// 252.57339996099472</span></code></pre>
+<p> Let&#39;s make sure <code>differentiate</code> really is generalizable by testing it against a new function, <script type="math/tex">g(x)</script>, and its symbolically determined derivative as given by:</p>
+<p><span id="_placeholder_2"><div class="block-diagram block-diagram-math"><script type="math/tex; mode=display">
+	g(x) = x^3 + 5x^2 + 7 \\
+	g^{\prime}(x) = (3)x^{3-1} + (2)(5)x^{2-1} + (0)(7) \\
+	g^{\prime}(x) = 3x^2 + 10x</script></div></span></p>
+<p>In code:</p>
+<pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">gFunc</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="comment">// g(x) = x^3 + 5x^2 + 7</span>
+    <span class="keyword">var</span> g <span class="keyword operator">=</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">3</span>) <span class="keyword operator">+</span> (<span class="constant numeric">5</span> <span class="keyword operator">*</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">2</span>)) <span class="keyword operator">+</span> <span class="constant numeric">7</span>;
+    <span class="keyword">return</span> g;
+}
+
+<span class="storage">var</span> <span class="entity function">gPrimeSymbolic</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="comment">// g&#39;(x) = 3x^2 + 10x</span>
+    <span class="keyword">return</span> (<span class="constant numeric">3</span> <span class="keyword operator">*</span> Math.<span class="function call">pow</span>(x,<span class="constant numeric">2</span>)) <span class="keyword operator">+</span> (<span class="constant numeric">10</span> <span class="keyword operator">*</span> x);
+}
+
+<span class="keyword">var</span> gDifferentiated <span class="keyword operator">=</span> <span class="function call">differentiate</span>(gFunc);
+
+console.<span class="support method">log</span>( <span class="function call">gPrimeSymbolic</span>(<span class="constant numeric">20</span>) );    <span class="comment">// 1400</span>
+console.<span class="support method">log</span>( <span class="function call">gDifferentiated</span>(<span class="constant numeric">20</span>) );    <span class="comment">// 1400</span>
+
+console.<span class="support method">log</span>( <span class="function call">gPrimeSymbolic</span>(<span class="constant numeric">15.68</span>) );    <span class="comment">// 894.38719999999999</span>
+console.<span class="support method">log</span>( <span class="function call">gDifferentiated</span>(<span class="constant numeric">15.68</span>) );    <span class="comment">// 894.38719998786926</span></code></pre>
+<p>As before, the values are in agreement except for a small floating point error.</p>
+<p>As a finishing touch, let&#39;s try using <code>differentiate</code> on a function to obtain the second derivative of <script type="math/tex">g(x)</script>.  We&#39;ll compare it against the symbolically-determined second derivative, which is: </p>
+<p><span id="_placeholder_3"><div class="block-diagram block-diagram-math"><script type="math/tex; mode=display">
+	g^{\prime}(x) = 3x^2 + 10x \\
+	g^{\prime\prime}(x) = (2)(3)x^{2-1} + (1)(10)x^{1-1} \\
+	g^{\prime\prime}(x) = 6x + 10</script></div></span></p>
+<p>Now we get the second derivative function by calling <code>differentiate</code> with the first derivative obtained above, <code>gDifferentiated</code>, and compare to our symbolic <script type="math/tex">g^{\prime\prime}(x)</script></p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> gSecondDiff <span class="keyword operator">=</span> <span class="function call">differentiate</span>(gDifferentiated);
+<span class="storage">var</span> <span class="entity function">gSecondSymbolic</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="keyword">return</span> (<span class="constant numeric">6</span> <span class="keyword operator">*</span> x) <span class="keyword operator">+</span> <span class="constant numeric">10</span>;
+}
+
+console.<span class="support method">log</span>( <span class="function call">gSecondDiff</span>(<span class="constant numeric">20</span>) );    <span class="comment">// 130</span>
+console.<span class="support method">log</span>( <span class="function call">gSecondSymbolic</span>(<span class="constant numeric">20</span>) );    <span class="comment">// 130</span>
+
+console.<span class="support method">log</span>( <span class="function call">gSecondDiff</span>(<span class="constant numeric">15.68</span>) );    <span class="comment">// 103.5</span>
+console.<span class="support method">log</span>( <span class="function call">gSecondSymbolic</span>(<span class="constant numeric">15.68</span>) );    <span class="comment">// 104.08</span></code></pre>
+<p>The output for 15.68 shows that the second derivative obtained by calling <code>differentiate</code> on its own result is reasonable, but not entirely reliable.  Percent difference against the symbolic second derivative is much greater than that for the calculation of the first derivative:</p>
+<p><span id="_placeholder_4"><div class="block-diagram block-diagram-math"><script type="math/tex; mode=display">
+	\frac{|894.38719999999999 - 894.38719998786926|}{894.38719999999999} * 100\% \approx 1.356E^{-9} \\
+	\\
+	\frac{|104.08 - 103.5|}{104.08} * 100\% \approx 0.558\%</script></div></span></p>
+<p>This is due to the same floating point issues observed in the first-order derivative, but the effect is much larger because the error is compounded by <code>differentiate</code> operating on the value twice before it is returned. This kind of error is expected with floating point numbers.  Dedicated engineering and computer algebra systems handle this problem with &quot;arbitrary precision&quot; floating point values, which provide greater accuracy at the cost of slower processing and increased memory consumption.  That extra precision isn&#39;t necessary for the majority of Javascript applications, so a discrepancy of 0.558% isn&#39;t too much to worry about.</p>
+<p>In the next article, we&#39;ll generalize this method to functions with two or more free variables.</p>
+<div id="article_biblio"></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="aside-frame"></div>
+    </div>
+  </body>
+</html>
