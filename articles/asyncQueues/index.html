@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="/js/app/configMathjax.js"></script>
+    <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/rainbow-obsidian.css" type="text/css" rel="stylesheet"/>
+    <title>scivey | Async Queues for Non-Async-Safe Functions</title>
+    <script src="/js/app/article.js"></script>
+  </head>
+  <body>
+    <div id="page-frame">
+      <div id="content-frame">
+        <div id="article-frame">
+          <div id="article-header">
+            <h3>Async Queues for Non-Async-Safe Functions
+            </h3>
+            <hr>
+          </div>
+          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Many Node.js packages follow the same API convention: lightweight functions are synchronous, and functions with heavier processing accept a callback with a signature of <code>(error, response1[, response2...])</code>.  The exact line between heavier and lighter processing can be a matter of opinion, and this can complicate things when packages with similar purposes follow different conventions.  </p>
+<p>Template engines are a good example.  Internally, these consist of two phases: compilation, in which a template string is turned into a callable template function, and rendering, where a set of variables is passed to the template function and inserted at the appropriate positions.  Some engines have an asynchronous interface to these phases, while others use synchronous calls. This is not a problem in itself, but presents a few issues for the maintainability and readability of dependent code.</p>
+<p>One issue is flexibility.  Ideally, modules with similar purposes should be interchangeable with minimal changes to other code - replacing one template engine with another shouldn&#39;t require significant refactoring.  </p>
+<p>Another problem is the added complexity to flow control.  In applications that delegate processing to a number of other modules, such as static site generators, data is usually moved through a kind of asynchronous pipeline.  Adding synchronous function calls in the middle of the pipeline can get ugly.</p>
+<p>Most of these problems can be handled with a wrapper around the offending module&#39;s API.  At its most basic, this can be a function which pushes the underlying synchronous call onto the event loop.  While the underlying processing is still performed synchronously, callers can treat the wrapped module like any other asynchronous call:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> jade <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;jade&quot;);
+<span class="keyword">var</span> fs <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;fs&quot;);
+
+<span class="keyword">var</span> locals <span class="keyword operator">=</span> {title: &quot;Test Page&quot;, content: &quot;Nothing to see here.&quot; };
+
+
+<span class="comment">// calling Jade synchronously:</span>
+fs.<span class="function call">readFile</span>(&quot;.<span class="string regexp"><span class="string regexp open">/</span>templates<span class="string regexp close">/</span></span>testPage.jade&quot;, &quot;utf8&quot;, <span class="keyword">function</span>(err, stringOfJade) {
+    <span class="keyword">var</span> templateFn <span class="keyword operator">=</span> jade.<span class="function call">compile</span>(stringOfJade);
+    <span class="keyword">var</span> html <span class="keyword operator">=</span> <span class="function call">templateFn</span>(locals);
+    <span class="comment">// `html` contains the rendered page</span>
+})
+
+
+
+<span class="comment">// calling Jade asynchronously through a wrapper:</span>
+
+<span class="keyword">var</span> jadeWrapper <span class="keyword operator">=</span> {
+    <span class="entity function">compile</span>: <span class="keyword">function</span>(jadeString, callback) {
+        templateFn <span class="keyword operator">=</span> jade.<span class="function call">compile</span>(jadeString);
+        <span class="function call">callback</span>(<span class="constant language">null</span>, templateFn);
+    }
+}
+
+fs.<span class="function call">readFile</span>(&quot;.<span class="string regexp"><span class="string regexp open">/</span>templates<span class="string regexp close">/</span></span>testPage.jade&quot;, &quot;utf8&quot;, <span class="keyword">function</span>(err, stringOfJade) {
+
+    jadeWrapper.<span class="function call">compile</span>(stringOfJade, <span class="keyword">function</span>(err, templateFn) {
+        <span class="keyword">var</span> html <span class="keyword operator">=</span> <span class="function call">templatFn</span>(locals);
+        <span class="comment">// as before, `html` contains the rendered page.</span>
+    });
+}</code></pre>
+<p>Some modules have a more subtle problem with async calls: though they present an asynchronous interface, they rely on package-level state in a way that makes it unsafe to hand them more than one task at a time.  In the long term, it&#39;s best to either find a replacement or refactor the code so it can safely handle multiple requests - especially if being used in a real-time production environment.  In the short term, we can insulate dependent code from the problem by creating
+an asynchronous queue.  </p>
+<p>An async queue presents an interface indistinguishable from an async-safe version of the unsafe module.  Internally, it queues requests and makes sure that the underlying function is only asked to handle one task at a time.  All state specific to handling the unsafe function is encapsulated within a closure, which keeps the other code clean.  A major advantage of this is that the system as a whole (async queue + module) can be replaced by an async-safe module without any breaking changes to callers.</p>
+<pre><code class="lang-javascript">
+<span class="keyword">var</span> asyncQueue <span class="keyword operator">=</span> (<span class="keyword">function</span>() {
+    <span class="keyword">var</span> _queue <span class="keyword operator">=</span> [];
+    <span class="keyword">var</span> _working <span class="keyword operator">=</span> <span class="constant language">false</span>
+    <span class="keyword">var</span> _interval <span class="keyword operator">=</span> <span class="constant language">false</span>;
+    <span class="keyword">var</span> _intervalPeriod <span class="keyword operator">=</span> <span class="constant numeric">25</span>;
+    <span class="keyword">var</span> unsafeMod <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;unsafemodule&quot;);
+
+    <span class="storage">var</span> <span class="entity function">callUnsafe</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(data, callback) {
+        unsafeMod.<span class="function call">process</span>(data, <span class="keyword">function</span>(err, result) {
+            _working <span class="keyword operator">=</span> <span class="constant language">false</span>;
+            <span class="function call">callback</span>(<span class="constant language">null</span>, result);
+        })
+    }
+
+
+    <span class="storage">var</span> <span class="entity function">pollCycle</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {
+        <span class="keyword">if</span> (<span class="keyword operator">!</span> _working) {
+            <span class="keyword">if</span> (_queue.<span class="support property">length</span> <span class="keyword operator">&gt;</span> <span class="constant numeric">0</span> ) {
+                _working <span class="keyword operator">=</span> <span class="constant language">true</span>;
+                <span class="keyword">var</span> _job <span class="keyword operator">=</span> queue.<span class="function call">pop</span>();
+                <span class="function call">callUnsafe</span>(_job.input, _job.cb);
+            }
+        }
+    }
+
+    <span class="storage">var</span> <span class="entity function">startPolling</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {
+        <span class="keyword">if</span> ( <span class="keyword operator">!</span> _interval ) {
+            <span class="keyword">var</span> _timeoutCounter <span class="keyword operator">=</span> <span class="constant numeric">0</span>;
+            <span class="storage">var</span> <span class="entity function">_intervalFn</span> <span class="keyword operator">=</span> <span class="keyword">function</span>() {
+                <span class="keyword">if</span> ( <span class="keyword operator">!</span> _working ) {
+                    <span class="keyword">if</span> (_queue.<span class="support property">length</span> <span class="keyword operator">&gt;</span> <span class="constant numeric">0</span>) {
+                        <span class="function call">pollCycle</span>();
+                    } <span class="keyword">else</span> {
+                        _timeoutCounter<span class="keyword operator">+</span><span class="keyword operator">+</span>;
+                        <span class="keyword">if</span> (_timeoutCounter <span class="keyword operator">&gt;</span> <span class="constant numeric">10</span>) {
+                            <span class="function call">clearInterval</span>(_interval);
+                            _interval <span class="keyword operator">=</span> <span class="constant language">false</span>;
+                        }
+                    }
+                }
+            }
+
+            <span class="support function">setInterval</span>(_intervalFn, intervalPeriod); 
+        }
+    }
+
+
+    <span class="storage">var</span> <span class="entity function">push</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(input, callback) {
+        <span class="keyword">var</span> job <span class="keyword operator">=</span> {
+            input: input,
+            cb: callback,
+        }
+        _queue.<span class="support method">push</span>(job);
+        <span class="function call">startPolling</span>();
+    }
+
+    <span class="keyword">return</span> {
+        push: push
+    };
+
+})();
+
+<span class="keyword">var</span> _ <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;underscore&quot;);
+<span class="keyword">var</span> dataSet <span class="keyword operator">=</span> [&quot;elemOne&quot;, &quot;elemTwo&quot;, &quot;elemThree&quot;];
+
+<span class="storage">var</span> <span class="entity function">safeModuleCall</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(data, callback) {
+    asyncQueue.<span class="support method">push</span>(data, callback);
+}
+
+_.<span class="function call">each</span>(dataSet, <span class="keyword">function</span>(oneElem) {
+    <span class="keyword">var</span> _elem <span class="keyword operator">=</span> oneElem;
+    <span class="function call">safeModuleCall</span>(_elem, <span class="keyword">function</span>(err, result) {
+        console.<span class="support method">log</span>(_elem <span class="keyword operator">+</span> &quot; processed to: &quot; <span class="keyword operator">+</span> result);
+    });
+});</code></pre>
+<p>Notice that three async calls are made in short succession, but <code>asyncQueue</code> ensures that only one call at a time is made by the underlying <code>unsafeMod</code> reference.  Also note that <code>safeModuleCall</code> is called in exactly the same way as a natively async-safe version of the module.  I.e., if the module were already async-safe, the code would look like this:</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> safeModule <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;safeModule&quot;);
+<span class="keyword">var</span> _ <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;underscore&quot;);
+
+<span class="keyword">var</span> dataSet <span class="keyword operator">=</span> [&quot;elemOne&quot;, &quot;elemTwo&quot;, &quot;elemThree&quot;];
+
+_.<span class="function call">each</span>(dataSet, <span class="keyword">function</span>(oneElem) {
+    <span class="keyword">var</span> _elem <span class="keyword operator">=</span> oneElem;
+    <span class="function call">safeModule</span>(_elem, <span class="keyword">function</span>(err, result) {
+        console.<span class="support method">log</span>(_elem <span class="keyword operator">+</span> &quot; processed to: &quot; <span class="keyword operator">+</span> result);
+    });
+});</code></pre>
+<p>The identical function signatures and logic make it easy to replace the unsafe code when convenient, and without introducing breaking changes.  This makes it an effective short-term solution</p>
+<div id="article_biblio"></div></div>
+          </div>
+        </div>
+      </div>
+      <div id="aside-frame"></div>
+    </div>
+  </body>
+</html>
