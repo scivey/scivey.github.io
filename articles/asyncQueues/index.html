@@ -31,6 +31,7 @@
 
 <span class="comment">// calling Jade synchronously:</span>
 fs.<span class="function call">readFile</span>(&quot;.<span class="string regexp"><span class="string regexp open">/</span>templates<span class="string regexp close">/</span></span>testPage.jade&quot;, &quot;utf8&quot;, <span class="keyword">function</span>(err, stringOfJade) {
+
     <span class="keyword">var</span> templateFn <span class="keyword operator">=</span> jade.<span class="function call">compile</span>(stringOfJade);
     <span class="keyword">var</span> html <span class="keyword operator">=</span> <span class="function call">templateFn</span>(locals);
     <span class="comment">// `html` contains the rendered page</span>
@@ -42,8 +43,10 @@ fs.<span class="function call">readFile</span>(&quot;.<span class="string regexp
 
 <span class="keyword">var</span> jadeWrapper <span class="keyword operator">=</span> {
     <span class="entity function">compile</span>: <span class="keyword">function</span>(jadeString, callback) {
-        templateFn <span class="keyword operator">=</span> jade.<span class="function call">compile</span>(jadeString);
-        <span class="function call">callback</span>(<span class="constant language">null</span>, templateFn);
+        process.<span class="function call">nextTick</span>(<span class="keyword">function</span>() {
+            templateFn <span class="keyword operator">=</span> jade.<span class="function call">compile</span>(jadeString);
+            <span class="function call">callback</span>(<span class="constant language">null</span>, templateFn);
+        });
     }
 }
 
