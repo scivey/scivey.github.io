@@ -11,12 +11,15 @@ div.content-block {
   background: #00ff00;
   min-height: 100px; }
 
-@media screen and (min-device-width: 321px) {
+@media screen and (min-device-width: 481px) {
   body {
     background: #ff00ff; } }
-@media screen and (max-device-width: 320px) {
+@media screen and (max-device-width: 480x) {
   body {
-    background: #ff0000; } }
+    background: #ffff00; } }
+@media screen and (max-device-height: 480px) {
+  body {
+    background: #ffffff; } }
 @media all and (min-width: 600px) {
   div.page-frame {
     width: 600px;
