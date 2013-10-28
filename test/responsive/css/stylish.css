@@ -22,7 +22,7 @@ div.content-block {
     width: 100%;
     display: block; }
 
-  body {
+  .content-block {
     font-size: 16px; } }
 @media screen and (min-width: 601px) {
   div.page-frame {
@@ -34,7 +34,7 @@ div.content-block {
     width: 45%;
     display: inline-block; }
 
-  body {
+  .content-block {
     font-size: 16px; } }
 @media screen and (device-width-max: 480px) {
   body {
@@ -47,7 +47,7 @@ div.content-block {
     width: 100%;
     display: block; }
 
-  body {
+  .content-block {
     font-size: 24px; } }
 @media screen and (device-height-max: 480px) {
   body {
@@ -60,5 +60,5 @@ div.content-block {
     width: 100%;
     display: block; }
 
-  body {
+  .content-block {
     font-size: 24px; } }
