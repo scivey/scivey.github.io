@@ -17,39 +17,7 @@ div.content-block {
 
   body {
     font-size: 16px; } }
-@media screen and (min-device-width: 481px) {
-  body {
-    background: #ff00ff; }
-
-  body {
-    font-size: 16px; } }
-@media screen and (max-device-height: 480px) {
-  body {
-    background: #ffff00; }
-
-  div.page-frame {
-    background: #ff0000; }
-
-  div.content-block {
-    width: 100%;
-    display: block; }
-
-  body {
-    font-size: 24px; } }
-@media screen and (max-device-width: 480px) {
-  body {
-    background: #990000; }
-
-  div.page-frame {
-    background: #ff0000; }
-
-  div.content-block {
-    width: 100%;
-    display: block; }
-
-  body {
-    font-size: 24px; } }
-@media screen and (min-width: 600px) {
+@media screen and (min-device-height: 481px) and (min-width: 600px) {
   div.page-frame {
     width: 600px;
     margin-left: auto;
@@ -58,10 +26,23 @@ div.content-block {
   div.content-block {
     width: 45%;
     display: inline-block; } }
-@media screen and (max-width: 600px) {
+@media screen and (min-device-height: 481px) and (max-width: 600px) {
   div.page-frame {
     background: #ff0000; }
 
   div.content-block {
     width: 100%;
     display: block; } }
+@media screen and (max-device-height: 480px) {
+  body {
+    background: #00ff00; }
+
+  div.page-frame {
+    background: #ff0000; }
+
+  div.content-block {
+    width: 100%;
+    display: block; }
+
+  body {
+    font-size: 24px; } }
