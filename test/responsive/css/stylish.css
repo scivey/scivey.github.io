@@ -11,7 +11,20 @@ div.content-block {
   background: #00ff00;
   min-height: 100px; }
 
-@media screen and (max-width: 480px) {
+@media screen and (device-width-max: 480px) {
+  body {
+    background: #ff00ff; }
+
+  div.page-frame {
+    background: #ff0000; }
+
+  div.content-block {
+    width: 100%;
+    display: block; }
+
+  body {
+    font-size: 24px; } }
+@media screen and (device-height-max: 480px) {
   body {
     background: #ff00ff; }
 
