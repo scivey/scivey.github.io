@@ -11,6 +11,18 @@ div.content-block {
   background: #00ff00;
   min-height: 100px; }
 
+@media screen and (min-device-height: 481px) {
+  body {
+    background: #ff00ff; }
+
+  body {
+    font-size: 16px; } }
+@media screen and (min-device-width: 481px) {
+  body {
+    background: #ff00ff; }
+
+  body {
+    font-size: 16px; } }
 @media screen and (max-device-height: 480px) {
   body {
     background: #ffff00; }
@@ -24,21 +36,9 @@ div.content-block {
 
   body {
     font-size: 24px; } }
-@media screen and (min-device-height: 481px) {
-  body {
-    background: #ff00ff; }
-
-  body {
-    font-size: 16px; } }
-@media screen and (min-device-width: 481px) {
-  body {
-    background: #ff00ff; }
-
-  body {
-    font-size: 16px; } }
 @media screen and (max-device-width: 480px) {
   body {
-    background: #ffff00; }
+    background: #990000; }
 
   div.page-frame {
     background: #ff0000; }
