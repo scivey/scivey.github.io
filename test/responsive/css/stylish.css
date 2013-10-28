@@ -11,22 +11,7 @@ div.content-block {
   background: #00ff00;
   min-height: 100px; }
 
-@media screen and (min-device-width: 481px) {
-  body {
-    background: #ff00ff; }
-
-  body {
-    font-size: 16px; }
-
-  div.page-frame {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto; }
-
-  div.content-block {
-    width: 45%;
-    display: inline-block; } }
-@media screen and (max-device-width: 480x) {
+@media screen and (max-device-height: 480px) {
   body {
     background: #ffff00; }
 
@@ -39,16 +24,12 @@ div.content-block {
 
   body {
     font-size: 24px; } }
-@media screen and (max-device-height: 480px) {
+@media screen and (min-device-height: 481px) {
   body {
-    background: #ffffff; }
+    background: #ff00ff; }
 
-  div.page-frame {
-    background: #ff0000; }
-
-  div.content-block {
-    width: 100%;
-    display: block; } }
+  body {
+    font-size: 16px; } }
 @media screen and (min-width: 600px) {
   div.page-frame {
     width: 600px;
