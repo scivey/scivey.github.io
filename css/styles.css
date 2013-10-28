@@ -518,30 +518,69 @@ button {
   #page-frame:after {
     clear: both; }
 
+/*
 #aside-frame {
-  display: block;
-  float: left;
-  margin-right: 2.35765%;
-  width: 23.23176%;
-  margin-right: 0;
-  min-height: 50px; }
-  #aside-frame:last-child {
-    margin-right: 0; }
+	@include span-columns(3);
+	@include omega;
+	min-height: 50px;
+	//background-color: tint(#00ff00, 50%);
+}
 
 #content-frame {
-  display: block;
-  float: left;
-  margin-right: 2.35765%;
-  width: 74.41059%;
-  background-color: #fcfcd8;
-  border-width: 0px 2px 0px 2px;
-  border-style: solid;
-  border-color: #666666;
-  padding: 3.0em;
-  padding-right: 2.0em; }
-  #content-frame:last-child {
-    margin-right: 0; }
+	@include span-columns(9);
+	//background-color: tint(#ffa500, 50%);
+	background-color: tint($bg-col, 20%);
 
+	border-width: 0px 2px 0px 2px;
+	border-style: solid;
+	border-color: #666666;
+	padding: 3.0em;
+	padding-right: 2.0em;
+}
+
+*/
+@media all and (min-width: 800px) {
+  #aside-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    margin-right: 0;
+    min-height: 50px; }
+    #aside-frame:last-child {
+      margin-right: 0; }
+
+  #content-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 74.41059%;
+    background-color: #fcfcd8;
+    border-width: 0px 2px 0px 2px;
+    border-style: solid;
+    border-color: #666666;
+    padding: 3.0em;
+    padding-right: 2.0em; }
+    #content-frame:last-child {
+      margin-right: 0; } }
+@media all and (max-width: 799px) {
+  #aside-frame {
+    display: none; }
+
+  #content-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 100%;
+    margin-right: 0;
+    background-color: #fcfcd8;
+    border-width: 0px 2px 0px 2px;
+    border-style: solid;
+    border-color: #666666;
+    padding: 3.0em;
+    padding-right: 2.0em; }
+    #content-frame:last-child {
+      margin-right: 0; } }
 #article-list-head {
   margin-bottom: 4.0rem; }
 
@@ -552,7 +591,8 @@ button {
   vertical-align: top;
   padding: 1.0em;
   margin-top: 0px;
-  width: 500px;
+  width: inherit;
+  height: inherit;
   background: #fafa9e;
   display: inline-block;
   border-width: 1px 2px 1px 0.5px;
@@ -571,7 +611,7 @@ button {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(75%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.1)));
   background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.1) 100%);
   background-image: linear-gradient(to right,rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.1) 100%);
-  background-color: #c7fcc0; }
+  background-color: #EA4B4B; }
 
 .article-list-title {
   margin-left: 2.0rem;
@@ -580,7 +620,7 @@ button {
 
 .article-list-thumb {
   vertical-align: top;
-  width: 100px;
+  width: 0px;
   max-height: 200px;
   display: inline-block; }
   .article-list-thumb img {
@@ -612,6 +652,8 @@ span.bibref:hover:before {
   .block-diagram.block-diagram-pic {
     background-color: #e2e2ba;
     border: 2px solid black; }
+    .block-diagram.block-diagram-pic > img {
+      max-width: 90%; }
   .block-diagram.block-diagram-math {
     border: 1px solid #bbbbbb; }
   .block-diagram .block-diagram-caption {
