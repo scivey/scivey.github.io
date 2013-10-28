@@ -1,0 +1,422 @@
+.blend-box {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: white;
+  margin: 5px; }
+
+.float-text {
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  background: red;
+  border: 2px solid black; }
+
+div.blend-box-container .blend-box-1 {
+  background: #bf4040; }
+  div.blend-box-container .blend-box-1:after {
+    content: "bg ...H...0deg....... ...S...50%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-2 {
+  background: #a6a659; }
+  div.blend-box-container .blend-box-2:after {
+    content: "fg ...H...60deg....... ...S...30%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-3 {
+  background: #7c2916;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-3:after {
+    content: "3 multiply ...H...11.17647deg....... ...S...69.86301%............. ...L...28.62745%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-4 {
+  background: #e8bc83;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-4:after {
+    content: "4 screen ...H...33.86139deg....... ...S...68.70748%............. ...L...71.17647%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-5 {
+  background: #ffe699;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-5:after {
+    content: "5 lineardodge ...H...45.29412deg....... ...S...100.0%............. ...L...80%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-6 {
+  background: #660000;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-6:after {
+    content: "6 linearburn ...H...0deg....... ...S...100%............. ...L...20%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-7 {
+  background: #196619;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-7:after {
+    content: "7 difference ...H...120deg....... ...S...60.62992%............. ...L...24.90196%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-8 {
+  background: #e8bc83;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-8:after {
+    content: "8 screen ...H...33.86139deg....... ...S...68.70748%............. ...L...71.17647%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-9 {
+  background: #6c926c;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-9:after {
+    content: "9 exclusion ...H...120deg....... ...S...14.96063%............. ...L...49.80392%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-10 {
+  background: #bc9043;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-10:after {
+    content: "10 softlight ...H...38.18182deg....... ...S...47.45098%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-11 {
+  background: #d2532c;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-11:after {
+    content: "11 hardlight ...H...14.09639deg....... ...S...65.35433%............. ...L...49.80392%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-12 {
+  background: #ffde77;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-12:after {
+    content: "12 colordodge ...H...45.44118deg....... ...S...100.0%............. ...L...73.33333%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-13 {
+  background: #880000;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-13:after {
+    content: "13 colorburn ...H...0deg....... ...S...100%............. ...L...26.66667%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-14 {
+  background: #d2792c;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-14:after {
+    content: "14 overlay ...H...27.83133deg....... ...S...65.35433%............. ...L...49.80392%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-15 {
+  background: #ff2700;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-15:after {
+    content: "15 linearlight ...H...9.17647deg....... ...S...100%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-16 {
+  background: #ff4d00;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-16:after {
+    content: "16 vividlight ...H...18.11765deg....... ...S...100%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-17 {
+  background: #a68059;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-17:after {
+    content: "17 pinlight ...H...30.38961deg....... ...S...30.19608%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-18 {
+  background: red;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-18:after {
+    content: "18 hardmix ...H...0deg....... ...S...100%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-19 {
+  background: #a63737;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-19:after {
+    content: "19 colorblend ...H...0deg....... ...S...50.22624%............. ...L...43.33333%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-20 {
+  background: #ddffff;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-20:after {
+    content: "20 divide ...H...180deg....... ...S...100%............. ...L...93.33333%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-21 {
+  background: #a65959;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-21:after {
+    content: "21 hue ...H...0deg....... ...S...30.19608%............. ...L...50%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-22 {
+  background: #bfbf67;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-22:after {
+    content: "22 luminosity ...H...60.0deg....... ...S...40.74074%............. ...L...57.64706%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-23 {
+  background: #a6a637;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-23:after {
+    content: "23 saturation ...H...60deg....... ...S...50.22624%............. ...L...43.33333%............";
+    position: relative;
+    left: 100px; }
+div.blend-box-container .blend-box-24 {
+  background: #006619;
+  margin-right: 200px; }
+  div.blend-box-container .blend-box-24:after {
+    content: "24 subtract ...H...134.70588deg....... ...S...100%............. ...L...20%............";
+    position: relative;
+    left: 100px; }
+
+div.hue-box-container .hue-box-1 {
+  background: #e88f7d; }
+div.hue-box-container .hue-box-2 {
+  background: #e8a17d; }
+div.hue-box-container .hue-box-3 {
+  background: #e8b37d; }
+div.hue-box-container .hue-box-4 {
+  background: #e8c47d; }
+div.hue-box-container .hue-box-5 {
+  background: #e8d67d; }
+div.hue-box-container .hue-box-6 {
+  background: #e8e87d; }
+div.hue-box-container .hue-box-7 {
+  background: #d6e87d; }
+div.hue-box-container .hue-box-8 {
+  background: #c4e87d; }
+div.hue-box-container .hue-box-9 {
+  background: #b3e87d; }
+div.hue-box-container .hue-box-10 {
+  background: #a1e87d; }
+div.hue-box-container .hue-box-11 {
+  background: #8fe87d; }
+div.hue-box-container .hue-box-12 {
+  background: #7de87d; }
+div.hue-box-container .hue-box-13 {
+  background: #7de88f; }
+div.hue-box-container .hue-box-14 {
+  background: #7de8a1; }
+div.hue-box-container .hue-box-15 {
+  background: #7de8b3; }
+div.hue-box-container .hue-box-16 {
+  background: #7de8c4; }
+div.hue-box-container .hue-box-17 {
+  background: #7de8d6; }
+div.hue-box-container .hue-box-18 {
+  background: #7de8e8; }
+div.hue-box-container .hue-box-19 {
+  background: #7dd6e8; }
+div.hue-box-container .hue-box-20 {
+  background: #7dc4e8; }
+div.hue-box-container .hue-box-21 {
+  background: #7db2e8; }
+div.hue-box-container .hue-box-22 {
+  background: #7da1e8; }
+div.hue-box-container .hue-box-23 {
+  background: #7d8fe8; }
+div.hue-box-container .hue-box-24 {
+  background: #7d7de8; }
+div.hue-box-container .hue-box-25 {
+  background: #8f7de8; }
+div.hue-box-container .hue-box-26 {
+  background: #a17de8; }
+div.hue-box-container .hue-box-27 {
+  background: #b27de8; }
+div.hue-box-container .hue-box-28 {
+  background: #c47de8; }
+div.hue-box-container .hue-box-29 {
+  background: #d67de8; }
+div.hue-box-container .hue-box-30 {
+  background: #e87de8; }
+div.hue-box-container .hue-box-31 {
+  background: #e87dd6; }
+div.hue-box-container .hue-box-32 {
+  background: #e87dc4; }
+div.hue-box-container .hue-box-33 {
+  background: #e87db3; }
+div.hue-box-container .hue-box-34 {
+  background: #e87da1; }
+div.hue-box-container .hue-box-35 {
+  background: #e87d8f; }
+div.hue-box-container .hue-box-36 {
+  background: #e87d7d; }
+
+div.saturation-box-container .saturation-box-1 {
+  background: #7a857a; }
+div.saturation-box-container .saturation-box-2 {
+  background: #758a75; }
+div.saturation-box-container .saturation-box-3 {
+  background: #708f70; }
+div.saturation-box-container .saturation-box-4 {
+  background: #6b946b; }
+div.saturation-box-container .saturation-box-5 {
+  background: #669966; }
+div.saturation-box-container .saturation-box-6 {
+  background: #619e61; }
+div.saturation-box-container .saturation-box-7 {
+  background: #5ca35c; }
+div.saturation-box-container .saturation-box-8 {
+  background: #57a857; }
+div.saturation-box-container .saturation-box-9 {
+  background: #52ad52; }
+div.saturation-box-container .saturation-box-10 {
+  background: #4db34d; }
+div.saturation-box-container .saturation-box-11 {
+  background: #47b847; }
+div.saturation-box-container .saturation-box-12 {
+  background: #42bd42; }
+div.saturation-box-container .saturation-box-13 {
+  background: #3dc23d; }
+div.saturation-box-container .saturation-box-14 {
+  background: #38c738; }
+div.saturation-box-container .saturation-box-15 {
+  background: #33cc33; }
+div.saturation-box-container .saturation-box-16 {
+  background: #2ed12e; }
+div.saturation-box-container .saturation-box-17 {
+  background: #29d629; }
+div.saturation-box-container .saturation-box-18 {
+  background: #24db24; }
+div.saturation-box-container .saturation-box-19 {
+  background: #1fe01f; }
+div.saturation-box-container .saturation-box-20 {
+  background: #19e619; }
+div.saturation-box-container .saturation-box-21 {
+  background: #14eb14; }
+div.saturation-box-container .saturation-box-22 {
+  background: #0ff00f; }
+div.saturation-box-container .saturation-box-23 {
+  background: #0af50a; }
+div.saturation-box-container .saturation-box-24 {
+  background: #05fa05; }
+div.saturation-box-container .saturation-box-25 {
+  background: lime; }
+
+div.lightness-box-container .lightness-box-1 {
+  background: #050f05; }
+div.lightness-box-container .lightness-box-2 {
+  background: #0a1f0a; }
+div.lightness-box-container .lightness-box-3 {
+  background: #0f2e0f; }
+div.lightness-box-container .lightness-box-4 {
+  background: #143d14; }
+div.lightness-box-container .lightness-box-5 {
+  background: #194d19; }
+div.lightness-box-container .lightness-box-6 {
+  background: #1f5c1f; }
+div.lightness-box-container .lightness-box-7 {
+  background: #246b24; }
+div.lightness-box-container .lightness-box-8 {
+  background: #297a29; }
+div.lightness-box-container .lightness-box-9 {
+  background: #2e8a2e; }
+div.lightness-box-container .lightness-box-10 {
+  background: #339933; }
+div.lightness-box-container .lightness-box-11 {
+  background: #38a838; }
+div.lightness-box-container .lightness-box-12 {
+  background: #3db83d; }
+div.lightness-box-container .lightness-box-13 {
+  background: #47c247; }
+div.lightness-box-container .lightness-box-14 {
+  background: #57c757; }
+div.lightness-box-container .lightness-box-15 {
+  background: #66cc66; }
+div.lightness-box-container .lightness-box-16 {
+  background: #75d175; }
+div.lightness-box-container .lightness-box-17 {
+  background: #85d685; }
+div.lightness-box-container .lightness-box-18 {
+  background: #94db94; }
+div.lightness-box-container .lightness-box-19 {
+  background: #a3e0a3; }
+div.lightness-box-container .lightness-box-20 {
+  background: #b3e6b3; }
+div.lightness-box-container .lightness-box-21 {
+  background: #c2ebc2; }
+div.lightness-box-container .lightness-box-22 {
+  background: #d1f0d1; }
+div.lightness-box-container .lightness-box-23 {
+  background: #e0f5e0; }
+div.lightness-box-container .lightness-box-24 {
+  background: #f0faf0; }
+div.lightness-box-container .lightness-box-25 {
+  background: white; }
+
+div.color-box-container {
+  background: #d9f2d9;
+  border: 25px solid transparent;
+  -webkit-border-image: url(/img/bordered.png) 100 100 100 100 repeat repeat;
+  -moz-border-image: url(/img/bordered.png) 100 100 100 100 repeat repeat;
+  -o-border-image: url(/img/bordered.png) 100 100 100 100 repeat repeat;
+  border-image: url(/img/bordered.png) 100 100 100 100 repeat repeat; }
+  div.color-box-container .color-box-1 {
+    background: #3bff3b; }
+  div.color-box-container .color-box-2 {
+    background: #43ff43; }
+  div.color-box-container .color-box-3 {
+    background: #4bff4b; }
+  div.color-box-container .color-box-4 {
+    background: #54ff54; }
+  div.color-box-container .color-box-5 {
+    background: #5cff5c; }
+  div.color-box-container .color-box-6 {
+    background: #64ff64; }
+  div.color-box-container .color-box-7 {
+    background: #6cff6c; }
+  div.color-box-container .color-box-8 {
+    background: #74ff74; }
+  div.color-box-container .color-box-9 {
+    background: #7cff7c; }
+  div.color-box-container .color-box-10 {
+    background: #85ff85; }
+  div.color-box-container .color-box-11 {
+    background: #8dff8d; }
+  div.color-box-container .color-box-12 {
+    background: #95ff95; }
+  div.color-box-container .color-box-13 {
+    background: #9dff9d; }
+  div.color-box-container .color-box-14 {
+    background: #a5ffa5; }
+  div.color-box-container .color-box-15 {
+    background: #adffad; }
+  div.color-box-container .color-box-16 {
+    background: #b6ffb6; }
+  div.color-box-container .color-box-17 {
+    background: #beffbe; }
+  div.color-box-container .color-box-18 {
+    background: #c6ffc6; }
+  div.color-box-container .color-box-19 {
+    background: #ceffce; }
+  div.color-box-container .color-box-20 {
+    background: #d6ffd6; }
+  div.color-box-container .color-box-21 {
+    background: #deffde; }
+  div.color-box-container .color-box-22 {
+    background: #e7ffe7; }
+  div.color-box-container .color-box-23 {
+    background: #efffef; }
+  div.color-box-container .color-box-24 {
+    background: #f7fff7; }
+  div.color-box-container .color-box-25 {
+    background: white; }
+
+body {
+  background: #e6e6e6; }
+  body .item-1-class {
+    background: #ff0000; }
+  body .item-3-class {
+    background: #ff0000; }
+  body .item-0-class {
+    background: #ff0000; }

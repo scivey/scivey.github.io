@@ -1,0 +1,680 @@
+@charset "IBM437";
+@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Droid Sans Mono"), local("DroidSansMono"), url(/fonts/droidSansMono.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Anonymous Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Anonymous Pro"), local("AnonymousPro"), url(/fonts/anonymousPro.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Inconsolata"), url(fonts/inconsolata.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url(/fonts/openSans.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Libre Baskerville"), url(/fonts/libreBaskerville.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Merriweather"), url(/fonts/merriweather.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Merriweather Bold"), local("Merriweather-Bold"), url(/fonts/merriweatherBold.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 300;
+  src: local("Merriweather Light Italic"), local("Merriweather-LightItalic"), url(/fonts/merriweatherLightItalic.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Merriweather Italic"), local("Merriweather-Italic"), url(/fonts/merriweatherItalic.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  src: local("Merriweather Bold Italic"), local("Merriweather-BoldItalic"), url(/fonts.merriweatherBoldItalic.woff) format("woff"); }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/*!
+ *
+.||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||.
+
+	.                                      '||            .
+  .||.  .... ... ... ...    ....  ... ...   ||   ....   .||.    ....
+   ||    '|.  |   ||'  || .|...||  ||'  ||  ||  '' .||   ||   .|...||
+   ||     '|.|    ||    | ||       ||    |  ||  .|' ||   ||   ||
+   '|.'    '|     ||...'   '|...'  ||...'  .||. '|..'|'  '|.'  '|...'
+		.. |      ||               ||
+		 ''      ''''             ''''      A Typographic Starter Kit
+
+  URL ........... http://typeplate.com
+  VERSION ....... 1.1.1
+  Github ........ https://github.com/typeplate/typeplate.github.io
+  AUTHORS ....... Dennis Gaebel (@gryghostvisuals) & Zachary Kain (@zakkain)
+  LICENSE ....... Creative Commmons Attribution 3.0
+  LICENSE URL ... http://creativecommons.org/licenses/by/3.0
+
+ .||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||.
+ *
+ */
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia"), local("Garamond"), local("Palatino"), local("Book Antiqua");
+  unicode-range: U+0026; }
+
+@font-face {
+  font-family: "Ampersand";
+  src: local("Georgia");
+  unicode-range: U+270C; }
+
+body {
+  word-wrap: break-word; }
+
+pre code {
+  word-wrap: normal; }
+
+/**
+ * Dropcap Sass @include
+ * Use the following Sass @include with any selector you feel necessary.
+ *
+	@include dropcap($dropcap-float-position, $dropcap-font-size, $dropcap-font-family, $dropcap-txt-indent, $dropcap-margin, $dropcap-padding, $dropcap-color, $dropcap-line-height, $dropcap-bg);
+ *
+ * Extend this object into your custom stylesheet. Let the variables do the work.
+ *
+ */
+html {
+  font: normal 90%/1.9 "Libre Baskerville", serif; }
+
+body {
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -o-hyphens: auto;
+  hyphens: auto;
+  color: #444444; }
+
+small {
+  font-size: 65%; }
+
+h1, h2, h3, h4, h5, h6 {
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0; }
+
+.tera {
+  font-size: 117px;
+  font-size: 8.125rem;
+  margin-bottom: 0.23385rem; }
+
+.giga {
+  font-size: 90px;
+  font-size: 6.25rem;
+  margin-bottom: 0.304rem; }
+
+.mega {
+  font-size: 72px;
+  font-size: 5rem;
+  margin-bottom: 0.38rem; }
+
+.alpha, h1 {
+  font-size: 60px;
+  font-size: 4.16667rem;
+  margin-bottom: 0.456rem; }
+
+.beta, h2 {
+  font-size: 48px;
+  font-size: 3.33333rem;
+  margin-bottom: 0.57rem; }
+
+.gamma, h3 {
+  font-size: 36px;
+  font-size: 2.5rem;
+  margin-bottom: 0.76rem; }
+
+.delta, h4 {
+  font-size: 24px;
+  font-size: 1.66667rem;
+  margin-bottom: 1.14rem; }
+
+.epsilon, h5 {
+  font-size: 21px;
+  font-size: 1.45833rem;
+  margin-bottom: 1.30286rem; }
+
+.zeta, h6 {
+  font-size: 18px;
+  font-size: 1.25rem;
+  margin-bottom: 1.52rem; }
+
+p {
+  margin: auto auto 1.5em; }
+  p + p {
+    text-indent: 1.5em;
+    margin-top: -1.5em; }
+
+abbr,
+acronym,
+blockquote,
+code,
+dir,
+kbd,
+listing,
+plaintext,
+q,
+samp,
+tt,
+var,
+xmp {
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -o-hyphens: none;
+  hyphens: none; }
+
+pre code {
+  white-space: -moz-pre-wrap;
+  white-space: pre-wrap; }
+
+pre {
+  white-space: pre; }
+
+code {
+  white-space: pre;
+  font-family: monospace; }
+
+/**
+ * Abbreviations Markup
+ *
+	<abbr title="hyper text markup language">HMTL</abbr>
+ *
+ * Extend this object into your markup.
+ *
+ */
+abbr {
+  font-variant: small-caps;
+  font-weight: 600;
+  text-transform: lowercase;
+  color: gray; }
+  abbr[title]:hover {
+    cursor: help; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #222222; }
+
+p + .drop-cap {
+  text-indent: 0;
+  margin-top: 0; }
+
+.drop-cap:first-letter {
+  float: left;
+  margin: inherit;
+  padding: inherit;
+  font-size: 4em;
+  font-family: inherit;
+  line-height: 1;
+  text-indent: 0;
+  background: transparent;
+  color: inherit; }
+
+/**
+ * Lining Definition Style Markup
+ *
+	<dl class="lining">
+		<dt><b></b></dt>
+		<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.lining dt,
+.lining dd {
+  display: inline;
+  margin: 0; }
+.lining dt + dt:before,
+.lining dd + dt:before {
+  content: "\A";
+  white-space: pre; }
+.lining dd + dd:before {
+  content: ", "; }
+.lining dd:before {
+  content: ": ";
+  margin-left: -0.2rem; }
+
+/**
+ * Dictionary Definition Style Markup
+ *
+	<dl class="dictionary-style">
+		<dt><b></b></dt>
+			<dd></dd>
+	</dl>
+ *
+ * Extend this object into your markup.
+ *
+ */
+.dictionary-style dt {
+  display: inline;
+  counter-reset: definitions; }
+  .dictionary-style dt + dt:before {
+    content: ", ";
+    margin-left: -0.2rem; }
+.dictionary-style dd {
+  display: block;
+  counter-increment: definitions; }
+  .dictionary-style dd:before {
+    content: counter(definitions,decimal) ". "; }
+
+/**
+ * Blockquote Markup
+ *
+		<figure>
+			<blockquote cite="">
+				<p></p>
+			</blockquote>
+			<figcaption>
+				<cite>
+					<small><a href=""></a></small>
+				</cite>
+			</figcaption>
+		</figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Pull Quotes Markup
+ *
+	<aside class="pull-quote">
+		<blockquote>
+			<p></p>
+		</blockquote>
+	</aside>
+ *
+ * Extend this object into your custom stylesheet.
+ *
+ */
+.pull-quote {
+  position: relative;
+  padding: 1em; }
+  .pull-quote:before, .pull-quote:after {
+    height: 1em;
+    opacity: 0.5;
+    position: absolute;
+    font-size: 4em;
+    color: #dc976e; }
+  .pull-quote:before {
+    content: '“';
+    top: 0;
+    left: 0; }
+  .pull-quote:after {
+    content: '”';
+    bottom: 0;
+    right: 0; }
+
+/**
+ * Figures Markup
+ *
+	<figure>
+		<figcaption>
+			<strong>Fig. 4.2 | </strong>Type Anatomy, an excerpt from Mark Boulton's book<cite title="http://designingfortheweb.co.uk/book/part3/part3_chapter11.php">"Designing for the Web"</cite>
+		</figcaption>
+	</figure>
+ *
+ * Extend this object into your markup.
+ *
+ */
+/**
+ * Footnote Markup : Replace 'X' with your unique number for each footnote
+ *
+	<article>
+		<p><sup><a href="#fn-itemX" id="fn-returnX"></a></sup></p>
+		<footer>
+			<ol class="foot-notes">
+				<li id="fn-itemX"><a href="#fn-returnX">↩</a></li>
+			</ol>
+		</footer>
+	</article>
+ *
+ * Extend this object into your markup.
+ *
+ */
+code {
+  font-family: "Droid Sans Mono"; }
+
+p > code {
+  background: rgba(250, 250, 158, 0.9);
+  color: #c31d1d;
+  font-size: 14px; }
+
+pre {
+  background: #22282A;
+  word-wrap: break-word;
+  color: #F1F2F3;
+  font-size: 16px;
+  margin-bottom: 20px; }
+
+pre .comment {
+  color: #66747B; }
+
+pre .constant {
+  color: #EC7600; }
+
+pre .storage {
+  color: #EC7600; }
+
+pre .string, pre .comment.docstring {
+  color: #EC7600; }
+
+pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
+  color: #fff; }
+
+pre .keyword, pre .selector {
+  color: #93C763; }
+
+pre .inherited-class {
+  font-style: italic; }
+
+pre .entity {
+  color: #93C763; }
+
+pre .integer {
+  color: #FFCD22; }
+
+pre .support, *[data-language="csharp"] .function.call {
+  color: #FACD22; }
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+  color: #CCC; }
+
+/* C# specific rule */
+pre .preprocessor {
+  color: #66747B; }
+
+span.eq-display {
+  display: block;
+  margin: 0;
+  margin-left: auto;
+  text-align: left;
+  margin-right: auto;
+  padding: 10px;
+  margin-bottom: 20px; }
+
+span.diagram-display > img {
+  display: block;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  margin-bottom: 20px; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  background: #fcfcc0;
+  max-width: 1080px;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333; }
+
+pre {
+  background: #000032;
+  color: #eeeeee;
+  padding: 2.0rem;
+  border: 2px solid black;
+  margin: 3.0em;
+  border-radius: 4px; }
+  pre > code {
+    font-size: 110%;
+    line-height: 1.8rem;
+    font-family: "Droid Sans Mono"; }
+
+p > code {
+  font-family: "Droid Sans Mono"; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans"; }
+
+button {
+  border: 1px solid #076fe4;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 #8ebcf1;
+  color: white;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: #4294f0;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4294f0), color-stop(100%, #0776f3));
+  background-image: -webkit-linear-gradient(#4294f0, #0776f3);
+  background-image: linear-gradient(#4294f0, #0776f3);
+  padding: 7px 18px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 #0065d6;
+  background-clip: padding-box; }
+  button:hover:not(:disabled) {
+    box-shadow: inset 0 1px 0 0 #60a2ec;
+    cursor: pointer;
+    background-color: #2f87ea;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #2f87ea), color-stop(100%, #086fe3));
+    background-image: -webkit-linear-gradient(#2f87ea, #086fe3);
+    background-image: linear-gradient(#2f87ea, #086fe3); }
+  button:active:not(:disabled) {
+    border: 1px solid #076fe4;
+    box-shadow: inset 0 0 8px 4px #0868d3, inset 0 0 8px 4px #0868d3, 0 1px 1px 0 #eeeeee; }
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed; }
+
+.content-body {
+  margin-top: 1.0em; }
+  .content-body > p {
+    color: #333333; }
+
+#page-frame {
+  *zoom: 1;
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  #page-frame:before, #page-frame:after {
+    content: " ";
+    display: table; }
+  #page-frame:after {
+    clear: both; }
+
+/*
+#aside-frame {
+	@include span-columns(3);
+	@include omega;
+	min-height: 50px;
+	//background-color: tint(#00ff00, 50%);
+}
+
+#content-frame {
+	@include span-columns(9);
+	//background-color: tint(#ffa500, 50%);
+	background-color: tint($bg-col, 20%);
+
+	border-width: 0px 2px 0px 2px;
+	border-style: solid;
+	border-color: #666666;
+	padding: 3.0em;
+	padding-right: 2.0em;
+}
+
+*/
+@media all and (min-width: 800px) {
+  #aside-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 23.23176%;
+    margin-right: 0;
+    min-height: 50px; }
+    #aside-frame:last-child {
+      margin-right: 0; }
+
+  #content-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 74.41059%;
+    background-color: #fcfcd8;
+    border-width: 0px 2px 0px 2px;
+    border-style: solid;
+    border-color: #666666;
+    padding: 3.0em;
+    padding-right: 2.0em; }
+    #content-frame:last-child {
+      margin-right: 0; } }
+@media all and (max-width: 799px) {
+  #aside-frame {
+    display: none; }
+
+  #content-frame {
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 100%;
+    margin-right: 0;
+    background-color: #fcfcd8;
+    border-width: 0px 2px 0px 2px;
+    border-style: solid;
+    border-color: #666666;
+    padding: 3.0em;
+    padding-right: 2.0em; }
+    #content-frame:last-child {
+      margin-right: 0; } }
+#article-list-head {
+  margin-bottom: 4.0rem; }
+
+.base-page-title {
+  text-align: center; }
+
+.article-list-text {
+  vertical-align: top;
+  padding: 1.0em;
+  margin-top: 0px;
+  width: inherit;
+  height: inherit;
+  background: #fafa9e;
+  display: inline-block;
+  border-width: 1px 2px 1px 0.5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: #666666; }
+
+.article-list-item {
+  margin-bottom: 2.0em;
+  padding: 1.0em;
+  padding-left: 2.0em;
+  border-radius: 5px;
+  min-height: 150px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(75%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.1)));
+  background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.1) 100%);
+  background-image: linear-gradient(to right,rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.1) 100%);
+  background-color: #EA4B4B; }
+
+.article-list-title {
+  margin-left: 2.0rem;
+  max-width: 450px;
+  display: inline-block; }
+
+.article-list-thumb {
+  vertical-align: top;
+  width: 0px;
+  max-height: 200px;
+  display: inline-block; }
+  .article-list-thumb img {
+    width: 80px;
+    max-height: 100px;
+    display: inline-block; }
+
+.article-list-link {
+  display: inline-block; }
+  .article-list-link * {
+    display: inline-block; }
+
+span.bibref a {
+  text-decoration: none;
+  color: #c31d1d; }
+span.bibref:before {
+  content: "";
+  position: absolute; }
+span.bibref:hover:before {
+  content: attr(data-ref);
+  background: #7fff7f;
+  padding: 2px 8px; }
+
+.block-diagram {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 2.0rem;
+  margin-right: 2.0rem; }
+  .block-diagram.block-diagram-pic {
+    background-color: #e2e2ba;
+    border: 2px solid black; }
+    .block-diagram.block-diagram-pic > img {
+      max-width: 90%; }
+  .block-diagram.block-diagram-math {
+    border: 1px solid #bbbbbb; }
+  .block-diagram .block-diagram-caption {
+    display: block;
+    margin: 0px auto; }
+    .block-diagram .block-diagram-caption > p {
+      display: block;
+      margin: 0px auto;
+      text-align: center; }
+  .block-diagram .block-diagram-title > * {
+    display: block;
+    margin: 0px auto;
+    text-align: center; }
+  .block-diagram img {
+    display: block;
+    max-height: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto; }
+
+p {
+  margin-bottom: 3.0rem; }
