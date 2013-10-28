@@ -30,6 +30,25 @@ div.content-block {
 
   body {
     font-size: 16px; } }
+@media screen and (min-device-width: 481px) {
+  body {
+    background: #ff00ff; }
+
+  body {
+    font-size: 16px; } }
+@media screen and (max-device-width: 480px) {
+  body {
+    background: #ffff00; }
+
+  div.page-frame {
+    background: #ff0000; }
+
+  div.content-block {
+    width: 100%;
+    display: block; }
+
+  body {
+    font-size: 24px; } }
 @media screen and (min-width: 600px) {
   div.page-frame {
     width: 600px;
