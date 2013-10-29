@@ -1,0 +1,107 @@
+@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Droid Sans Mono"), local("DroidSansMono"), url(/fonts/droidSansMono.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Anonymous Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Anonymous Pro"), local("AnonymousPro"), url(/fonts/anonymousPro.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Inconsolata"), url(fonts/inconsolata.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url(/fonts/openSans.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Libre Baskerville"), url(/fonts/libreBaskerville.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Merriweather"), url(/fonts/merriweather.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Merriweather Bold"), local("Merriweather-Bold"), url(/fonts/merriweatherBold.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 300;
+  src: local("Merriweather Light Italic"), local("Merriweather-LightItalic"), url(/fonts/merriweatherLightItalic.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Merriweather Italic"), local("Merriweather-Italic"), url(/fonts/merriweatherItalic.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Merriweather';
+  font-style: italic;
+  font-weight: 700;
+  src: local("Merriweather Bold Italic"), local("Merriweather-BoldItalic"), url(/fonts.merriweatherBoldItalic.woff) format("woff"); }
+
+* {
+  box-sizing: border-box; }
+
+.si-container {
+  width: 95%;
+  min-height: 300px;
+  background: #ff7fff;
+  display: inline-block; }
+  .si-container > * {
+    display: inline-block; }
+
+.si-article {
+  padding-left: 2.083%;
+  padding-right: 2.083%;
+  width: 47.917%;
+  margin-left: 16.667%;
+  box-sizing: border-box;
+  min-height: 200px;
+  background: #66ff66;
+  display: inline-block;
+  float: left;
+  padding-top: 1.0em;
+  padding-bottom: 1.0em; }
+
+.si-aside {
+  margin-left: 4.167%;
+  padding-left: 2.083%;
+  padding-right: 2.083%;
+  width: 16.667%;
+  min-height: 200px;
+  background: #ff6666;
+  display: inline-block;
+  padding-top: 1.0em;
+  padding-bottom: 1.0em; }
+
+body {
+  font-size: 112.5%;
+  font-family: "Libre Baskervile"; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans"; }
+
+@media screen and (max-width: 480px) {
+  h1, h2, h3, h4, h5, h6 {
+    color: #ff0000; } }
+h1 {
+  font-size: 1.6em; }
