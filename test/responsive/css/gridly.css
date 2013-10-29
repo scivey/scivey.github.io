@@ -103,9 +103,8 @@
     display: inline-block;
     float: left;
     padding-top: 1.0em;
-    padding-bottom: 1.0em; }
-    .si-article > p {
-      width: 55.0rem; }
+    padding-bottom: 1.0em;
+    font-size: 1.0em; }
 
   .si-aside {
     margin-left: 4.167%;
