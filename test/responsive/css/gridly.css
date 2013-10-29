@@ -83,6 +83,7 @@
   padding-right: 1.0em; }
 
 .si-aside {
+  width: 100%;
   min-height: 200px;
   background: #ff6666;
   display: inline-block;
