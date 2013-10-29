@@ -118,6 +118,7 @@
     padding-bottom: 1.0em; } }
 body {
   font-size: 112.5%;
+  line-height: 1.4;
   font-family: "Libre Baskervile"; }
 
 h1, h2, h3, h4, h5, h6 {
