@@ -77,7 +77,7 @@
   display: inline-block;
   float: left;
   padding-top: 1.0em;
-  font-size: 0.9em;
+  font-size: 1.0em;
   padding-bottom: 1.0em;
   padding-left: 1.0em;
   padding-right: 1.0em; }
@@ -91,7 +91,17 @@
   padding-left: 1.0em;
   padding-right: 1.0em; }
 
+body {
+  font-size: 100%;
+  line-height: 1.7;
+  font-family: "Libre Baskervile"; }
+
 @media screen and (min-width: 600px) {
+  body {
+    font-size: 112.5%;
+    line-height: 1.4;
+    font-family: "Libre Baskervile"; }
+
   .si-article {
     padding-left: 2.083%;
     padding-right: 2.083%;
@@ -116,11 +126,6 @@
     display: inline-block;
     padding-top: 1.0em;
     padding-bottom: 1.0em; } }
-body {
-  font-size: 112.5%;
-  line-height: 1.4;
-  font-family: "Libre Baskervile"; }
-
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans"; }
 
