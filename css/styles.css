@@ -9,7 +9,7 @@
   font-family: 'Ubuntu';
   font-style: normal;
   font-weight: 400;
-  src: local("Ubuntu"), url(ubuntu.woff) format("woff"); }
+  src: local("Ubuntu"), url(/fonts/ubuntu.woff) format("woff"); }
 
 @font-face {
   font-family: 'Anonymous Pro';
@@ -70,57 +70,22 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-code {
-  font-family: "Droid Sans Mono"; }
+h1, h2, h3, h4, h5, h6 {
+  color: #e75253; }
+
+a h1, a h2, a h3, a h4, a h5, a h6 {
+  color: #e75253; }
+a:visited h1, a:visited h2, a:visited h3, a:visited h4, a:visited h5, a:visited h6 {
+  color: #e75253; }
+a:hover h1, a:hover h2, a:hover h3, a:hover h4, a:hover h5, a:hover h6 {
+  color: #eb7475; }
 
 p > code {
-  background: rgba(250, 250, 158, 0.9);
-  color: #c31d1d;
-  font-size: 14px; }
+  background-color: #dddddd; }
 
 pre {
-  background: #22282A;
-  word-wrap: break-word;
-  color: #F1F2F3;
-  font-size: 16px;
-  margin-bottom: 20px; }
-
-pre .comment {
-  color: #66747B; }
-
-pre .constant {
-  color: #EC7600; }
-
-pre .storage {
-  color: #EC7600; }
-
-pre .string, pre .comment.docstring {
-  color: #EC7600; }
-
-pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
-  color: #fff; }
-
-pre .keyword, pre .selector {
-  color: #93C763; }
-
-pre .inherited-class {
-  font-style: italic; }
-
-pre .entity {
-  color: #93C763; }
-
-pre .integer {
-  color: #FFCD22; }
-
-pre .support, *[data-language="csharp"] .function.call {
-  color: #FACD22; }
-
-pre .variable.global, pre .variable.class, pre .variable.instance {
-  color: #CCC; }
-
-/* C# specific rule */
-pre .preprocessor {
-  color: #66747B; }
+  background: #000032;
+  color: #eeeeee; }
 
 span.eq-display {
   display: block;
@@ -153,8 +118,6 @@ body {
   color: #333333; }
 
 pre {
-  background: shade(blue, 80%);
-  color: #eeeeee;
   padding: 2.0rem;
   border: 2px solid black;
   margin: 3.0em;
@@ -163,12 +126,6 @@ pre {
     font-size: 110%;
     line-height: 1.8rem;
     font-family: "Droid Sans Mono", sans-serif; }
-
-p > code {
-  font-family: "Droid Sans Mono", sans-serif; }
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", sans-serif; }
 
 button {
   border: 1px solid #076fe4;
@@ -304,6 +261,7 @@ button {
 
 .article-list-title {
   text-decoration: none;
+  color: #e75253;
   max-width: 75%;
   display: inline-block; }
 
@@ -368,6 +326,52 @@ span.bibref:hover:before {
 p {
   margin-bottom: 2.0rem; }
 
+code {
+  font-family: "Droid Sans Mono"; }
+
+pre {
+  background: #22282A;
+  word-wrap: break-word;
+  color: #F1F2F3;
+  margin-bottom: 20px; }
+
+pre .comment {
+  color: #66747B; }
+
+pre .constant {
+  color: #EC7600; }
+
+pre .storage {
+  color: #EC7600; }
+
+pre .string, pre .comment.docstring {
+  color: #EC7600; }
+
+pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
+  color: #fff; }
+
+pre .keyword, pre .selector {
+  color: #93C763; }
+
+pre .inherited-class {
+  font-style: italic; }
+
+pre .entity {
+  color: #93C763; }
+
+pre .integer {
+  color: #FFCD22; }
+
+pre .support, *[data-language="csharp"] .function.call {
+  color: #FACD22; }
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+  color: #CCC; }
+
+/* C# specific rule */
+pre .preprocessor {
+  color: #66747B; }
+
 /*!
  *
 .||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||..||.
@@ -420,6 +424,14 @@ html {
   font-weight: normal;
   line-height: 1.5; }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400; }
+
+p > code {
+  font-family: "Droid Sans Mono", sans-serif;
+  font-size: 0.5rem; }
+
 @media screen and (min-width: 600px) {
   html {
     font-size: 112.5%;
@@ -441,12 +453,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0; }
 
 h1 {
-  font-size: 1.4em; }
+  font-size: 1.7em; }
 
 h2 {
-  font-size: 48px;
-  font-size: 6rem;
-  margin-bottom: 0.48rem; }
+  font-size: 1.6em; }
 
 h3 {
   font-size: 1.5em; }
@@ -459,6 +469,12 @@ h5 {
 
 h6 {
   font-size: 1.1em; }
+
+p > code {
+  font-size: 0.9em; }
+
+pre > code {
+  font-size: 0.8em; }
 
 @media screen and (min-width: 600px) {
   .desk-tera {
@@ -593,7 +609,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #222222; }
+  color: #e75253; }
 
 p + .drop-cap {
   text-indent: 0;
