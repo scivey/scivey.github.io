@@ -127,6 +127,37 @@ body {
     display: inline-block;
     padding-top: 1.0em;
     padding-bottom: 1.0em; } }
+@media screen and (min-width: 1000px) {
+  body {
+    background: #6666ff;
+    font-size: 112.5%;
+    line-height: 1.4;
+    font-family: "Libre Baskervile"; }
+
+  .si-article {
+    padding-left: 2.083%;
+    padding-right: 2.083%;
+    width: 47.917%;
+    margin-left: 16.667%;
+    box-sizing: border-box;
+    min-height: 200px;
+    background: #66ff66;
+    display: inline-block;
+    float: left;
+    padding-top: 1.0em;
+    padding-bottom: 1.0em;
+    font-size: 1.0em; }
+
+  .si-aside {
+    margin-left: 4.167%;
+    padding-left: 2.083%;
+    padding-right: 2.083%;
+    width: 16.667%;
+    min-height: 200px;
+    background: #ff6666;
+    display: inline-block;
+    padding-top: 1.0em;
+    padding-bottom: 1.0em; } }
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans"; }
 
