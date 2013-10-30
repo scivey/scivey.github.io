@@ -96,7 +96,6 @@ span.eq-display {
   display: block;
   margin: 0;
   margin-left: auto;
-  text-align: left;
   margin-right: auto;
   padding: 10px;
   margin-bottom: 20px; }
@@ -172,47 +171,49 @@ button {
   padding: 3.0em;
   padding-right: 2.0em; }
 
+.article-list-text {
+  vertical-align: top;
+  padding: 0 1.0em 1.0em 1.0em;
+  margin-top: 0px;
+  height: inherit;
+  max-width: 28.0em;
+  display: inline-block;
+  border-radius: 5px;
+  border-color: #666666; }
+
 @media screen and (min-width: 600px) {
   #aside-frame {
     display: none; }
 
+  .article-list-text {
+    max-width: 25.0em; }
+
   #content-frame {
-    width: 100%;
     border-width: 0px 2px 0px 2px;
     border-style: solid;
     border-color: #666666;
     padding: 3.0em;
     padding-right: 2.0em; } }
 @media screen and (min-width: 800px) {
-  #aside-frame {
-    display: none; }
-
   #content-frame {
-    width: 100%;
+    max-width: 800px;
     border-width: 0px 2px 0px 2px;
     border-style: solid;
     border-color: #666666;
     padding: 3.0em;
-    padding-right: 2.0em; } }
+    padding-left: 5.0em;
+    padding-right: 5.0em; }
+    #content-frame > p {
+      max-width: 25.0em; } }
 #article-list-head {
-  margin-bottom: 2.0rem; }
+  margin-bottom: 4.0em; }
 
 .base-page-title {
   text-align: center; }
 
-.article-list-text {
-  vertical-align: top;
-  padding: 1.0em;
-  margin-top: 0px;
-  width: inherit;
-  height: inherit;
-  display: inline-block;
-  border-radius: 5px;
-  border-color: #666666; }
-
 .article-list-item {
   border-radius: 5px;
-  min-height: 150px;
+  margin-bottom: 1.0em;
   width: 100%; }
   .article-list-item a {
     text-decoration: none; }
@@ -220,8 +221,11 @@ button {
 .article-list-title {
   text-decoration: none;
   color: #e75253;
-  max-width: 75%;
+  max-width: 90%;
   display: inline-block; }
+  .article-list-title h1, .article-list-title h2, .article-list-title h3, .article-list-title h4, .article-list-title h5, .article-list-title h6 {
+    margin-bottom: 0.1em;
+    padding-bottom: 0; }
 
 .article-list-thumb {
   vertical-align: top;
@@ -249,11 +253,14 @@ span.bibref:hover:before {
   background: #7fff7f;
   padding: 2px 8px; }
 
+p > .block-diagram {
+  margin-top: 2.0em; }
+
 .block-diagram {
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: 2.0rem;
-  margin-right: 2.0rem; }
+  box-sizing: border-box;
+  margin-top: 2.0em;
+  margin: 1.0em;
+  max-width: 80%; }
   .block-diagram.block-diagram-pic {
     background-color: #e2e2ba;
     border: 2px solid black; }
@@ -274,10 +281,10 @@ span.bibref:hover:before {
     text-align: center; }
   .block-diagram img {
     display: block;
-    max-height: 400px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: 400px;
+    max-height: 10.0em;
+    margin-top: 1.0em;
+    margin-bottom: 1.0em;
+    max-width: 80%;
     margin-left: auto;
     margin-right: auto; }
 
@@ -431,6 +438,12 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1;
   margin-top: 0; }
 
+p {
+  margin: auto auto 1.5em; }
+  p + p {
+    text-indent: 1.5em;
+    margin-top: -1.5em; }
+
 h1 {
   font-size: 1.7em; }
 
@@ -441,7 +454,7 @@ h3 {
   font-size: 1.5em; }
 
 h4 {
-  font-size: 1.3em; }
+  font-size: 1.2em; }
 
 h5 {
   font-size: 1.2em; }
@@ -454,6 +467,11 @@ p > code {
 
 pre > code {
   font-size: 0.85em; }
+
+p + p {
+  margin-top: 2.0em; }
+p:first-child {
+  margin-top: 4.0em; }
 
 @media screen and (min-width: 600px) {
   .desk-tera {
@@ -532,16 +550,10 @@ pre > code {
     margin-bottom: 1.28rem; }
 
   pre > code {
-    font-size: 0.8em; } }
+    font-size: 0.95em; } }
 @media scren and (min-width: 840px) {
   pre > code {
     font-size: 1.0em; } }
-p {
-  margin: auto auto 1.5em; }
-  p + p {
-    text-indent: 1.5em;
-    margin-top: -1.5em; }
-
 abbr,
 acronym,
 blockquote,
