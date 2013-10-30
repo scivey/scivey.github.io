@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="/js/app/configMathjax.js"></script>
+    <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/rainbow-obsidian.css" type="text/css" rel="stylesheet"/>
+    <title>scivey | Articles</title>
+    <script src="/js/app/article.js"></script>
+  </head>
+  <body>
+    <div id="page-frame">
+      <div id="content-frame">
+        <div id="article-index-frame">
+          <div id="article-list-head">
+            <h3 class="base-page-title">Articles</h3>
+            <hr>
+          </div>
+          <div id="article-list">
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/partialsI">
+                    <h4>Partial Application</h4></a></div>
+                <p class="article-list-synopsis">Functions binding parameters of other functions.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/derivativeSingleVar">
+                    <h4>Numerical Differentiation: Single-Variable</h4></a></div>
+                <p class="article-list-synopsis">Find the approximate slope at a point of of any f(x), using a reusable higher-order `differentiate` function.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/derivativeMultiVar1">
+                    <h4>Numerical Differentiation: Multi-Variable, Part One</h4></a></div>
+                <p class="article-list-synopsis">Find partial derivatives by combining the finite element method with partial application.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/asyncQueues">
+                    <h4>Async Queues for Non-Async-Safe Functions</h4></a></div>
+                <p class="article-list-synopsis">Some packages present asynchronous APIs but track internal state in a way that causes unexpected results when multiple calls are made in short succession.  As a short-term solution, a queue-based wrapper around the unsafe function ensures normal execution while presenting an async-safe API to dependent code.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="aside-frame"></div>
+    </div>
+  </body>
+</html>
