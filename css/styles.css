@@ -267,7 +267,8 @@ p > .block-diagram {
     .block-diagram.block-diagram-pic > img {
       max-width: 90%; }
   .block-diagram.block-diagram-math {
-    border: 1px solid #bbbbbb; }
+    border: 1px solid #bbbbbb;
+    max-width: 90%; }
   .block-diagram .block-diagram-caption {
     display: block;
     margin: 0px auto; }
