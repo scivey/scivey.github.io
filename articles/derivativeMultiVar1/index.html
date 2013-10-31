@@ -3,8 +3,26 @@
   <head>
     <meta name="viewport" content="width=device-width">
     <script src="/js/jquery.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+       showProcessingMessages: false,
+       messageStyle: "none",
+       "HTML-CSS": {
+        imageFont: null,
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+       SVG: {
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+      });
+    </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script src="/js/app/configMathjax.js"></script>
     <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
     <title>scivey | Numerical Differentiation: Multi-Variable, Part One</title>
     <script src="/js/app/article.js"></script>
