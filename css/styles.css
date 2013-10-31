@@ -152,10 +152,10 @@ button {
     color: #333333; }
 
 #page-frame {
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
-  box-sizing: border-box;
-  width: 95%; }
+  box-sizing: border-box; }
 
 #aside-frame {
   display: none;
@@ -191,9 +191,22 @@ button {
   #article-header .article-header-text * {
     display: inline-block; }
 
+@media all and (max-width: 480px), (max-device-width: 480px) {
+  #content-frame {
+    box-sizing: border-box;
+    width: 100%; }
+
+  #page-frame {
+    width: 100%; } }
 @media all and (min-width: 481px) and (min-device-width: 481px) {
   .article-body p {
-    max-width: 25.0em; } }
+    max-width: 25.0em; }
+
+  #page-frame {
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    width: 95%; } }
 @media all and (min-width: 600px) and (min-device-width: 600px) {
   #article-header .article-header-text {
     max-width: 450px; }
