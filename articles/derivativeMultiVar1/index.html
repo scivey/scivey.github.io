@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="/js/jquery.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -25,6 +25,7 @@
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
     <script>
+      /*
       $(document).ready( function() {
       
        var $label = $(".dbg-width-label");
@@ -32,18 +33,25 @@
        var $pageFrame = $("#page-frame");
        var $contentFrame = $("#content-frame");
        var $meta = $("#view-meta");
+       var $artFrame = $("#article-frame");
+       var $contentBody = $(".content-body");
        var sizeCheck = function() {
         var bodSize = $body.width();
         var pfSize = $pageFrame.width();
         var cfSize = $contentFrame.width();
         var vSize = $meta.attr("content");
-        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>" + "v: " + vSize;
-        $label.html(labelTxt);
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>";
+        var afSize = $artFrame.width();
+        var cbSize = $contentBody.width();
+        var label2 = "A: " + afSize + "  Cb: " + cbSize;
+        
+        $label.html(labelTxt + label2);
        }
        
        setInterval(sizeCheck, 2000);
        
        });
+       */
     </script>
     <title>scivey | Numerical Differentiation: Multi-Variable, Part One</title>
     <script src="/js/app/article.js"></script>
@@ -144,7 +152,6 @@ console.<span class="support method">log</span>(xPDerivAtY6X3); <span class="com
           </div>
         </div>
       </div>
-      <div id="aside-frame"></div>
     </div>
   </body>
 </html>

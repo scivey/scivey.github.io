@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width">
+    <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="/js/jquery.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+       showProcessingMessages: false,
+       //messageStyle: "none",
+       "HTML-CSS": {
+        imageFont: null,
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+       SVG: {
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+      });
+    </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script src="/js/app/configMathjax.js"></script>
     <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <script>
+      /*
+      $(document).ready( function() {
+      
+       var $label = $(".dbg-width-label");
+       var $body = $("body");
+       var $pageFrame = $("#page-frame");
+       var $contentFrame = $("#content-frame");
+       var $meta = $("#view-meta");
+       var $artFrame = $("#article-frame");
+       var $contentBody = $(".content-body");
+       var sizeCheck = function() {
+        var bodSize = $body.width();
+        var pfSize = $pageFrame.width();
+        var cfSize = $contentFrame.width();
+        var vSize = $meta.attr("content");
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>";
+        var afSize = $artFrame.width();
+        var cbSize = $contentBody.width();
+        var label2 = "A: " + afSize + "  Cb: " + cbSize;
+        
+        $label.html(labelTxt + label2);
+       }
+       
+       setInterval(sizeCheck, 2000);
+       
+       });
+       */
+    </script>
     <title>scivey | Articles</title>
     <script src="/js/app/article.js"></script>
   </head>
@@ -53,7 +100,6 @@
           </div>
         </div>
       </div>
-      <div id="aside-frame"></div>
     </div>
   </body>
 </html>
