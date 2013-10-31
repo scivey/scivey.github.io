@@ -191,10 +191,10 @@ button {
   #article-header .article-header-text * {
     display: inline-block; }
 
-@media screen and (min-width: 481px) and (min-device-width: 481px) {
+@media all and (min-width: 481px) and (min-device-width: 481px) {
   .article-body p {
     max-width: 25.0em; } }
-@media screen and (min-width: 600px) and (min-device-width: 600px) {
+@media all and (min-width: 600px) and (min-device-width: 600px) {
   #article-header .article-header-text {
     max-width: 450px; }
 
@@ -216,7 +216,7 @@ button {
     border-color: #666666;
     padding: 3.0em;
     padding-right: 2.0em; } }
-@media screen and (min-width: 800px) and (min-device-width: 800px) {
+@media all and (min-width: 800px) and (min-device-width: 800px) {
   #page-frame {
     max-width: 1400px; }
 
@@ -342,11 +342,11 @@ p > code {
   margin-left: 0.2em;
   margin-right: 0.2em; }
 
-@media screen and (min-width: 600px) {
+@media all and (min-width: 600px) {
   pre {
     margin-left: 1rem;
     margin-right: 1rem; } }
-@media screen and (min-width: 840px) {
+@media all and (min-width: 840px) {
   pre {
     margin-left: 2rem;
     margin-right: 2rem; } }
@@ -447,7 +447,7 @@ p > code {
   font-family: "Droid Sans Mono", sans-serif;
   font-size: 0.5rem; }
 
-@media screen and (min-width: 600px) {
+@media all and (min-width: 600px) {
   html {
     font-size: 112.5%;
     line-height: 1.65; } }
@@ -502,7 +502,7 @@ p + p {
 p:first-child {
   margin-top: 4.0em; }
 
-@media screen and (min-width: 600px) {
+@media all and (min-width: 600px) {
   .desk-tera {
     font-size: 117px;
     font-size: 6.5rem;
@@ -580,7 +580,7 @@ p:first-child {
 
   pre > code {
     font-size: 0.95em; } }
-@media scren and (min-width: 840px) {
+@media all and (min-width: 840px) {
   pre > code {
     font-size: 1.0em; } }
 abbr,
