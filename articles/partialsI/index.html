@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <script src="/js/jquery.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -24,6 +24,25 @@
     </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <script>
+      $(document).ready( function() {
+      
+       var $label = $(".dbg-width-label");
+       var $body = $("body");
+       var $pageFrame = $("#page-frame");
+       var $contentFrame = $("#content-frame");
+       var sizeCheck = function() {
+        var bodSize = $body.width();
+        var pfSize = $pageFrame.width();
+        var cfSize = $contentFrame.width();
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize;
+        $label.text(labelTxt);
+       }
+       
+       setInterval(sizeCheck, 2000);
+       
+       });
+    </script>
     <title>scivey | Partial Application</title>
     <script src="/js/app/article.js"></script>
   </head>
@@ -34,7 +53,7 @@
         <div id="article-frame">
           <div id="article-header"><span class="article-header-text">
               <h3>Partial Application
-              </h3></span>
+              </h3></span><span class="dbg-width-label"></span>
             <hr>
           </div>
           <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Partial application takes a function reference and returns a copy with one or more of its parameters bound.  In other words, it takes a function <code>(x,y) -&gt; x + y</code> and replaces the value of <code>x</code>, returning the function <code>(y) -&gt; [boundXVal] + y</code>.  </p>

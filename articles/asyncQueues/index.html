@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <script src="/js/jquery.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -24,6 +24,25 @@
     </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <script>
+      $(document).ready( function() {
+      
+       var $label = $(".dbg-width-label");
+       var $body = $("body");
+       var $pageFrame = $("#page-frame");
+       var $contentFrame = $("#content-frame");
+       var sizeCheck = function() {
+        var bodSize = $body.width();
+        var pfSize = $pageFrame.width();
+        var cfSize = $contentFrame.width();
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize;
+        $label.text(labelTxt);
+       }
+       
+       setInterval(sizeCheck, 2000);
+       
+       });
+    </script>
     <title>scivey | Async Queues for Non-Async-Safe Functions</title>
     <script src="/js/app/article.js"></script>
   </head>
@@ -34,7 +53,7 @@
         <div id="article-frame">
           <div id="article-header"><span class="article-header-text">
               <h3>Async Queues for Non-Async-Safe Functions
-              </h3></span>
+              </h3></span><span class="dbg-width-label"></span>
             <hr>
           </div>
           <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Many Node.js packages follow the same API convention: lightweight functions are synchronous, and functions with heavier processing accept a callback with a signature of <code>(error, response1[, response2...])</code>.  The exact line between heavier and lighter processing can be a matter of opinion, and this can complicate things when packages with similar purposes follow different conventions.  </p>
