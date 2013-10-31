@@ -168,8 +168,7 @@ button {
   border-width: 0px 2px 0px 2px;
   border-style: solid;
   border-color: #666666;
-  padding: 3.0em;
-  padding-right: 2.0em; }
+  padding: 3.0em; }
 
 .article-list-text {
   vertical-align: top;
@@ -257,18 +256,15 @@ p > .block-diagram {
   margin-top: 2.0em; }
 
 .block-diagram {
-  box-sizing: border-box;
-  margin-top: 2.0em;
-  margin: 1.0em;
-  max-width: 80%; }
+  margin: 0px auto;
+  display: block;
+  max-width: 80%;
+  margin-bottom: 1.0em; }
   .block-diagram.block-diagram-pic {
     background-color: #e2e2ba;
     border: 2px solid black; }
     .block-diagram.block-diagram-pic > img {
       max-width: 90%; }
-  .block-diagram.block-diagram-math {
-    border: 1px solid #bbbbbb;
-    max-width: 90%; }
   .block-diagram .block-diagram-caption {
     display: block;
     margin: 0px auto; }
@@ -288,6 +284,12 @@ p > .block-diagram {
     max-width: 80%;
     margin-left: auto;
     margin-right: auto; }
+
+.block-diagram-math {
+  border: 1px solid #cccccc;
+  max-width: 80%;
+  text-align: left;
+  margin-left: 0px auto; }
 
 p {
   margin-bottom: 2.0rem; }
