@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta id="view_meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <script src="/js/jquery.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
@@ -31,12 +31,14 @@
        var $body = $("body");
        var $pageFrame = $("#page-frame");
        var $contentFrame = $("#content-frame");
+       var $meta = $("#view-meta");
        var sizeCheck = function() {
         var bodSize = $body.width();
         var pfSize = $pageFrame.width();
         var cfSize = $contentFrame.width();
-        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize;
-        $label.text(labelTxt);
+        var vSize = $meta.attr("content");
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>" + "v: " + vSize;
+        $label.html(labelTxt);
        }
        
        setInterval(sizeCheck, 2000);
