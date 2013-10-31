@@ -70,11 +70,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
-* {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
 h1, h2, h3, h4, h5, h6 {
   color: #e75253; }
 
@@ -91,22 +86,6 @@ p > code {
 pre {
   background: #000032;
   color: #eeeeee; }
-
-span.eq-display {
-  display: block;
-  margin: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  margin-bottom: 20px; }
-
-span.diagram-display > img {
-  display: block;
-  margin: 0;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  margin-bottom: 20px; }
 
 body {
   background: #fcfcc0;
@@ -146,30 +125,50 @@ button {
     cursor: not-allowed; }
 
 .content-body {
-  box-sizing: border-box;
-  margin-top: 1.0em; }
+  margin-top: 1.0em;
+  width: 100%; }
   .content-body > p {
     color: #333333; }
 
 #page-frame {
   width: 100%;
-  margin-left: auto;
+  margin: 0;
   margin-right: auto;
+  display: block;
   box-sizing: border-box; }
+
+#article-frame {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0px;
+  padding-left: 1.5em;
+  padding-right: 1.5em; }
+
+#article-body {
+  width: 100%; }
+
+.article-page-top {
+  width: 100%;
+  box-sizing: border-box;
+  height: 3.0em;
+  padding-top: 0.5em;
+  padding-left: 1.5em;
+  padding-bottom: 1.0em; }
 
 #aside-frame {
   display: none;
   box-sizing: border-box;
-  width: 0; }
+  width: 0px; }
 
 #content-frame {
-  box-sizing: border-box;
   width: 100%;
   background-color: #fcfcfc;
-  border-width: 0px 2px 0px 2px;
+  border-width: 0px 1px 0px 1px;
   border-style: solid;
   border-color: #666666;
-  padding: 3.0em; }
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 3.0em; }
 
 #article-header {
   box-sizing: border-box; }
@@ -187,7 +186,7 @@ button {
 #article-header .article-header-text {
   box-sizing: border-box;
   display: block;
-  max-width: 300px; }
+  max-width: 240px; }
   #article-header .article-header-text * {
     display: inline-block; }
 
@@ -198,9 +197,33 @@ button {
 
   #page-frame {
     width: 100%; } }
+#article-body {
+  box-sizing: border-box;
+  margin: 0; }
+
+@media all and (min-width: 321px) and (min-device-width: 321px) {
+  #article-body {
+    box-sizing: border-box; }
+
+  #article-frame {
+    padding-left: 2.0em;
+    padding-right: 2.0em; }
+
+  #article-header .article-header-text {
+    max-width: 300px; }
+
+  #content-frame {
+    width: 100%; }
+
+  #page-frame {
+    width: 100%; } }
 @media all and (min-width: 481px) and (min-device-width: 481px) {
   .article-body p {
     max-width: 25.0em; }
+
+  #article-frame {
+    padding-left: 2.0em;
+    padding-right: 2.0em; }
 
   #page-frame {
     margin-left: auto;
@@ -210,6 +233,10 @@ button {
 @media all and (min-width: 600px) and (min-device-width: 600px) {
   #article-header .article-header-text {
     max-width: 450px; }
+
+  #article-frame {
+    padding-left: 3.0em;
+    padding-right: 3.0em; }
 
   #page-frame {
     max-width: 799px; }
@@ -226,9 +253,7 @@ button {
   #content-frame {
     border-width: 0px 2px 0px 2px;
     border-style: solid;
-    border-color: #666666;
-    padding: 3.0em;
-    padding-right: 2.0em; } }
+    border-color: #666666; } }
 @media all and (min-width: 800px) and (min-device-width: 800px) {
   #page-frame {
     max-width: 1400px; }
@@ -237,10 +262,7 @@ button {
     max-width: 800px;
     border-width: 0px 2px 0px 2px;
     border-style: solid;
-    border-color: #666666;
-    padding: 3.0em;
-    padding-left: 5.0em;
-    padding-right: 5.0em; }
+    border-color: #666666; }
     #content-frame > p {
       max-width: 25.0em; } }
 #article-list-head {
@@ -460,6 +482,14 @@ p > code {
   font-family: "Droid Sans Mono", sans-serif;
   font-size: 0.5rem; }
 
+@media all and (min-width: 321px) {
+  html {
+    font-size: 95%;
+    line-height: 1.4; } }
+@media all and (min-width: 481px) {
+  html {
+    font-size: 105%;
+    line-height: 1.4; } }
 @media all and (min-width: 600px) {
   html {
     font-size: 112.5%;
@@ -787,3 +817,5 @@ p + .drop-cap {
  * Extend this object into your markup.
  *
  */
+body {
+  overflow-x: hidden; }
