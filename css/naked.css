@@ -80,6 +80,12 @@ table {
   font-weight: 400;
   src: local("Libre Baskerville Italic"), local("LibreBaskerville-Italic"), url(/fonts/libreBaskerville_Italic.woff) format("woff"); }
 
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Oswald Regular"), local("Oswald-Regular"), url(/fonts/oswald.woff) format("woff"); }
+
 p > code, pre code {
   word-wrap: normal; }
 
@@ -558,7 +564,7 @@ code {
   font-family: "Droid Sans Mono", "Bitstream Vera Sans Mono", Consolas, Courier, monospace; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", Verdana, Geneva, sans-serif;
+  font-family: "Oswald", Verdana, Geneva, sans-serif;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   line-height: 1;
@@ -578,6 +584,11 @@ h4 {
 
 h5 {
   font-size: 1.16em; }
+
+span.bibref {
+  font-size: 0.6em;
+  position: relative;
+  top: -0.5em; }
 
 /* DIAGRAM STYLES */
 .block-diagram {
@@ -616,6 +627,11 @@ h5 {
   margin-left: 0px auto; }
 
 /* END DIAGRAMS */
+/* SPECIFIC ELEMENT STYLES */
+/* END SPECIFIC ELEMENT STYLES */
+h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
+  margin-top: 0.5em; }
+
 p {
   margin: auto auto 1.5em;
   margin-bottom: 1.0em; }
@@ -640,6 +656,9 @@ pre {
 
 body {
   font-size: 9000%;
+  -webkit-transition: width 0.2s ease-in-out;
+  -moz-transition: width 0.2s ease-in-out;
+  transition: width 0.2s ease-in-out;
   line-height: 1.5; }
   @media all and (min-width: 321px) {
     body {
@@ -670,7 +689,10 @@ body {
     width: 93.625%;
     min-width: 93.625%;
     float: left;
-    display: inline-block; }
+    display: inline-block;
+    -webkit-transition: width 0.2s ease-in-out;
+    -moz-transition: width 0.2s ease-in-out;
+    transition: width 0.2s ease-in-out; }
     @media all and (min-width: 321px) {
       body #content-frame {
         margin-left: 10.75%;
@@ -732,7 +754,10 @@ p > code {
   background: #dddddd; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #C74343; }
+  color: #c74343; }
+
+span.bibref {
+  color: #c74343; }
 
 pre .comment {
   color: #66747B; }
