@@ -7,7 +7,7 @@
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
        showProcessingMessages: false,
-       //messageStyle: "none",
+       messageStyle: "none",
        "HTML-CSS": {
         imageFont: null,
         linebreaks: { 
@@ -84,7 +84,27 @@
 <h5>Partial Derivatives</h5>
 <p>As with many areas of math, multivariate derivatives are really just an aggregate of simpler concepts.  In this case, both the gradient and the directional derivative can be found through a function&#39;s partial derivatives.</p>
 <p>A partial derivative, in turn, is just a slight twist on the ordinary derivative.  Strang<span data-ref="strang1991:p477" class="bibref"><a href="#_biblio_ref_0"><sup>[1]</sup></a></span> describes the partial derivative as equivalent to the derivative of a partial function.  A partial function is a smaller piece of a multivariate function, and describes the relationship between that function&#39;s output and one of its variables while its other variables are held constant.</p>
-<p>In this view, a function of two variables can also be thought of as a sequence of two functions of one variable (just like &quot;currying&quot; in Javascript and Haskell).  Using <script type="math/tex">g(x,y)</script> as our function, we could represent the resulting three dimensional surface as an infinite series of two dimensional functions along either the <script type="math/tex">x</script> or <script type="math/tex">y</script> axis.  To be clear, this doesn&#39;t mean that the surface itself extends into infinity: it could, or it could be bound to a range like <script type="math/tex">-10 \lt x \lt 10</script> and <script type="math/tex">-10 \lt y \lt 10</script> .  The area of the surface is irrelevant -- the sequence of two dimensional functions is still infinite in the same sense that a closed geometric object on a plane contains an infinite number of points. </p>
+<p>In this view, a function of two variables can also be thought of as a sequence of two functions of one variable.  This is exactly like &quot;currying&quot; in Javascript and Haskell.  Using a three-variable function for clarity, it looks like this:</p>
+<pre><code class="lang-javascript"><span class="comment">// return the sum of three numbers</span>
+<span class="comment">// (uncurried version)</span>
+<span class="storage">var</span> <span class="entity function">sum3</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x, y, z) {
+    <span class="keyword">return</span> x <span class="keyword operator">+</span> y <span class="keyword operator">+</span> z;
+}
+
+<span class="keyword">var</span> normalSum <span class="keyword operator">=</span> <span class="function call">sum3</span>(<span class="constant numeric">10</span>, <span class="constant numeric">2</span>, <span class="constant numeric">7</span>);
+console.<span class="support method">log</span>(normalSum); <span class="comment">// 19</span>
+
+<span class="storage">var</span> <span class="entity function">sum3Curried</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x) {
+    <span class="keyword">return</span> <span class="keyword">function</span>(y) {
+        <span class="keyword">return</span> <span class="keyword">function</span>(z) {
+            <span class="keyword">return</span> x <span class="keyword operator">+</span> y <span class="keyword operator">+</span> z;
+        }
+    }
+}
+
+<span class="keyword">var</span> curriedSum <span class="keyword operator">=</span> <span class="function call">sum3Curried</span>(<span class="constant numeric">10</span>)(<span class="constant numeric">2</span>)(<span class="constant numeric">7</span>);
+console.<span class="support method">log</span>(curriedSum); <span class="comment">// 19</span></code></pre>
+<p>We can approach <script type="math/tex">g(x,y)</script> just like <code>sum3</code>, representing the resulting three dimensional surface as an infinite series of two dimensional functions along either the <script type="math/tex">x</script> or <script type="math/tex">y</script> axis.  To be clear, this doesn&#39;t mean that the surface itself extends into infinity: it could, or it could be bound to a range like <script type="math/tex">-10 \lt x \lt 10</script> and <script type="math/tex">-10 \lt y \lt 10</script> .  The area of the surface is irrelevant.  The sequence of two dimensional functions is still infinite in the same sense that a closed geometric object on a plane contains an infinite number of points. </p>
 <p>(This is because the real number line does not consist of discrete steps.  Given any two numbers, even very close ones such as 0.0001 and 0.0002, there are an infinite number of points between them.)</p>
 <p>This interpretation of partial functions and their derivatives isn&#39;t always emphasized in math classes, as the idea of functions returning functions can be more confusing than helpful in that context.  Since Javascript is all about passing functions back and forth, it&#39;s the natural approach here.</p>
 <p>Before we get into any more of these abstractions, let&#39;s look at some code to describe what we&#39;ve just covered. </p>
@@ -108,7 +128,7 @@
 }</code></pre>
 <p>We described partial derivatives in terms of derivatives of partial functions earlier, and now we&#39;re using partial application in our translation to code.  This is not a coincidence.  Similar-sounding terms in computer science and math don&#39;t always refer to analogous concepts, but in this case the two ideas are closely linked.</p>
 <p>A partial function describes the change in a multivariate function&#39;s output as one of its variables is manipulated and the others are held constant.  Partial application binds some of a function&#39;s variables and returns a function that accepts the remaining parameter(s).  If partial application is used to bind all of a function&#39;s variables but one, then the returned function reference is equivalent to the partial function of that remaining variable.  </p>
-<p>More concretely: the function returned by <code>applyPartial(gFunc, 5)</code> is identical to the partial function <script type="math/tex">g_y</script> of <script type="math/tex">g(x,y)</script> through the plane where <script type="math/tex">x = 5</script>, and the output of <code>applyRightPartial(gFunc, 10)</code> is identical to the partial function <script type="math/tex">g_x</script> of <script type="math/tex">g(x,y)</script> through the plane where <script type="math/tex">y = 10</script></p>
+<p>More concretely: the function returned by <code>applyPartial(gFunc, 5)</code> is identical to the partial function <script type="math/tex">g(x_0,y)</script> where <script type="math/tex">x_0 := 5</script>, and the output of <code>applyRightPartial(gFunc, 10)</code> is identical to the partial function <script type="math/tex">g(x,y_0)</script> where <script type="math/tex">y_0 = 10</script> .</p>
 <p>We know now that we can use partial application on <code>gFunc</code> to obtain any of its partial functions with respect to <code>x</code> or <code>y</code>.    From the previous article on differentiation of a single-variable function, we also have a general purpose <code>differentiate</code> function which returns a close approximation of the derivative of any continuous function.  This function depends on the limit definition of the derivative, which is also explained in that article.  As a refresher, it looks like this:</p>
 <pre><code class="lang-javascript">
 <span class="storage">var</span> <span class="entity function">differentiate</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn) {
@@ -144,6 +164,25 @@
 <span class="keyword">var</span> xPDerivAtY6X3 <span class="keyword operator">=</span> <span class="function call">xPDerivAtY6</span>(<span class="constant numeric">3</span>);
 
 console.<span class="support method">log</span>(xPDerivAtY6X3); <span class="comment">//18</span></code></pre>
+<p>Now that we have an answer to compare to, we can look at the tradititional notation for the partial derivative:</p>
+<div class="block-diagram block-diagram-math"><script type="math/tex">
+g(x,y) = 3x^2 + y^2 + 6 \\
+y := 6 \\
+\frac{ \partial g }{ \partial x } = (3)(2)x^{2-1} + (0)(6^2 + 6)^{1-1} \\
+\frac{ \partial g }{ \partial x } = 6x \\</script></div>
+<p>Using Strang&#39;s partial function approach, this is equivalent to:</p>
+<div class="block-diagram block-diagram-math"><script type="math/tex">
+g(x,y) = 3x^2 + y^2 + 6 \\
+y_0 := 6 \\
+g(x,y_0) = 3x^2 + y_0^2 + 6 \\
+g_{y=y_0}(x) = 3x^2 + 6^2 + 6 \\
+g_{y=y_0}(x) = 3x^2 + 42 \\
+g^{\prime}_{y=y_0}(x) = (2)(3)x^{2-1} + (0)42^{1-1} \\
+g^{\prime}_{y=y_0}(x) = 6x \\</script></div>
+<p>Evaluating this function for <script type="math/tex">x=3</script>, as in <code>xPDerivAtY6X3</code> above, yields:</p>
+<div class="block-diagram block-diagram-math"><script type="math/tex">
+\frac{ \partial g }{ \partial x } = 6x \\
+\frac{ \partial g }{ \partial x }(3) = 6(3) = 18</script></div>
 <p>It can be difficult to translate the abstract concepts from calculus into working code, but once that step has been taken the implementation tends to be simple.  In finding the partial derivative we really didn&#39;t create any new functions or write much code; it just required understanding the idea well enough to interpret it in terms of the code we already have.  This will also be the case when we deal with combined derivatives of multivariate functions in a future article.</p>
 <div id="article_biblio"><h4>References</h4><span class="footRef" id="_biblio_ref_0">
 	
