@@ -85,8 +85,8 @@ p > code, pre code {
 
 @font-face {
   font-family: 'IconicFill';
-  src: url("iconic_fill.eot");
-  src: url("iconic_fill.eot?#iefix") format("embedded-opentype"), url("iconic_fill.ttf") format("truetype"), url("iconic_fill.svg#iconic") format("svg");
+  src: url("/fonts/iconic_fill.eot");
+  src: url("/fonts/iconic_fill.eot?#iefix") format("embedded-opentype"), url("/fonts/iconic_fill.ttf") format("truetype"), url("/fonts/iconic_fill.svg#iconic") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -615,7 +615,7 @@ span.bibref {
     margin-right: auto; }
 
 .block-diagram-math {
-  border: 1px solid #cccccc;
+  border: 0.5px solid #dedede;
   max-width: 80%;
   text-align: left;
   margin-left: 0px auto; }
