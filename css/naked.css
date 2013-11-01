@@ -649,15 +649,15 @@ pre {
     white-space: pre-wrap; }
 
 body {
-  font-size: 9000%;
+  font-size: 85%;
   -webkit-transition: width 0.2s ease-in-out;
   -moz-transition: width 0.2s ease-in-out;
   transition: width 0.2s ease-in-out;
-  line-height: 1.5; }
-  @media all and (min-width: 321px) {
+  line-height: 1.6; }
+  @media all and (min-width: 380px) {
     body {
       font-size: 100%; } }
-  @media all and (min-width: 481px) {
+  @media all and (min-width: 500px) {
     body {
       font-size: 112.5%; } }
   @media all and (min-width: 600px) {
@@ -666,35 +666,35 @@ body {
   @media all and (min-width: 840px) {
     body {
       font-size: 125%; } }
-  @media all and (min-width: 321px) {
+  @media all and (min-width: 340px) {
     body {
-      line-height: 1.4; } }
-  @media all and (min-width: 481px) {
+      line-height: 1.5; } }
+  @media all and (min-width: 500px) {
     body {
-      line-height: 1.4; } }
+      line-height: 1.6; } }
   @media all and (min-width: 600px) {
     body {
-      line-height: 1.5; } }
+      line-height: 1.6; } }
   @media all and (min-width: 840px) {
     body {
-      line-height: 1.5; } }
+      line-height: 1.6; } }
   body #content-frame {
-    margin-left: 4.375%;
-    width: 93.625%;
-    min-width: 93.625%;
+    margin-left: 10.75%;
+    width: 80.875%;
+    min-width: 80.875%;
     float: left;
     display: inline-block;
     -webkit-transition: width 0.2s ease-in-out;
     -moz-transition: width 0.2s ease-in-out;
     transition: width 0.2s ease-in-out; }
-    @media all and (min-width: 321px) {
+    @media all and (min-width: 340px) {
       body #content-frame {
         margin-left: 10.75%;
         width: 80.875%;
         min-width: 80.875%;
         float: left;
         display: inline-block; } }
-    @media all and (min-width: 481px) {
+    @media all and (min-width: 500px) {
       body #content-frame {
         margin-left: 10.75%;
         width: 80.875%;
@@ -718,8 +718,8 @@ body {
     @media all and (min-width: 1000px) {
       body #content-frame {
         margin-left: 17.125%;
-        width: 49%;
-        min-width: 49%;
+        width: 55.375%;
+        min-width: 55.375%;
         float: left;
         display: inline-block; } }
 
