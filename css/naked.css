@@ -74,12 +74,21 @@ table {
   font-weight: 400;
   src: local("Libre Baskerville"), url(/fonts/libreBaskerville.woff) format("woff"); }
 
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: italic;
+  font-weight: 400;
+  src: local("Libre Baskerville Italic"), local("LibreBaskerville-Italic"), url(/fonts/libreBaskerville_Italic.woff) format("woff"); }
+
 p > code, pre code {
   word-wrap: normal; }
 
 body {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Libre Baskerville", Georgia, serif;
   font-weight: normal; }
+  body p em {
+    font-family: "Libre Baskerville Italic", "Libre Baskerville", Georgia, serif;
+    font-style: italic; }
 
 code {
   font-family: "Droid Sans Mono", sans-serif; }
