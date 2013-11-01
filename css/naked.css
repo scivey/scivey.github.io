@@ -753,6 +753,15 @@ h1, h2, h3, h4, h5, h6 {
 span.bibref {
   color: #c74343; }
 
+span.si-icon {
+  color: #c74343; }
+
+span.si-icon-lg {
+  font-size: 1.8em; }
+
+span.si-icon-md {
+  font-size: 1.3em; }
+
 pre .comment {
   color: #66747B; }
 
