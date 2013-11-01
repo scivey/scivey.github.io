@@ -1,0 +1,299 @@
+/*
+		RESET
+
+*/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*
+		END RESET
+
+*/
+.col-base {
+  float: left; }
+
+@font-face {
+  font-family: 'Droid Sans Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Droid Sans Mono"), local("DroidSansMono"), url(/fonts/droidSansMono.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Ubuntu"), url(/fonts/ubuntu.woff) format("woff"); }
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans"), local("OpenSans"), url(/fonts/openSans.woff) format("woff"); }
+
+p > code, pre code {
+  word-wrap: normal; }
+
+body {
+  font-family: "Ubuntu";
+  font-weight: normal; }
+
+code {
+  font-family: "Droid Sans Mono", sans-serif; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-top: 0; }
+
+h1 {
+  font-size: 3.33em; }
+
+h2 {
+  font-size: 2.667em; }
+
+h3 {
+  font-size: 2em; }
+
+h4 {
+  font-size: 1.333em; }
+
+h5 {
+  font-size: 1.16em; }
+
+/* DIAGRAM STYLES */
+.block-diagram {
+  margin: 0px auto;
+  display: block;
+  max-width: 80%;
+  margin-bottom: 1.0em; }
+  .block-diagram.block-diagram-pic {
+    border: 2px solid black; }
+    .block-diagram.block-diagram-pic > img {
+      max-width: 90%; }
+  .block-diagram .block-diagram-caption {
+    display: block;
+    margin: 0px auto; }
+    .block-diagram .block-diagram-caption > p {
+      display: block;
+      margin: 0px auto;
+      text-align: center; }
+  .block-diagram .block-diagram-title > * {
+    display: block;
+    margin: 0px auto;
+    text-align: center; }
+  .block-diagram img {
+    display: block;
+    max-height: 10.0em;
+    margin-top: 1.0em;
+    margin-bottom: 1.0em;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto; }
+
+.block-diagram-math {
+  border: 1px solid #cccccc;
+  max-width: 80%;
+  text-align: left;
+  margin-left: 0px auto; }
+
+/* END DIAGRAMS */
+p {
+  margin: auto auto 1.5em;
+  margin-bottom: 1.0em; }
+  p + p {
+    text-indent: 1.5em; }
+  p > code {
+    padding: 0 0.1em 0 0.1em;
+    margin: 0 0.1em 0 0.1em; }
+
+code {
+  white-space: pre; }
+
+pre {
+  padding: 1.0em;
+  line-height: 1.1;
+  border-radius: 4px;
+  white-space: pre; }
+  pre code {
+    font-size: 0.8em;
+    white-space: -moz-pre-wrap;
+    white-space: pre-wrap; }
+
+body {
+  font-size: 9000%;
+  line-height: 1.5; }
+  @media all and (min-width: 321px) {
+    body {
+      font-size: 100%; } }
+  @media all and (min-width: 481px) {
+    body {
+      font-size: 112.5%; } }
+  @media all and (min-width: 600px) {
+    body {
+      font-size: 117.5%; } }
+  @media all and (min-width: 840px) {
+    body {
+      font-size: 125%; } }
+  @media all and (min-width: 321px) {
+    body {
+      line-height: 1.4; } }
+  @media all and (min-width: 481px) {
+    body {
+      line-height: 1.4; } }
+  @media all and (min-width: 600px) {
+    body {
+      line-height: 1.5; } }
+  @media all and (min-width: 840px) {
+    body {
+      line-height: 1.5; } }
+  body #content-frame {
+    margin-left: 4.375%;
+    width: 93.625%;
+    min-width: 93.625%;
+    float: left;
+    display: inline-block; }
+    @media all and (min-width: 321px) {
+      body #content-frame {
+        margin-left: 10.75%;
+        width: 80.875%;
+        min-width: 80.875%;
+        float: left;
+        display: inline-block; } }
+    @media all and (min-width: 481px) {
+      body #content-frame {
+        margin-left: 10.75%;
+        width: 80.875%;
+        min-width: 80.875%;
+        float: left;
+        display: inline-block; } }
+    @media all and (min-width: 600px) {
+      body #content-frame {
+        margin-left: 10.75%;
+        width: 74.5%;
+        min-width: 74.5%;
+        float: left;
+        display: inline-block; } }
+    @media all and (min-width: 840px) {
+      body #content-frame {
+        margin-left: 10.75%;
+        width: 61.75%;
+        min-width: 61.75%;
+        float: left;
+        display: inline-block; } }
+    @media all and (min-width: 1000px) {
+      body #content-frame {
+        margin-left: 17.125%;
+        width: 49%;
+        min-width: 49%;
+        float: left;
+        display: inline-block; } }
+
+html {
+  overflow-x: hidden; }
+
+body {
+  overflow-x: hidden; }
+
+/* COLORING */
+pre {
+  background: #22282A;
+  color: #F1F2F3;
+  margin-bottom: 1.0em; }
+  pre code {
+    background: #22282A; }
+
+code {
+  white-space: pre; }
+
+body {
+  background: #fdfdfd;
+  color: #333333; }
+
+p > code {
+  background: #dddddd; }
+
+h1, h2, h3, h4, h5, h6 {
+  color: #e50000; }
+
+pre .comment {
+  color: #66747B; }
+
+pre .constant {
+  color: #EC7600; }
+
+pre .storage {
+  color: #EC7600; }
+
+pre .string, pre .comment.docstring {
+  color: #EC7600; }
+
+pre .string.regexp, pre .support.tag.script, pre .support.tag.style {
+  color: #fff; }
+
+pre .keyword, pre .selector {
+  color: #93C763; }
+
+pre .inherited-class {
+  font-style: italic; }
+
+pre .entity {
+  color: #93C763; }
+
+pre .integer {
+  color: #FFCD22; }
+
+pre .support, *[data-language="csharp"] .function.call {
+  color: #FACD22; }
+
+pre .variable.global, pre .variable.class, pre .variable.instance {
+  color: #CCC; }
+
+/* C# specific rule */
+pre .preprocessor {
+  color: #66747B; }
