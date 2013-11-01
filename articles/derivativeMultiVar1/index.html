@@ -3,6 +3,7 @@
   <head>
     <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/lightbox.min.js"></script>
     <script type="text/x-mathjax-config">
       MathJax.Hub.Config({
        showProcessingMessages: false,
@@ -24,6 +25,7 @@
     </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link href="/css/naked.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/lightbox.css" type="text/css" rel="stylesheet"/>
     <script>
       /*
       $(document).ready( function() {
@@ -69,9 +71,9 @@
           <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Derivatives of multivariate functions aren&#39;t much more complicated than those of single-variable functions.  There are three things to understand: how the idea of a derivative changes in problems of three or more dimensions, what partial derivatives are, and how to combine partial derivatives into derivatives of the function as a whole.</p>
 <h5>What does the derivative of g(x,y) mean?</h5>
 <p>Given a differentiable function <script type="math/tex">f(x)</script>, the phrase &quot;derivative of <script type="math/tex">f(x)</script>&quot; refers unambiguously to a single function <script type="math/tex">f^{\prime}(x)</script>.  For a multivariate function like <script type="math/tex">g(x,y)</script>, this is not the case.  This becomes clear after comparing possible graphs of <script type="math/tex">f(x)</script> and <script type="math/tex">g(x,y)</script> side by side:</p>
-<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>f(x) = 4x^2+cos(x)</h5></section> <img class="block-fig-image" src="img/fig/4x2cosx.png"> <section class="block-diagram-caption"><p>Line</p></section></div>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>f(x) = 4x^2+cos(x)</h5></section> <a data-lightbox="img/fig/4x2cosx.png" href="img/fig/4x2cosx.png" title="Line"><img class="block-fig-image" src="img/fig/4x2cosx.png"></a> <section class="block-diagram-caption"><p>Line</p></section></div>
 <p></p>
-<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>g(x,y) = 3x^2 + y^2 + 6</h5></section> <img class="block-fig-image" src="img/fig/splot.png"> <section class="block-diagram-caption"><p>Surface</p></section></div>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>g(x,y) = 3x^2 + y^2 + 6</h5></section> <a data-lightbox="img/fig/splot.png" href="img/fig/splot.png" title="Surface"><img class="block-fig-image" src="img/fig/splot.png"></a> <section class="block-diagram-caption"><p>Surface</p></section></div>
 <p>While <script type="math/tex">f(x)</script> defines a line on a two dimensional plane, <script type="math/tex">g(x,y)</script> defines a surface in three dimensional space.  This extra dimension explains some of the ambiguity.</p>
 <p>On the two-dimensional plot, evaluating the derivative at a point <script type="math/tex">c</script> returns the slope of <script type="math/tex">f(x)</script> at <script type="math/tex">x = c</script>.  Here <em>slope</em> can refer only to the ratio of change in <script type="math/tex">y</script> over change in <script type="math/tex">x</script>; no other details need to be given and, provided <script type="math/tex">f(x)</script> is unaltered, no other information will change the definition or value of the slope at <script type="math/tex">x = c</script> .</p>
 <p>Compare this to the surface plot of <script type="math/tex">g(x,y)</script>.  Given a pair of <script type="math/tex">x,y</script> coordinates <script type="math/tex">c,d</script>, what is the slope of the surface at <script type="math/tex">x=c, y=d</script> ?</p>
