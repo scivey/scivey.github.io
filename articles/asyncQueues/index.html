@@ -23,7 +23,7 @@
       });
     </script>
     <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link href="/css/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/naked.css" type="text/css" rel="stylesheet"/>
     <script>
       /*
       $(document).ready( function() {
@@ -67,9 +67,6 @@
             <hr>
           </div>
           <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Many Node.js packages follow the same API convention: lightweight functions are synchronous, and functions with heavier processing accept a callback with a signature of <code>(error, response1[, response2...])</code>.  The exact line between heavier and lighter processing can be a matter of opinion, and this can complicate things when packages with similar purposes follow different conventions.  </p>
-<div class="block-diagram block-diagram-math"><script type="math/tex">
-\lambda x.y \equiv x^2 \\
-x \equiv z</script></div>
 <p>Template engines are a good example.  Internally, these consist of two phases: compilation, in which a template string is turned into a callable template function, and rendering, where a set of variables is passed to the template function and inserted at the appropriate positions.  Some engines have an asynchronous interface to these phases, while others use synchronous calls. This is not a problem in itself, but presents a few issues for the maintainability and readability of dependent code.</p>
 <p>One issue is flexibility.  Ideally, modules with similar purposes should be interchangeable with minimal changes to other code - replacing one template engine with another shouldn&#39;t require significant refactoring.  </p>
 <p>Another problem is the added complexity to flow control.  In applications that delegate processing to a number of other modules, such as static site generators, data is usually moved through a kind of asynchronous pipeline.  Adding synchronous function calls in the middle of the pipeline can get ugly.</p>
