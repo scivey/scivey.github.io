@@ -84,17 +84,17 @@ p > code, pre code {
   word-wrap: normal; }
 
 body {
-  font-family: "Libre Baskerville", Georgia, serif;
+  font-family: "Libre Baskerville", Georgia, Cambria, "Times New Roman", Times, serif;
   font-weight: normal; }
   body p em {
-    font-family: "Libre Baskerville Italic", "Libre Baskerville", Georgia, serif;
+    font-family: "Libre Baskerville Italic", "Libre Baskerville", Georgia, Cambria, "Times New Roman", Times, serif;
     font-style: italic; }
 
 code {
-  font-family: "Droid Sans Mono", sans-serif; }
+  font-family: "Droid Sans Mono", "Bitstream Vera Sans Mono", Consolas, Courier, monospace; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", Verdana, Geneva, sans-serif;
   font-weight: 400;
   text-rendering: optimizeLegibility;
   line-height: 1;
