@@ -63,22 +63,22 @@ table {
   src: local("Droid Sans Mono"), local("DroidSansMono"), url(/fonts/droidSansMono.woff) format("woff"); }
 
 @font-face {
-  font-family: 'Ubuntu';
-  font-style: normal;
-  font-weight: 400;
-  src: local("Ubuntu"), url(/fonts/ubuntu.woff) format("woff"); }
-
-@font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   src: local("Open Sans"), local("OpenSans"), url(/fonts/openSans.woff) format("woff"); }
 
+@font-face {
+  font-family: 'Libre Baskerville';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Libre Baskerville"), url(/fonts/libreBaskerville.woff) format("woff"); }
+
 p > code, pre code {
   word-wrap: normal; }
 
 body {
-  font-family: "Ubuntu";
+  font-family: "Libre Baskerville", serif;
   font-weight: normal; }
 
 code {
@@ -259,7 +259,7 @@ p > code {
   background: #dddddd; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #e50000; }
+  color: #C74343; }
 
 pre .comment {
   color: #66747B; }
