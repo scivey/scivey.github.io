@@ -73,7 +73,8 @@
 <h4>Basics</h4>
 <p>Below, <code>applyPartial</code> is a higher-order function which performs a simplified version of partial application.  To avoid some of the Javascript-specific quirks we&#39;ll cover later, this code assumes that the target function <code>funcRef</code> takes exactly two parameters. </p>
 <pre><code class="lang-javascript">
-<span class="comment">// funcRef is a reference to another function with arity=2</span>
+<span class="comment">// funcRef is a reference to</span>
+<span class="comment">// another function with arity=2</span>
 <span class="storage">var</span> <span class="entity function">applyPartial</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(funcRef, firstParam) {
     <span class="keyword">return</span> <span class="keyword">function</span>(secondParam) {
         <span class="keyword">return</span> <span class="function call">funcRef</span>(firstParam, secondParam);
@@ -149,10 +150,12 @@ console.<span class="support method">log</span>( <span class="function call">xOv
 <p>Javascript&#39;s variadic functions complicate the design of a generic partial application function, as we need to know when a &quot;full&quot; set of parameters has been received in order to invoke the original function at the proper time.  In the first examples on this page, <code>applyPartial</code> and its right-handed variant avoided this problem by assuming that all functions had an arity of two.  This is useful for demonstrating the core idea of partial application, but limits reusability.</p>
 <p>A simple solution is to explicitly specify the function&#39;s arity.  Still using left partial application as our example, there are two main ways of approaching this.  The first uses a single generic <code>applyPartial</code> function which accepts a function reference, an arity, and one or more values to partially apply:</p>
 <pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">applyNPartial</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn, arity, params) {
-    <span class="comment">// `params` is an array of one or more values, which avoids</span>
-    <span class="comment">// a messy dance around `Array.prototype.slice.apply(arguments)`, etc.</span>
+    <span class="comment">// `params` is an array of one or more values,</span>
+    <span class="comment">// which avoids a messy dance around </span>
+    <span class="comment">//`Array.prototype.slice.apply(arguments)`, etc.</span>
 
-    <span class="comment">// create an empty array if no parameters were provided</span>
+    <span class="comment">// create an empty array if no </span>
+    <span class="comment">// parameters were provided</span>
     params <span class="keyword operator">=</span> params <span class="keyword operator">|</span><span class="keyword operator">|</span> [];
 
 
@@ -176,12 +179,14 @@ console.<span class="support method">log</span>( <span class="function call">sum
 <p>The other approach is to create a factory function for arity-specific versions of <code>applyPartial</code>:</p>
 <pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">makeApplyPartial</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(arity) {
 
-    <span class="comment">// the first inner function is the returned version</span>
-    <span class="comment">// of `applyPartial` with parameter count =`arity` </span>
+    <span class="comment">// the first inner function is the </span>
+    <span class="comment">// returned version of `applyPartial` </span>
+    <span class="comment">// with parameter count =`arity` </span>
 
     <span class="keyword">return</span> <span class="keyword">function</span>(fn, params) {
 
-        <span class="comment">// create an empty array if no parameters were provided</span>
+        <span class="comment">// create an empty array if no </span>
+        <span class="comment">// parameters were provided</span>
         params <span class="keyword operator">=</span> params <span class="keyword operator">|</span><span class="keyword operator">|</span> [];
 
         <span class="keyword">return</span> <span class="keyword">function</span>(moreParams) {
