@@ -127,7 +127,7 @@ console.<span class="support method">log</span>(curriedSum); <span class="commen
 }</code></pre>
 <p>We described partial derivatives in terms of derivatives of partial functions earlier, and now we&#39;re using partial application in our translation to code.  This is not a coincidence.  Similar-sounding terms in computer science and math don&#39;t always refer to analogous concepts, but in this case the two ideas are closely linked.</p>
 <p>A partial function describes the change in a multivariate function&#39;s output as one of its variables is manipulated and the others are held constant.  Partial application binds some of a function&#39;s variables and returns a function that accepts the remaining parameter(s).  If partial application is used to bind all of a function&#39;s variables but one, then the returned function reference is equivalent to the partial function of that remaining variable.  </p>
-<p>More concretely: the function returned by <code>applyPartial(gFunc, 5)</code> is identical to the partial function <script type="math/tex">g(x_0,y)</script> where <script type="math/tex">x_0 := 5</script>, and the output of <code>applyRightPartial(gFunc, 10)</code> is identical to the partial function <script type="math/tex">g(x,y_0)</script> where <script type="math/tex">y_0 = 10</script> .</p>
+<p>More concretely: the function returned by <code>applyPartial(gFunc, 5)</code> is identical to the partial function <script type="math/tex">g(x_0,y)</script> where <script type="math/tex">x_0 := 5</script>, and the output of <code>applyRightPartial(gFunc, 10)</code> is identical to the partial function <script type="math/tex">g(x,y_0)</script> where <script type="math/tex">y_0 := 10</script> .</p>
 <p>We know now that we can use partial application on <code>gFunc</code> to obtain any of its partial functions with respect to <code>x</code> or <code>y</code>.    From the previous article on differentiation of a single-variable function, we also have a general purpose <code>differentiate</code> function which returns a close approximation of the derivative of any continuous function.  This function depends on the limit definition of the derivative, which is also explained in that article.  As a refresher, it looks like this:</p>
 <pre><code class="lang-javascript">
 <span class="storage">var</span> <span class="entity function">differentiate</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn) {
@@ -182,7 +182,43 @@ g^{\prime}_{y=y_0}(x) = 6x \\</script></div>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 \frac{ \partial g }{ \partial x } = 6x \\
 \frac{ \partial g }{ \partial x }(3) = 6(3) = 18</script></div>
-<p>which is equal to the numerically-determined result above.  That&#39;s really all there is to partial derivatives: partial application followed by the finite difference method.  In the next article, we&#39;ll combine multiple partial derivatives to find the directional and total derivatives at a point.</p>
+<p>which is equal to the numerically-determined result above.</p>
+<p>That&#39;s really all there is to partial derivatives: partial application followed by the finite difference method.  For a cleaner interface, these steps can be combined into a single <code>differentiatePartial</code> function:</p>
+<pre><code class="lang-javascript">
+<span class="comment">// takes a function of two parameters and returns its</span>
+<span class="comment">// partial derivative with respect to one of those parameters</span>
+<span class="storage">var</span> <span class="entity function">differentiatePartial</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn, paramOne, paramTwo) {
+    <span class="keyword">var</span> _partialFn;
+
+    <span class="keyword">if</span> (typeof paramOne <span class="keyword operator">!</span><span class="keyword operator">=</span><span class="keyword operator">=</span> &quot;undefined&quot;) {
+
+        <span class="comment">// assume paramTwo is null.</span>
+        <span class="comment">// set _partialFn to the partial function</span>
+        <span class="comment">// of `fn` with respect to paramTwo,</span>
+        <span class="comment">// with paramOne bound.</span>
+
+        _partialFn <span class="keyword operator">=</span> <span class="function call">applyPartial</span>(fn, paramOne);
+
+    } <span class="keyword">else</span> <span class="keyword">if</span> (typeof paramTwo <span class="keyword operator">!</span><span class="keyword operator">=</span><span class="keyword operator">=</span> &quot;undefined&quot;) {
+
+        <span class="comment">// set _partialFn to the partial function of</span>
+        <span class="comment">// `fn` with respect to paramOne,</span>
+        <span class="comment">// with paramTwo bound.</span>
+
+        _partialFn <span class="keyword operator">=</span> <span class="function call">applyRightPartial</span>(fn, paramTwo);
+    }
+
+    <span class="comment">// get the derivative of the partial function</span>
+    <span class="keyword">return</span> <span class="function call">differentiate</span>(_partialFn);
+}
+
+<span class="comment">// partial derivative with respect to x along y=6</span>
+<span class="keyword">var</span> gPartialAtY6 <span class="keyword operator">=</span> <span class="function call">differentiatePartial</span>(gFunc, <span class="constant language">null</span>, <span class="constant numeric">6</span>);
+
+<span class="comment">// partial derivative with respect to y along x=2</span>
+<span class="keyword">var</span> gPartialAtX2 <span class="keyword operator">=</span> <span class="function call">differentiatePartial</span>(gFunc, <span class="constant numeric">2</span>);</code></pre>
+<p>While this implementation of <code>differentiatePartial</code> assumes that <code>fn</code> takes two parameters, it can be easily extended to use three or more parameters by changing the method of partial application.  (In other words: the parts specific to partial differentiation do not change; it&#39;s just a question of binding more values.)</p>
+<p>In the next article, we&#39;ll combine multiple partial derivatives to find the directional and total derivatives at a point.</p>
 <div id="article_biblio"><h4>References</h4><span class="footRef" id="_biblio_ref_0">
 	
 		G. Strang, 
