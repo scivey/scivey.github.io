@@ -591,7 +591,9 @@ span.bibref {
   max-width: 80%;
   margin-bottom: 1.0em; }
   .block-diagram.block-diagram-pic {
-    border: 2px solid black; }
+    border: 2px solid black;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em; }
     .block-diagram.block-diagram-pic > img {
       max-width: 90%; }
   .block-diagram .block-diagram-caption {
