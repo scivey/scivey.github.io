@@ -148,7 +148,8 @@
 <p>This notion of infinitely small numbers is the main reason we&#39;ve had to take such an indirect route:  if the derivative is defined by an infinitesimal shift along an axis, then what does it mean to shift by an infinitely small amount along a path at thirty degrees to an axis?</p>
 <p>In a word, nothing.  That&#39;s why the partial derivatives need to be found first.  Once they&#39;re found, we can evaluate all of them at a given point to get a set of non-infinitesimal numbers which we can work with in more familiar ways.  It may seem helpful to think of this in terms of trigonometry, but a trig-based approach becomes impossible in problems of 4+ dimensions.  For this reason we&#39;ll use vector analogues of trigonometric functions, notably the <a href="http://en.wikipedia.org/wiki/Dot_product">dot product</a>.</p>
 <h5>Finding the Gradient</h5>
-<p>The gradient basically boils down to vector addition, which pops up in two-dimensional intro physics problems all the time: if a car is moving 10mph toward the East and 50mph toward the North, what is its speed and direction?  Instead of using the Pythagorean theorem and sine or cosine, which would result in separate answers for magnitude and direction, we can represent each of the given speeds as a two-element column of numbers: one for speed toward the East, and one for speed toward the North.  Adding the corresponding elements results in a third column which represents the magnitude and direction of the resulting vector.  In other words:</p>
+<p>The gradient basically boils down to vector addition, with one vector for each partial derivative. Vector additon which pops up in Physics I problems all the time: if a car is moving 10mph toward the East and 50mph toward the North, what is its speed and direction?</p>
+<p>Instead of using the Pythagorean theorem and sine or cosine, which would result in separate answers for magnitude and direction, we can represent each of the given speeds as a two-element column of numbers: one for speed toward the East, and one for speed toward the North.  Adding the corresponding elements results in a third column which represents the magnitude and direction of the resulting vector.  In other words:</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	10 \text{ mph East} = \begin{bmatrix} 10 \text{ mph East} \\ 0 \text{ mph North} \end{bmatrix} \\
 	50 \text{ mph North} = \begin{bmatrix} 0 \text{ mph East} \\ 50 \text{ mph North} \end{bmatrix} \\
@@ -235,7 +236,7 @@
         <span class="keyword">return</span> degrees;
     }
 }</code></pre>
-<p>Like <code>getGradientOf</code>, <code>getGradientAngleOf</code> returns a function which takes values for <script type="math/tex">x</script> and <script type="math/tex">y</script> .  The difference is that it processes the gradient vector instead of returning it, calculating degrees from the X axis and returning that instead.</p>
+<p>Like <code>getGradientOf</code>, <code>getGradientAngleOf</code> returns a function which takes values for <script type="math/tex">x</script> and <script type="math/tex">y</script> .  The difference is that it processes the gradient vector instead of returning it, calculating degrees from the <script type="math/tex">x</script> axis and returning that instead.</p>
 <p>In the next article, we&#39;ll use a similar method to find the directional derivative.</p>
 <div id="article_biblio"></div></div>
           </div>
