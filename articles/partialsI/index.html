@@ -166,6 +166,8 @@ console.<span class="support method">log</span>( <span class="function call">xOv
         }
     }
 
+    <span class="keyword">return</span> _partialified;
+
 }
 
 <span class="storage">var</span> <span class="entity function">sumXYZ</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x,y,z) {
@@ -208,7 +210,7 @@ console.<span class="support method">log</span>( <span class="function call">sum
 
 console.<span class="support method">log</span>( <span class="function call">sum10_6_C_D</span>(<span class="constant numeric">7</span>, <span class="constant numeric">3</span>) ); <span class="comment">// 26</span>
 <span class="comment">// equivalent to sumABCD(10, 6, 7, 3);</span></code></pre>
-<p>These approaches are equally effective, and which one to use is largely a matter of style and taste.  In both implementations, note that the inner function appends any provided values to the existing list of parameters and then invokes the wrapped function <em>if a full set of parameters has been provided</em>.  This is an important feature of partial application, and one that isn&#39;t obvious from the two-variable function examples.</p>
+<p>These approaches are equally effective, and choosing one or the other is largely a matter of style. In both implementations, note that the inner function appends any provided values to the existing list of parameters and then invokes the wrapped function <em>if a full set of parameters has been provided</em>.  This is an important feature of partial application, and one that isn&#39;t obvious from the two-variable function examples.</p>
 <p>The practical implication of this is that parameters don&#39;t need to be supplied in exactly two sets (i.e. at the time of partial application and then when the value is needed), but can instead be supplied in batches of one or more until a full set has been gathered:</p>
 <pre><code class="lang-javascript"><span class="comment">// returns the string formed by</span>
 <span class="comment">// concatenating top + middle + bottom</span>
