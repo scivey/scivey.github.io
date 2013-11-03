@@ -167,7 +167,7 @@
 	\nabla g = \frac{\partial g}{\partial x} i + \frac{\partial g}{\partial y}j \\
 	\nabla g = \frac{\partial g}{\partial x} \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 
 		\frac{\partial g}{\partial y} \begin{bmatrix} 0 \\ 1 \end{bmatrix}</script></div>
-<p>For some point on <script type="math/tex">g(x,y)</script> , say that <script type="math/tex">\frac{\partial g}{\partial x} = 13 \text{ and } \frac{\partial g}{\partial y} = 5 .</script>  This would evaluate to:</p>
+<p>For some point on <script type="math/tex">g(x,y)</script>, let&#39;s say that <script type="math/tex">\frac{\partial g}{\partial x} = 13 \text{ and } \frac{\partial g}{\partial y} = 5</script>.  This would evaluate to:</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	\nabla g = 13 \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 
 		5 \begin{bmatrix} 0 \\ 1 \end{bmatrix} \\
@@ -178,6 +178,8 @@
 	\nabla g =  \begin{bmatrix} 13 \\ 0 \end{bmatrix} +
 		\begin{bmatrix} 0 \\ 5 \end{bmatrix} \\
 
+	\nabla g = \begin{bmatrix} 13 + 0 \\ 0 + 5 \end{bmatrix} \\
+	
 	\nabla g = \begin{bmatrix} 13 \\ 5 \end{bmatrix}</script></div>
 <p>Implementing this isn&#39;t any harder than the partial derivative was.  As before, it&#39;s just a question of composing our existing functions in a form that captures the meaning of the gradient.</p>
 <pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">getGradientOf</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn) {
