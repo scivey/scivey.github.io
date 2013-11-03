@@ -630,9 +630,14 @@ span.bibref {
 h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
   margin-top: 0.5em; }
 
+pre + h5 {
+  margin-top: 2em; }
+
 p {
   margin: auto auto 1.5em;
   margin-bottom: 1.0em; }
+  p + h5 {
+    margin-top: 2em; }
   p + p {
     text-indent: 1.5em; }
   p > code {
