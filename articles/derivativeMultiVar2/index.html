@@ -68,8 +68,7 @@
               </h3></span><span class="dbg-width-label"></span>
             <hr>
           </div>
-          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>The total and directional derivatives were introduced in the <a href="../derivativeMultiVar1/">previous article</a> in this series.  They differ from regular derivatives in that they have a concept of direction, as is required to completely describe variable relationships in spaces of three or more dimensions.</p>
-<p>They serve related but distinct purposes: the directional derivative is a function of both position and direction and returns a scalar (directionless) value, while the total derivative is a function of position alone and returns a vector (magnitude and direction) value.  Unlike the directional derivative, the total derivative at a point has an inherent direction.</p>
+          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>The total and directional derivatives, introduced in the <a href="../derivativeMultiVar1/">previous article</a>, differ from ordinary derivatives in that they return vectors rather than simple ratios.  They serve related but distinct purposes: the directional derivative is a function of both position and direction and returns a scalar value (directionless), while the total derivative is a function of position alone and returns a vector value (magnitude and direction).  Unlike the directional derivative, the total derivative at a point has an inherent direction.</p>
 <p>In plain English, the directional derivative is like asking: &quot;how many miles north of Boston is Montreal?&quot;  The answer is &quot;N miles,&quot; not &quot;N miles to the North,&quot; because the direction was already given in the question.  The total derivative is like asking: &quot;what is the shortest path from Boston to Montreal?&quot;  The answer has an inherent magnitude and direction, i.e. &quot;start in Boston, face X degrees North-Northwest, and keep going for N miles.&quot;
 (These examples are complicated by the Earth&#39;s surface being spherical, but pretend you&#39;re looking at a map.)</p>
 <h5>Partial Derivatives (Again)</h5>
@@ -77,8 +76,8 @@
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	g(x,y) = 3x^2 + y^2 + 6</script></div>
 <p>For this function, the total and directional derivatives for a pair of coordinates <script type="math/tex">(x=a,y=b)</script> are found by working with the partial derivatives <script type="math/tex">\frac{\partial g}{\partial x}</script>, where <script type="math/tex">y:= b</script> ; and <script type="math/tex">\frac{\partial g}{\partial y}</script>, where <script type="math/tex">x := a</script>. </p>
-<p>This makes sense if you think about it.  Since each of a function&#39;s partial derivatives describes the relationship between its output and one of its variables, it follows that the complete set of partial derivatives can be used to describe the function&#39;s behavior with respect to all of its variables.  Similarly, since evaluating a partial derivative at a given point returns the exact ratio between change in output and change in value of the partial&#39;s parameter at that point, it follows that evaluation of all of the function&#39;s partial derivatives at a point can describe the ratio between change in output and changes in <em>all</em> parameters.</p>
-<p>We&#39;ve already figured out how to estimate partial derivatives.  The <a href="../derivativeMultiVar1/">previous article</a> resulted in a <code>differentiatePartial</code> function, which estimates a two-variable function&#39;s partial derivative with respect to one of its variables.  It&#39;s a composition of <a href="../partialsI">partial application</a> and the <a href="../derivativeSingleVar/">finite difference method</a> :</p>
+<p>This makes sense if you think about it.  Since each of a function&#39;s partial derivatives describes the relationship change in its output and change in one of its variables, it follows that the complete set of partial derivatives passing through a point can be used to describe the function&#39;s relationship with respect to <em>all</em> of its variables at that point.</p>
+<p>We figured out how to estimate partial derivatives in the <a href="../derivativeMultiVar1/">previous article</a>, resulting in a reusable <code>differentiatePartial</code> function.  It estimates a two-variable function&#39;s partial derivative with respect to either of its variables, and is a composition of <a href="../partialsI">partial application</a> and the <a href="../derivativeSingleVar/">finite difference method</a> :</p>
 <pre><code class="lang-javascript">
 <span class="comment">// takes a function of two parameters and returns its</span>
 <span class="comment">// partial derivative with respect to one of those parameters</span>
@@ -162,12 +161,12 @@
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	10 \text{ mph East} = 10 * \begin{bmatrix} 1 \text{ mph East} \\ 0 \text{ mph North} \end{bmatrix}
 		= \begin{bmatrix} 10 \text{ mph East} \\ 0 \text{ mph North} \end{bmatrix}</script></div>
-<p>This is necessary because the value of the partial derivative at a given point is a ratio, making it a unitless, directionless value.  Using <script type="math/tex">i</script> and <script type="math/tex">j</script> as our <script type="math/tex">x</script> and <script type="math/tex">y</script> unit vectors, this gives us the following formula for the gradient of <script type="math/tex">g(x,y)</script>, denoted <script type="math/tex">\nabla g</script> :</p>
+<p>This is necessary because the value of the partial derivative at a given point is a ratio, making it a scalar value.  Multiplying the partial derivative&#39;s output by a unit vector allows us to interpret it in terms of both magnitude and direction.  Using <script type="math/tex">i</script> and <script type="math/tex">j</script> as our <script type="math/tex">x</script> and <script type="math/tex">y</script> unit vectors yeilds the following formula for the gradient of <script type="math/tex">g(x,y)</script>, denoted <script type="math/tex">\nabla g</script> :</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	\nabla g = \frac{\partial g}{\partial x} i + \frac{\partial g}{\partial y}j \\
 	\nabla g = \frac{\partial g}{\partial x} \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 
 		\frac{\partial g}{\partial y} \begin{bmatrix} 0 \\ 1 \end{bmatrix}</script></div>
-<p>For some point on <script type="math/tex">g(x,y)</script>, let&#39;s say that <script type="math/tex">\frac{\partial g}{\partial x} = 13 \text{ and } \frac{\partial g}{\partial y} = 5</script>.  This would evaluate to:</p>
+<p>For some point on <script type="math/tex">g(x,y)</script>, say that <script type="math/tex">\frac{\partial g}{\partial x} = 13 \text{ and } \frac{\partial g}{\partial y} = 5</script>.  This would evaluate to:</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	\nabla g = 13 \begin{bmatrix} 1 \\ 0 \end{bmatrix} + 
 		5 \begin{bmatrix} 0 \\ 1 \end{bmatrix} \\
@@ -181,7 +180,7 @@
 	\nabla g = \begin{bmatrix} 13 + 0 \\ 0 + 5 \end{bmatrix} \\
 
 	\nabla g = \begin{bmatrix} 13 \\ 5 \end{bmatrix}</script></div>
-<p>Implementing this isn&#39;t any harder than the partial derivative was.  As before, it&#39;s just a question of composing our existing functions in a form that captures the meaning of the gradient.</p>
+<p>This isn&#39;t any harder to implement than the partial derivative.  As before, it&#39;s just a question of composing our existing functions in a form that captures the meaning of the gradient.</p>
 <pre><code class="lang-javascript"><span class="storage">var</span> <span class="entity function">getGradientOf</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(fn) {
 
     <span class="keyword">return</span> <span class="keyword">function</span>(paramOne, paramTwo) {
@@ -199,7 +198,7 @@
     }
 
 }</code></pre>
-<p>Like the equation above, <code>getGradientOf</code> returns a one-dimensional array of numbers.  This is the best approach because it easily generalizes to functions with more parameters, but the output may need further processing in order to be meaningful for a particular application.  E.g., in code dealing with a 3-dimensional problem like <script type="math/tex">g(x,y)</script>, the main item of interest may be the XY-plane angle at which the greatest rate of change in output occurs.</p>
+<p>As with the equation above, <code>getGradientOf</code> returns a one-dimensional array of numbers.  This is the best approach because it easily generalizes to functions with more parameters, but the output may need further processing in order to be meaningful for a particular application.  E.g., in code dealing with a 3-dimensional problem like <script type="math/tex">g(x,y)</script>, the main item of interest may be the XY-plane angle at which the greatest rate of change in output occurs.</p>
 <p>In that case, a wrapper function around <code>getGradientOf</code> can be used to convert the returned vector into an XY-plane angle.  This provides the needed information to dependent code while keeping <code>getGradientOf</code> as general as possible.</p>
 <pre><code class="lang-javascript">
 <span class="storage">var</span> <span class="entity function">pythagorean</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(adj, opp) {
@@ -212,7 +211,7 @@
 
     <span class="comment">// cache ratio for rad -&gt; deg conversion</span>
     <span class="comment">// (2pi radians per 360 degrees)</span>
-    <span class="keyword">var</span> _ratio <span class="keyword operator">=</span> <span class="constant numeric">360</span> / (<span class="constant numeric">2</span> <span class="keyword operator">*</span> Math.PI)
+    <span class="keyword">var</span> _ratio <span class="keyword operator">=</span> <span class="constant numeric">360</span> / (<span class="constant numeric">2</span> <span class="keyword operator">*</span> Math.PI);
 
     <span class="keyword">return</span> <span class="keyword">function</span>(radians) {
         <span class="keyword">return</span> radians <span class="keyword operator">*</span> _ratio;
