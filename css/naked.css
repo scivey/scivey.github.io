@@ -653,6 +653,7 @@ pre {
     white-space: pre-wrap; }
 
 body {
+  padding-top: 2.0em;
   padding-bottom: 12.0em;
   font-size: 85%;
   -webkit-transition: width 0.2s ease-in-out;
@@ -728,6 +729,12 @@ body {
         float: left;
         display: inline-block; } }
 
+#article-list-head {
+  margin-bottom: 2.0em; }
+
+.article-header-text * {
+  max-width: 12.0em; }
+
 html {
   overflow-x: hidden; }
 
@@ -774,6 +781,51 @@ span.si-icon-lg {
 
 span.si-icon-md {
   font-size: 1.3em; }
+
+.base-page-head {
+  margin-right: 0;
+  margin-left: auto; }
+  .base-page-head .base-page-title {
+    margin-right: 0;
+    margin-left: auto;
+    text-align: right; }
+  .base-page-head .base-page-scivey {
+    color: #333333; }
+  .base-page-head .base-page-sep {
+    color: #333333;
+    font-weight: 200; }
+  .base-page-head * {
+    display: inline-block; }
+
+#name-block {
+  float: right; }
+
+.scivey-span {
+  margin: 0px;
+  margin-left: 0 auto; }
+  .scivey-span .base-page-scivey {
+    display: inline-block; }
+  .scivey-span .base-sep {
+    margin-left: 0.5em;
+    margin-right: 0.5em; }
+    .scivey-span .base-sep * {
+      margin: 0; }
+
+.base-page-head {
+  text-align: right; }
+
+.base-scivey-half {
+  padding-left: 5px;
+  border-left: 5px solid #c74343;
+  font-size: 1.1em;
+  vertical-align: top; }
+
+.base-title-half {
+  padding-right: 5px;
+  border-right: 5px solid #333333; }
+
+.base-page-scivey {
+  color: #333333; }
 
 pre .comment {
   color: #66747B; }

@@ -69,7 +69,7 @@
             <hr>
           </div>
           <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>The total and directional derivatives were introduced in the <a href="../derivativeMultiVar1/">previous article</a> in this series.  They differ from regular derivatives in that they have a concept of direction, as is required to completely describe variable relationships in spaces of three or more dimensions.</p>
-<p>They serve related but distinct purposes: the directional derivative is a function of both position and direction and returns a scalar (directionless) value, while the total derivative is a function of position alone and returns a vector (magnitude and direction) value.  Unlike the directional derivative, the total derivative <em>does</em> have an inherent direction.</p>
+<p>They serve related but distinct purposes: the directional derivative is a function of both position and direction and returns a scalar (directionless) value, while the total derivative is a function of position alone and returns a vector (magnitude and direction) value.  Unlike the directional derivative, the total derivative at a point has an inherent direction.</p>
 <p>In plain English, the directional derivative is like asking: &quot;how many miles north of Boston is Montreal?&quot;  The answer is &quot;N miles,&quot; not &quot;N miles to the North,&quot; because the direction was already given in the question.  The total derivative is like asking: &quot;what is the shortest path from Boston to Montreal?&quot;  The answer has an inherent magnitude and direction, i.e. &quot;start in Boston, face X degrees North-Northwest, and keep going for N miles.&quot;
 (These examples are complicated by the Earth&#39;s surface being spherical, but pretend you&#39;re looking at a map.)</p>
 <h5>Partial Derivatives (Again)</h5>
@@ -158,7 +158,7 @@
 	\begin{bmatrix} 0 \text{ mph East} \\ 50 \text{ mph North} \end{bmatrix}
 		= 
 	\begin{bmatrix} 10 \text{ mph East} \\ 50 \text{ mph North} \end{bmatrix} \\</script></div>
-<p>We use a very similar approach to determine the gradient.  For a point on <script type="math/tex">g(x,y)</script> , we can convert each of the partial derivatives into vector form by multiplying its value by a <em>unit vector</em>, which is a vector with a value of one for a single axis and a value of zero for all other axes.  Using the same physics example, we could represent the idea of &quot;10mph to the East&quot; with a unit vector like so:</p>
+<p>We use a very similar approach to determine the gradient.  For a point on <script type="math/tex">g(x,y)</script>, we can convert each of the partial derivatives into vector form by multiplying its value by a <em>unit vector</em>, which is a vector with a value of one for a single axis and a value of zero for all other axes.  Using the same physics example, we could represent the idea of &quot;10mph to the East&quot; with a unit vector like so:</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	10 \text{ mph East} = 10 * \begin{bmatrix} 1 \text{ mph East} \\ 0 \text{ mph North} \end{bmatrix}
 		= \begin{bmatrix} 10 \text{ mph East} \\ 0 \text{ mph North} \end{bmatrix}</script></div>
@@ -246,4 +246,9 @@
       </div>
     </div>
   </body>
+  <!--
+  <div id="name-sec"><span class="scivey-span"><span class="base-sep">
+        <h3 class="base-page-scivey">|</h3></span>
+      <h4 class="base-page-scivey">scott ivey</h4></span></div>
+  -->
 </html>
