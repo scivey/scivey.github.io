@@ -770,6 +770,14 @@ p > a {
     color: #3fbdbd;
     text-decoration: underline; }
 
+#article-list a {
+  text-decoration: none; }
+  #article-list a h3, #article-list a h4, #article-list a h5 {
+    text-decoration: underline; }
+    #article-list a h3:hover, #article-list a h4:hover, #article-list a h5:hover {
+      color: #d36a6a;
+      text-decoration: none; }
+
 span.bibref {
   color: #c74343; }
 
