@@ -76,9 +76,9 @@
 <p>Both the total and directional derivatives can be found by working with multiple partial derivatives -- one for each of the function&#39;s parameters.  Let&#39;s use the same two-variable function <script type="math/tex">g(x,y)</script> defined in the previous article:</p>
 <div class="block-diagram block-diagram-math"><script type="math/tex">
 	g(x,y) = 3x^2 + y^2 + 6</script></div>
-<p>For this function, the total and directional derivatives for a pair of coordinates <script type="math/tex">(x=a,y=b)</script> are found by working with the partial derivatives <script type="math/tex">\frac{\partial g}{\partial x}</script>, where <script type="math/tex">y:= b</script> ; and <script type="math/tex">\frac{\partial g}{\partial y}</script>, where <script type="math/tex">x := a</script> .</p>
+<p>For this function, the total and directional derivatives for a pair of coordinates <script type="math/tex">(x=a,y=b)</script> are found by working with the partial derivatives <script type="math/tex">\frac{\partial g}{\partial x}</script>, where <script type="math/tex">y:= b</script> ; and <script type="math/tex">\frac{\partial g}{\partial y}</script>, where <script type="math/tex">x := a</script>. </p>
 <p>This makes sense if you think about it.  Since each of a function&#39;s partial derivatives describes the relationship between its output and one of its variables, it follows that the complete set of partial derivatives can be used to describe the function&#39;s behavior with respect to all of its variables.  Similarly, since evaluating a partial derivative at a given point returns the exact ratio between change in output and change in value of the partial&#39;s parameter at that point, it follows that evaluation of all of the function&#39;s partial derivatives at a point can describe the ratio between change in output and changes in <em>all</em> parameters.</p>
-<p>We&#39;ve already figured out how to estimate partial derivatives.  The <a href="../derivativeMultiVar1/">previous article</a> resulted in a <code>differentiatePartial</code> function, which estimates a two-variable function&#39;s partial derivative with respect to one of its variables.  It&#39;s a composition of <a href="../partialsI">partial application</a> and the <a href="../derivativeSingleVar/">finite element method</a> :</p>
+<p>We&#39;ve already figured out how to estimate partial derivatives.  The <a href="../derivativeMultiVar1/">previous article</a> resulted in a <code>differentiatePartial</code> function, which estimates a two-variable function&#39;s partial derivative with respect to one of its variables.  It&#39;s a composition of <a href="../partialsI">partial application</a> and the <a href="../derivativeSingleVar/">finite difference method</a> :</p>
 <pre><code class="lang-javascript">
 <span class="comment">// takes a function of two parameters and returns its</span>
 <span class="comment">// partial derivative with respect to one of those parameters</span>
@@ -200,12 +200,12 @@
 
 }</code></pre>
 <p>Like the equation above, <code>getGradientOf</code> returns a one-dimensional array of numbers.  This is the best approach because it easily generalizes to functions with more parameters, but the output may need further processing in order to be meaningful for a particular application.  E.g., in code dealing with a 3-dimensional problem like <script type="math/tex">g(x,y)</script>, the main item of interest may be the XY-plane angle at which the greatest rate of change in output occurs.</p>
-<p>In that case, a wrapper function around <code>getGradientOf</code> can be used to convert the returned vector into an XY-plane angle.  This provides the needed information to dependent code while keeping <code>getGradientOf</code> as generalizable as possible.</p>
+<p>In that case, a wrapper function around <code>getGradientOf</code> can be used to convert the returned vector into an XY-plane angle.  This provides the needed information to dependent code while keeping <code>getGradientOf</code> as general as possible.</p>
 <pre><code class="lang-javascript">
 <span class="storage">var</span> <span class="entity function">pythagorean</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(adj, opp) {
     <span class="comment">// hypotenuse = sqrt(adjacent^2 + opposite^2)</span>
     <span class="keyword">var</span> hyp <span class="keyword operator">=</span> Math.<span class="function call">sqrt</span>(Math.<span class="function call">pow</span>(adj, <span class="constant numeric">2</span>) <span class="keyword operator">+</span> Math.<span class="function call">pow</span>(opp, <span class="constant numeric">2</span>));
-    <span class="keyword">return</span> hypotenuse;
+    <span class="keyword">return</span> hyp;
 }
 
 <span class="keyword">var</span> radiansToDegrees <span class="keyword operator">=</span> (<span class="keyword">function</span>() {
