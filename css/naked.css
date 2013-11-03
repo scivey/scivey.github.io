@@ -623,6 +623,8 @@ span.bibref {
   margin-left: 0px auto; }
 
 /* END DIAGRAMS */
+/* LIST STYLES */
+/* END LIST STYLES */
 /* SPECIFIC ELEMENT STYLES */
 /* END SPECIFIC ELEMENT STYLES */
 h1 + p, h2 + p, h3 + p, h4 + p, h5 + p, h6 + p {
@@ -651,6 +653,7 @@ pre {
     white-space: pre-wrap; }
 
 body {
+  padding-bottom: 12.0em;
   font-size: 85%;
   -webkit-transition: width 0.2s ease-in-out;
   -moz-transition: width 0.2s ease-in-out;
@@ -751,6 +754,14 @@ p > code {
 
 h1, h2, h3, h4, h5, h6 {
   color: #c74343; }
+
+p > a {
+  color: #329595;
+  text-decoration: none;
+  font-weight: 500; }
+  p > a:hover {
+    color: #3fbdbd;
+    text-decoration: underline; }
 
 span.bibref {
   color: #c74343; }
