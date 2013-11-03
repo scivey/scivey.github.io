@@ -191,7 +191,8 @@ console.<span class="support method">log</span>( <span class="function call">gSe
 	- 894.38719998786926}{894.38719999999999} * 100\% \approx 1.356E^{-9} \\
 	\\
 	\frac{|104.08 - 103.5|}{104.08} * 100\% \approx 0.558\%</script></div>
-<p>This is due to the same floating point issues observed in the first-order derivative, but the effect is much larger because the error is compounded by <code>differentiate</code> operating on the value twice before it is returned. This kind of error is expected with floating point numbers.  Dedicated engineering and computer algebra systems handle this problem with &quot;arbitrary precision&quot; floating point values, which provide greater accuracy at the cost of slower processing and increased memory consumption.  That extra precision isn&#39;t necessary for the majority of Javascript applications, so a discrepancy of 0.558% isn&#39;t too much to worry about.</p>
+<p>This is due to the same floating point issues observed in the first-order derivative, but the effect is much larger because the error is compounded by <code>differentiate</code> operating on the value twice before it is returned. This kind of error is expected with floating point numbers.  </p>
+<p>Dedicated engineering and computer algebra systems handle this problem with &quot;arbitrary precision&quot; floating point values, which provide greater accuracy at the cost of slower processing and increased memory consumption.  That extra precision isn&#39;t necessary for the majority of Javascript applications, so a discrepancy of 0.558% isn&#39;t too much to worry about.</p>
 <p>In the <a href="../derivativeMultiVar1/">next article</a>, we&#39;ll generalize this method to functions with two or more free variables.</p>
 <div id="article_biblio"></div></div>
           </div>

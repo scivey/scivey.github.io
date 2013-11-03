@@ -68,8 +68,8 @@
               </h3></span><span class="dbg-width-label"></span>
             <hr>
           </div>
-          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Partial application takes a function and returns a copy with one or more parameters bound, transforming a function of the form <code>(x,y) -&gt; x + y</code> into <code>(y) -&gt; [boundXVal] + y</code>.  That&#39;s the theory, anyway.</p>
-<p>In Javascript the function isn&#39;t really transformed.  Instead, a closure is created with a reference to the original function and an array of &quot;bound&quot; values to apply.  A second function with access to this closure is returned, and adds parameters to the array and/or applies them to the original function when called, returning the original&#39;s output to its own caller.</p>
+          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>Partial application takes a function and returns a copy with one or more parameters bound.  Less abstractly: consider a function <code>sum(x,y)</code> that returns the value <code>(x + y)</code>.  Now imagine &quot;filling in&quot; a value of 10 for <code>x</code> and getting back a function that takes a single number and returns that number plus 10.  That&#39;s partial application.</p>
+<p>In a typical Javascript implementation, the returned function has access to a closure containing a reference to the original function and an array of &quot;bound&quot; values to apply.  When called, it combines the previously bound values with its newest arguments and passes them to the original function.  The output is then returned to the caller.</p>
 <h5>Basics</h5>
 <p>This is all much less complicated than it sounds.  Below, <code>applyPartial</code> is a higher-order function which performs a simplified version of partial application.  To avoid some of the Javascript-specific quirks we&#39;ll cover later, this code assumes that the target function <code>funcRef</code> takes exactly two parameters. </p>
 <pre><code class="lang-javascript">
@@ -93,8 +93,8 @@
 
 <span class="function call">multByTen</span>(<span class="constant numeric">6.5</span>); <span class="comment">// 65</span></code></pre>
 <p>This version of <code>applyPartial</code> has a major weakness: it only allows for variable binding from left to right.  The limitation becomes clear if <code>multiply(x,y)</code> is replaced by a function <code>divide(x,y)</code>.  Because division is not commutative ( <script type="math/tex">\frac{1}{6} \neq \frac{6}{1}</script> ), <code>applyPartial</code> can&#39;t create a function along the lines of <code>divideXByFive</code>.  It can create a <code>divideFiveByX</code> function, but the former is much more useful.</p>
-<p>Most Javascript functions are like <code>divide</code>: they won&#39;t return the same result with reversed parameters.  Many will throw errors.  For this reason, partial application is used in distinct <em>left</em> and <em>right</em> forms.  Unless a direction is specified, the phrase &#39;partial application&#39; can be assumed to refer to the left variant.</p>
-<p>Right partial application is just as simple to implement: the parameters just have to be passed to <code>funcRef</code> in reverse order:</p>
+<p>Most Javascript functions they won&#39;t return the same result with reversed parameters, and many will throw errors.  For this reason, partial application is used in distinct <em>left</em> and <em>right</em> forms.  Unless a direction is specified, the phrase &#39;partial application&#39; can be assumed to refer to the left variant.</p>
+<p>Right partial application is also simple to implement: the parameters just have to be passed to <code>funcRef</code> in reverse order:</p>
 <pre><code class="lang-javascript">
 <span class="comment">// as before, `funcRef` expects two parameters</span>
 <span class="storage">var</span> <span class="entity function">applyRightPartial</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(funcRef, secondParam) {
