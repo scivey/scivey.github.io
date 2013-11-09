@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<svg width="450" height="500" version="1.1" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+
+		<symbol id="one-point" viewBox="0 0 20 20">
+			<circle cx="10" cy="10" r="5" stroke-width="1" stroke="#333333" fill="#00ff00" />
+		</symbol>
+		
+		<symbol id="plotted-points" viewBox="0 0 100 100">
+			<rect x="0" y="0" width="100" height="100" fill="none" stroke="#333333" stroke-width="1"/>
+			
+		         <use xlink:href="#one-point" x="50" y="90" height="5" width="5"/>
+			
+		         <use xlink:href="#one-point" x="20" y="66.66666666666667" height="5" width="5"/>
+			
+		         <use xlink:href="#one-point" x="70" y="80" height="5" width="5"/>
+			
+		         <use xlink:href="#one-point" x="15" y="46.66666666666667" height="5" width="5"/>
+			
+		         <use xlink:href="#one-point" x="80" y="86.66666666666667" height="5" width="5"/>
+			
+		         <use xlink:href="#one-point" x="60" y="53.333333333333336" height="5" width="5"/>
+			
+		</symbol>
+		
+	</defs>
+	<g>
+		<rect x="0" y="0" width="450" height="500" stroke="#333333" stroke-width="2" fill="none"/>
+
+		<text x="225" y="40" font-size="36px" text-anchor="middle">Plotted Points</text>
+
+		<use xlink:href="#plotted-points" x="25" y="75" width="400" height="400"/>
+	</g>
+</svg>

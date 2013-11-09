@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/lightbox.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+       showProcessingMessages: false,
+       messageStyle: "none",
+       "HTML-CSS": {
+        imageFont: null,
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+       SVG: {
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+      });
+    </script>
+    <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="/css/naked.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/lightbox.css" type="text/css" rel="stylesheet"/>
+    <script>
+      /*
+      $(document).ready( function() {
+      
+       var $label = $(".dbg-width-label");
+       var $body = $("body");
+       var $pageFrame = $("#page-frame");
+       var $contentFrame = $("#content-frame");
+       var $meta = $("#view-meta");
+       var $artFrame = $("#article-frame");
+       var $contentBody = $(".content-body");
+       var sizeCheck = function() {
+        var bodSize = $body.width();
+        var pfSize = $pageFrame.width();
+        var cfSize = $contentFrame.width();
+        var vSize = $meta.attr("content");
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>";
+        var afSize = $artFrame.width();
+        var cbSize = $contentBody.width();
+        var label2 = "A: " + afSize + "  Cb: " + cbSize;
+        
+        $label.html(labelTxt + label2);
+       }
+       
+       setInterval(sizeCheck, 2000);
+       
+       });
+       */
+    </script>
+    <title>scivey | Image Generation with SVG Templates, Part I</title>
+    <script src="/js/app/article.js"></script>
+  </head>
+  <body>
+    <div id="page-frame">
+      <div id="content-frame">
+        <div class="article-page-top"><a href="/articles" class="si-icon-link"><span class="si-icon si-icon-md iconic arrow_left"></span></a></div>
+        <div id="article-frame">
+          <div id="article-header"><span class="article-header-text">
+              <h3>Image Generation with SVG Templates, Part I
+              </h3></span><span class="dbg-width-label"></span>
+            <hr>
+          </div>
+          <div id="article-body" class="content-body"><div id="p_outer_wrapper"><p>SVG, the W3C-defined web standard for describing vector graphics, has the drawbacks and benefits typical of XML formats: its verbosity makes it inefficient to author by hand, but its standardized syntax means that parsers and related tools are available for almost all languages and platforms.</p>
+<p>It&#39;s also widely supported: most desktop and mobile browsers can render SVG, and many graphic design programs directly edit or export SVG. (E.g. InkScape, Adobe Illustrator.)</p>
+<p>Being usable in native form, easily convertable to PNG and other raster formats, and simple to edit with XML and/or text-based tools, SVG is a very effective raw material for graphics generation.  It can be used as a backend for visual descriptions of data, usable as-is and simple to process further.</p>
+<p>SVG&#39;s verbosity still has to be managed, but we already have many tools for handling that problem in the domain of HTML.  These include a large number of templating engines, some of which are more useful for this purpose than others.</p>
+<h5>Handlebars</h5>
+<p>In this article we&#39;ll combine the Handlebars templating language with SVG fragments to generate graphical representations of JSON-format data.  Handlebars makes an ideal engine for this use because its lightweight/semantic syntax within templates has a similar declarative feel to pure XML documents, while its custom block and expression helpers make it easy to apply reusable imperative code to sections of the template.  This is especially useful in SVG, as most operations will involve loops and a small set of coordinate transformations (scaling, offsetting).</p>
+<p>Another advantage of Handlebars: even very simple fragments of SVG can be combined into complete documents by just repeating an element with different coordinates. Only a small subset of SVG needs to be understood for this to work.  For instance, with no knowledge of patterns or reusable symbols, a set of coordinates in the range of {0 &lt;= x &lt;= 100, 0 &lt;= y &lt;= 100} can be plotted like so:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+        {{<span class="comment">#each points}}</span>
+                  <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;{{x}}&quot; cy<span class="keyword operator">=</span>&quot;{{sub <span class="constant numeric">100</span> y}}&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">3</span>&quot; stroke<span class="keyword operator">-</span>width<span class="keyword operator">=</span>&quot;<span class="constant numeric">2</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#000000&quot; fill=&quot;#00ff00&quot;/&gt;</span>
+        {{/each}}
+
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<p>Given the following JSON:</p>
+<pre><code class="lang-json">{&quot;points&quot;:
+    [
+        {&quot;x&quot;:<span class="constant numeric">50</span>,&quot;y&quot;:<span class="constant numeric">15</span>},
+        {&quot;x&quot;:<span class="constant numeric">20</span>,&quot;y&quot;:<span class="constant numeric">50</span>},
+        {&quot;x&quot;:<span class="constant numeric">70</span>,&quot;y&quot;:<span class="constant numeric">30</span>},
+        {&quot;x&quot;:<span class="constant numeric">15</span>,&quot;y&quot;:<span class="constant numeric">80</span>},
+        {&quot;x&quot;:<span class="constant numeric">80</span>,&quot;y&quot;:<span class="constant numeric">20</span>},
+        {&quot;x&quot;:<span class="constant numeric">60</span>,&quot;y&quot;:<span class="constant numeric">70</span>}
+    ]
+}</code></pre>
+<p>And the following Handlebars helper for subtraction:</p>
+<pre><code class="lang-javascript">Handlebars.<span class="function call">registerHelper</span>(&quot;sub&quot;, <span class="keyword">function</span>(x, y) {
+    <span class="keyword">return</span> x <span class="keyword operator">-</span> y;
+});</code></pre>
+<p>Yields the following image:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles.svg</h5></section> <a data-lightbox="img/fig/circles1.svg" href="img/fig/circles1.svg" title="First attempt."><img class="block-fig-image" src="img/fig/circles1.svg"></a> <section class="block-diagram-caption"><p>First attempt.</p></section></div>
+<p>That isn&#39;t a total failure, but it&#39;s pretty small.  We could enlarge it by scaling all of the point values before passing them into the template function:</p>
+<pre><code class="lang-javascript">_ <span class="keyword operator">=</span> <span class="function call">require</span>(&quot;underscore&quot;);
+
+transformedPoints <span class="keyword operator">=</span> _.<span class="function call">map</span>(data.points, <span class="keyword">function</span>(onePoint) {
+    pt <span class="keyword operator">=</span> {}
+    pt.x <span class="keyword operator">=</span> onePoint.x <span class="keyword operator">*</span> <span class="constant numeric">3</span>;
+    pt.y <span class="keyword operator">=</span> onePoint.y <span class="keyword operator">*</span> <span class="constant numeric">3</span>;
+    <span class="keyword">return</span> pt;
+});</code></pre>
+<p>Passing in those variables and increasing the root SVG element&#39;s <code>height</code> and <code>width</code> each to 300 yields a 3x-scaled version of the same image:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles1_scaled.svg</h5></section> <a data-lightbox="img/fig/circles1_scaled.svg" href="img/fig/circles1_scaled.svg" title="Second attempt."><img class="block-fig-image" src="img/fig/circles1_scaled.svg"></a> <section class="block-diagram-caption"><p>Second attempt.</p></section></div>
+<p>Once again, this works... but only sort of.  There are a couple of obvious problems, the first being that the <code>height</code> and <code>width</code> of the document have to be manually adjusted.  So do those of the framing <code>rect</code>.  The radius of the template <code>circle</code> element also hasn&#39;t been scaled, making the points less visible compared to those in the first version.</p>
+<p>We could scale all of these attributes by hand, but all of those manual edits are adding up.  That&#39;s exactly what templating is meant to avoid.</p>
+<p>SVG has a feature that simplifies this problem: reusable elements can be defined inside of the <code>defs</code> section in the top of the document, then inserted into the root <code>&lt;g&gt;</code> and scaled just like a <code>&lt;rect&gt;</code> or <code>&lt;circle&gt;</code> element.</p>
+<p>A shape defined in <code>&lt;defs&gt;</code> can be a normal element like <code>circle</code> or <code>rect</code>, but can also be a grouping element like <code>symbol</code>, which can include any number of sub-elements.  A simple example of a defined <code>&lt;symbol&gt;</code>:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>defs<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;rect<span class="keyword operator">-</span><span class="keyword">and</span><span class="keyword operator">-</span>circle&quot; viewBox<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span> <span class="constant numeric">0</span> <span class="constant numeric">100</span> <span class="constant numeric">100</span>&quot;<span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">5</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">5</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">40</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">40</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333&quot; stroke-width=&quot;2&quot; fill=&quot;#00ff00&quot;/&gt;</span>
+            <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;<span class="constant numeric">70</span>&quot; cy<span class="keyword operator">=</span>&quot;<span class="constant numeric">70</span>&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">20</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333&quot; stroke-width=&quot;2&quot; fill=&quot;#00ff00&quot;/&gt;</span>
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>/defs<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#rect-and-circle&quot; x=&quot;0&quot; y=&quot;0&quot; height=&quot;300&quot; width=&quot;300&quot;/&gt;</span>
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<p>Rendered:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>simple_symbol.svg</h5></section> <a data-lightbox="img/fig/simple_symbol.svg" href="img/fig/simple_symbol.svg" title="Simple example of `symbol` tag"><img class="block-fig-image" src="img/fig/simple_symbol.svg"></a> <section class="block-diagram-caption"><p>Simple example of `symbol` tag</p></section></div>
+<p>Note that the dimensions of the circle and square are defined in terms of a 100-by-100 coordinate system, given by the <code>viewBox</code> attribute of their containing <code>&lt;symbol&gt;</code> element.  The symbol is displayed at three times these dimensions because the <code>&lt;use&gt;</code> tag referencing it has <code>height</code> and <code>width</code> of 300.  This is a simple trick, but saves us from some repetitive scaling and offsetting transformations on the data passed in to the template.  The same coordinate transformations do take place, but they&#39;re done by the SVG renderer (e.g. the browser) and we don&#39;t have to think about it.</p>
+<p><code>&lt;symbol&gt;</code> is often used to define complex composite shapes, but it&#39;s also generally useful for any kind of coordinate transformation.  This makes it well suited to point plotting.  Instead of the <code>_.map</code> operation earlier, let&#39;s plot our points using the <code>defs/symbol</code> approach:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>defs<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;plotted<span class="keyword operator">-</span>points&quot; viewBox<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span> <span class="constant numeric">0</span> <span class="constant numeric">100</span> <span class="constant numeric">100</span>&quot;<span class="keyword operator">&gt;</span>
+            {{<span class="comment">#each points}}</span>
+                  <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;{{x}}&quot; cy<span class="keyword operator">=</span>&quot;{{sub <span class="constant numeric">100</span> y}}&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">3</span>&quot; stroke<span class="keyword operator">-</span>width<span class="keyword operator">=</span>&quot;<span class="constant numeric">1</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; fill=&quot;#00ff00&quot;/&gt;</span>
+            {{/each}}
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>/defs<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+        <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#plotted-points&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;300&quot; height=&quot;300&quot;/&gt;</span>
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles2.svg</h5></section> <a data-lightbox="img/fig/circles2.svg" href="img/fig/circles2.svg" title="Same visual result as before, but much simpler code.  There" s="" no="" need="" for="" coordinate="" transformation="" before="" passing="" data="" to="" the="" template.'=""><img class="block-fig-image" src="img/fig/circles2.svg"></a> <section class="block-diagram-caption"><p>Same visual result as before, but much simpler code.  There's no need for coordinate transformation before passing data to the template.</p></section></div>
+<p>The same approach can be used to offset a given diagram, making space for other graphical elements and for chart / axis labels.  First give the root document a larger <code>height</code> and <code>width</code> than the target size of the plotted points.  Then give the <code>use xlink...</code> tag <code>x</code> and <code>y</code> attributes according to the offset:</p>
+<pre><code class="lang-xml">
+<span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>defs<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;plotted<span class="keyword operator">-</span>points&quot; viewBox<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span> <span class="constant numeric">0</span> <span class="constant numeric">100</span> <span class="constant numeric">100</span>&quot;<span class="keyword operator">&gt;</span>
+            {{<span class="comment">#each points}}</span>
+                  <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;{{x}}&quot; cy<span class="keyword operator">=</span>&quot;{{sub <span class="constant numeric">100</span> y}}&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">3</span>&quot; stroke<span class="keyword operator">-</span>width<span class="keyword operator">=</span>&quot;<span class="constant numeric">1</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; fill=&quot;#00ff00&quot;/&gt;</span>
+            {{/each}}
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>/defs<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">75</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">75</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">300</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+
+        <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#plotted-points&quot; x=&quot;75&quot; y=&quot;75&quot; width=&quot;300&quot; height=&quot;300&quot;/&gt;</span>
+
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">35</span>&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>Top<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">415</span>&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>Bottom<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">25</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>L<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">425</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>R<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles2_offset.svg</h5></section> <a data-lightbox="img/fig/circles2_offset.svg" href="img/fig/circles2_offset.svg" title="The `symbol` element can be used for both scaling and offsetting coordinates."><img class="block-fig-image" src="img/fig/circles2_offset.svg"></a> <section class="block-diagram-caption"><p>The `symbol` element can be used for both scaling and offsetting coordinates.</p></section></div>
+<p>This illustrates a major advantage of defining data within a defined <code>&lt;symbol&gt;</code> element: positions of other elements in the final document can be specified very precisely and still be valid for a variety of rendered inputs.  Changing the data itself won&#39;t affect its visual relationship with the rest of the document, as this is determined by the calling <code>&lt;use&gt;</code> symbol.</p>
+<p>To make this clear, let&#39;s redefine our JSON data set to include <code>min</code> and <code>max</code> values for each of the X and Y axes.  These values will be inserted into the symbol&#39;s <code>viewBox</code> attribute instead of the hard-coded <code>0 0 100 100</code> value used earlier.</p>
+<pre><code class="lang-json">{
+    &quot;xAxis&quot;: {
+            &quot;min&quot;: <span class="constant numeric">0</span>,
+            &quot;max&quot;: <span class="constant numeric">100</span>
+        },
+    &quot;yAxis&quot;: {
+        &quot;min&quot;: <span class="constant numeric">0</span>,
+        &quot;max&quot;: <span class="constant numeric">100</span>
+    },
+    &quot;points&quot;:
+    [
+        {&quot;x&quot;:<span class="constant numeric">50</span>,&quot;y&quot;:<span class="constant numeric">15</span>},
+        {&quot;x&quot;:<span class="constant numeric">20</span>,&quot;y&quot;:<span class="constant numeric">50</span>},
+        {&quot;x&quot;:<span class="constant numeric">70</span>,&quot;y&quot;:<span class="constant numeric">30</span>},
+        {&quot;x&quot;:<span class="constant numeric">15</span>,&quot;y&quot;:<span class="constant numeric">80</span>},
+        {&quot;x&quot;:<span class="constant numeric">80</span>,&quot;y&quot;:<span class="constant numeric">20</span>},
+        {&quot;x&quot;:<span class="constant numeric">60</span>,&quot;y&quot;:<span class="constant numeric">70</span>}
+    ]
+}</code></pre>
+<p>The new template inserts the <code>xAxis.min</code>, <code>xAxis.max</code>, <code>yAxis.min</code> and <code>yAxis.max</code> values into <code>viewBox</code>:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>defs<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;one<span class="keyword operator">-</span>point&quot; viewBox<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span> <span class="constant numeric">0</span> <span class="constant numeric">20</span> <span class="constant numeric">20</span>&quot; preserveAspectRatio<span class="keyword operator">=</span>&quot;xMidYMid meet&quot;<span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;<span class="constant numeric">10</span>&quot; cy<span class="keyword operator">=</span>&quot;<span class="constant numeric">10</span>&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">5</span>&quot; stroke<span class="keyword operator">-</span>width<span class="keyword operator">=</span>&quot;<span class="constant numeric">1</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; fill=&quot;#00ff00&quot; /&gt;</span>
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;plotted<span class="keyword operator">-</span>points&quot; viewBox<span class="keyword operator">=</span>&quot;{{xAxis.min}} {{yAxis.min}} {{xAxis.max}} {{yAxis.max}}&quot; preserveAspectRatio<span class="keyword operator">=</span>&quot;none&quot; <span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;{{xAxis.max}}&quot; height<span class="keyword operator">=</span>&quot;{{yAxis.max}}&quot; fill<span class="keyword operator">=</span>&quot;none&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;1&quot;/&gt;</span>
+            {{<span class="comment">#each points}}</span>
+                 <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#one-point&quot; x=&quot;{{x}}&quot; y=&quot;{{sub ../yAxis.max y}}&quot; height=&quot;10&quot; width=&quot;10&quot;/&gt;</span>
+            {{/each}}
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>/defs<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">15</span>&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>Plotted Points<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#plotted-points&quot; x=&quot;25&quot; y=&quot;25&quot; width=&quot;400&quot; height=&quot;400&quot;/&gt;</span>
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<p>Feeding the modified JSON into this template yields the following image:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3.svg</h5></section> <a data-lightbox="img/fig/circles3.svg" href="img/fig/circles3.svg" title="Points plotted according to specified max and min for each axis."><img class="block-fig-image" src="img/fig/circles3.svg"></a> <section class="block-diagram-caption"><p>Points plotted according to specified max and min for each axis.</p></section></div>
+<p>That image looks the same as before, but is easier to modify by manipulating <code>xAxis.max</code> and <code>yAxis.max</code>.  Scaling these values to 150 each, we get the following image.  Notice that we don&#39;t have to recalculate the positions of the labels or of the box containing the points.</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3_scaled.svg</h5></section> <a data-lightbox="img/fig/circles3_scaled.svg" href="img/fig/circles3_scaled.svg" title="The points easily scale, with no changes to labels or other elements."><img class="block-fig-image" src="img/fig/circles3_scaled.svg"></a> <section class="block-diagram-caption"><p>The points easily scale, with no changes to labels or other elements.</p></section></div>
+<p>Looks good so far, but there are some limitations to this approach.  Look at the same figure rendered with <code>yAxis.max=150</code> and <code>xAxis.max=100</code>:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3_circlePoints2_scaled_uneven.svg</h5></section> <a data-lightbox="img/fig/circles3_circlePoints2_scaled_uneven.svg" href="img/fig/circles3_circlePoints2_scaled_uneven.svg" title="The group of plotted points doesn" t="" automatically="" stretch="" to="" fill="" the="" dimensions="" specified="" by="" `use`="" tag.'=""><img class="block-fig-image" src="img/fig/circles3_circlePoints2_scaled_uneven.svg"></a> <section class="block-diagram-caption"><p>The group of plotted points doesn't automatically stretch to fill the dimensions specified by the `use` tag.</p></section></div>
+<p>Although the <code>&lt;use xlink:href=&quot;#plotted-points&quot; ... /&gt;</code> tag specified a <code>width</code> and <code>height</code>, SVG&#39;s default scaling preserves the aspect ratio of the underlying symbol.  That settting can be changed with the <code>preserveAspectRatio</code> attribute on <code>symbol</code>:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;plotted<span class="keyword operator">-</span>points&quot; viewBox<span class="keyword operator">=</span>&quot;{{xAxis.min}} {{yAxis.min}} {{xAxis.max}} {{yAxis.max}}&quot; preserveAspectRatio<span class="keyword operator">=</span>&quot;none&quot; <span class="keyword operator">&gt;</span>
+        ...
+<span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span></code></pre>
+<p>However, the output shows that there&#39;s still a problem:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>`#plotted-points` stretched out to fill the `use` tag.</h5></section> <a data-lightbox="img/fig/circles3_stretched_circlePoints2_scaled_uneven.svg" href="img/fig/circles3_stretched_circlePoints2_scaled_uneven.svg" title="Stretching the symbol with `preserveAspectRatio=&quot;none&quot;` distorts the symbols used to represent point coordinates."><img class="block-fig-image" src="img/fig/circles3_stretched_circlePoints2_scaled_uneven.svg"></a> <section class="block-diagram-caption"><p>Stretching the symbol with `preserveAspectRatio="none"` distorts the symbols used to represent point coordinates.</p></section></div>
+<p>The circular points have turned into ovals, because the <code>preserveAspectRatio</code> setting is cascaded onto all of an element&#39;s children.  Adding a different <code>preserveAspectRatio</code> attribute to the child elements has no effect.  Using SVG tags alone, there doesn&#39;t appear to be any way to correct this problem.  This makes it a perfect place for a Handlebars block helper.</p>
+<h5>Block Helpers</h5>
+<p>This problem can be solved by defining a block helper, <code>scaleBox</code>, that maps coordinates between two specified viewBoxes.  It does this by providing <code>@xScale</code> and <code>@yScale</code> functions to all child expressions, which can be called with the <code>apply</code> expression helper we&#39;ve also defined.</p>
+<pre><code class="lang-xml">{{<span class="comment">#scaleBox 0 0 100 100 0 100 100 250}}</span>
+    {{<span class="comment">#each points}}</span>
+        {{x}} {{y}}     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        {{apply @xScale x}} {{apply @yScale y}}
+    {{/each}}
+{{/scaleBox}}</code></pre>
+<p>Output:</p>
+<pre><code class="lang-xml">        <span class="constant numeric">50</span> <span class="constant numeric">15</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">50</span> <span class="constant numeric">122.5</span>
+
+        <span class="constant numeric">20</span> <span class="constant numeric">50</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">20</span> <span class="constant numeric">175</span>
+
+        <span class="constant numeric">70</span> <span class="constant numeric">30</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">70</span> <span class="constant numeric">145</span>
+
+        <span class="constant numeric">15</span> <span class="constant numeric">80</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">15</span> <span class="constant numeric">220</span>
+
+        <span class="constant numeric">80</span> <span class="constant numeric">20</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">80</span> <span class="constant numeric">130</span>
+
+        <span class="constant numeric">60</span> <span class="constant numeric">70</span>     <span class="keyword operator">-</span><span class="keyword operator">&gt;</span>        <span class="constant numeric">60</span> <span class="constant numeric">205</span></code></pre>
+<p><code>scaleBox</code> also supplies the xMin/Max and yMin/Max parameters of the source and destination boxes as variables in <code>@src</code> and <code>@dest</code>.</p>
+<p>Before we get into the implementation of <code>frameBox</code>, let&#39;s see what it looks like in use on our existing point-plotting template:</p>
+<pre><code class="lang-xml"><span class="keyword operator">&lt;</span>?xml version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.0</span>&quot;?<span class="keyword operator">&gt;</span>
+
+<span class="keyword operator">&lt;</span>svg width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">500</span>&quot; version<span class="keyword operator">=</span>&quot;<span class="constant numeric">1.1</span>&quot; xmlns:svg<span class="keyword operator">=</span>&quot;http:<span class="comment">//www.w3.org/2000/svg&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;</span>
+    <span class="keyword operator">&lt;</span>defs<span class="keyword operator">&gt;</span>
+
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;one<span class="keyword operator">-</span>point&quot; viewBox<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span> <span class="constant numeric">0</span> <span class="constant numeric">20</span> <span class="constant numeric">20</span>&quot;<span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>circle cx<span class="keyword operator">=</span>&quot;<span class="constant numeric">10</span>&quot; cy<span class="keyword operator">=</span>&quot;<span class="constant numeric">10</span>&quot; r<span class="keyword operator">=</span>&quot;<span class="constant numeric">5</span>&quot; stroke<span class="keyword operator">-</span>width<span class="keyword operator">=</span>&quot;<span class="constant numeric">1</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; fill=&quot;#00ff00&quot; /&gt;</span>
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+        {{<span class="comment">#scaleBox xAxis.min yAxis.min xAxis.max yAxis.max 0 0 100 100}}</span>
+        <span class="keyword operator">&lt;</span>symbol id<span class="keyword operator">=</span>&quot;plotted<span class="keyword operator">-</span>points&quot; viewBox<span class="keyword operator">=</span>&quot;{{@dest.coordText}}&quot;<span class="keyword operator">&gt;</span>
+            <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;{{@dest.yMin}}&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">100</span>&quot; fill<span class="keyword operator">=</span>&quot;none&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;1&quot;/&gt;</span>
+            {{<span class="comment">#each points}}</span>
+                 <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#one-point&quot; x=&quot;{{apply @xScale x}}&quot; y=&quot;{{apply @yScaleInvert y}}&quot; height=&quot;5&quot; width=&quot;5&quot;/&gt;</span>
+            {{/each}}
+        <span class="keyword operator">&lt;</span>/symbol<span class="keyword operator">&gt;</span>
+        {{/scaleBox}}
+    <span class="keyword operator">&lt;</span>/defs<span class="keyword operator">&gt;</span>
+    <span class="keyword operator">&lt;</span>g<span class="keyword operator">&gt;</span>
+        <span class="keyword operator">&lt;</span>rect x<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">0</span>&quot; width<span class="keyword operator">=</span>&quot;<span class="constant numeric">450</span>&quot; height<span class="keyword operator">=</span>&quot;<span class="constant numeric">500</span>&quot; stroke<span class="keyword operator">=</span>&quot;<span class="comment">#333333&quot; stroke-width=&quot;2&quot; fill=&quot;none&quot;/&gt;</span>
+
+        <span class="keyword operator">&lt;</span>text x<span class="keyword operator">=</span>&quot;<span class="constant numeric">225</span>&quot; y<span class="keyword operator">=</span>&quot;<span class="constant numeric">40</span>&quot; font<span class="keyword operator">-</span>size<span class="keyword operator">=</span>&quot;36px&quot; text<span class="keyword operator">-</span>anchor<span class="keyword operator">=</span>&quot;middle&quot;<span class="keyword operator">&gt;</span>Plotted Points<span class="keyword operator">&lt;</span>/text<span class="keyword operator">&gt;</span>
+
+        <span class="keyword operator">&lt;</span>use xlink:href<span class="keyword operator">=</span>&quot;<span class="comment">#plotted-points&quot; x=&quot;25&quot; y=&quot;75&quot; width=&quot;400&quot; height=&quot;400&quot;/&gt;</span>
+    <span class="keyword operator">&lt;</span>/g<span class="keyword operator">&gt;</span>
+<span class="keyword operator">&lt;</span>/svg<span class="keyword operator">&gt;</span></code></pre>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3_scaleBox_circlePoints2</h5></section> <a data-lightbox="img/fig/circles3_scaleBox_circlePoints2.svg" href="img/fig/circles3_scaleBox_circlePoints2.svg" title="The `scaleBox` helper lets us transform coordinates without distorting point representations."><img class="block-fig-image" src="img/fig/circles3_scaleBox_circlePoints2.svg"></a> <section class="block-diagram-caption"><p>The `scaleBox` helper lets us transform coordinates without distorting point representations.</p></section></div>
+<pre><code class="lang-javascript">
+Handlebars.<span class="function call">registerHelper</span>(&quot;apply&quot;, <span class="keyword">function</span>(fn, param) {
+    <span class="keyword">return</span> <span class="function call">fn</span>(param);
+});
+
+Handlebars.<span class="function call">registerHelper</span>(&quot;scaleBox&quot;, <span class="keyword">function</span>(xMin1, yMin1, xMax1, yMax1, xMin2, yMin2, xMax2, yMax2, options) {
+
+  <span class="keyword">var</span> data <span class="keyword operator">=</span> Handlebars.<span class="function call">createFrame</span>(options.data <span class="keyword operator">|</span><span class="keyword operator">|</span> {});
+
+  <span class="keyword">var</span> xRatio <span class="keyword operator">=</span> (xMax2 <span class="keyword operator">-</span> xMin2) / (xMax1 <span class="keyword operator">-</span> xMin1);
+
+  <span class="keyword">var</span> yRatio <span class="keyword operator">=</span> (yMax2 <span class="keyword operator">-</span> yMin2) / (yMax1 <span class="keyword operator">-</span> yMin1);
+
+  <span class="keyword">var</span> src <span class="keyword operator">=</span> {
+    xMin: xMin1,
+    xMax: xMax1,
+    yMin: yMin1,
+    yMax: yMax1,
+    coordText: &quot;&quot; <span class="keyword operator">+</span> xMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> xMax1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMax1
+  };
+
+  <span class="keyword">var</span> dest <span class="keyword operator">=</span> {
+    xMin: xMin2,
+    xMax: xMax2,
+    yMin: yMin2,
+    yMax: yMax2,
+    coordText: &quot;&quot; <span class="keyword operator">+</span> xMin2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMin2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> xMax2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMax2
+  };
+
+  <span class="storage">var</span> <span class="entity function">xScale</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x1Val) {
+    <span class="keyword">var</span> x1Delta, x2Delta, x2Val;
+    x1Delta <span class="keyword operator">=</span> x1Val <span class="keyword operator">-</span> xMin1;
+    x2Delta <span class="keyword operator">=</span> x1Delta <span class="keyword operator">*</span> xRatio;
+    x2Val <span class="keyword operator">=</span> x2Delta <span class="keyword operator">+</span> xMin2;
+    <span class="keyword">return</span> x2Val;
+  };
+
+  <span class="storage">var</span> <span class="entity function">yScale</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(y1Val) {
+    <span class="keyword">var</span> y1Delta, y2Delta, y2Val;
+    y1Delta <span class="keyword operator">=</span> y1Val <span class="keyword operator">-</span> yMin1;
+    y2Delta <span class="keyword operator">=</span> y1Delta <span class="keyword operator">*</span> yRatio;
+    y2Val <span class="keyword operator">=</span> y2Delta <span class="keyword operator">+</span> yMin2;
+    <span class="keyword">return</span> y2Val;
+  };
+
+  <span class="storage">var</span> <span class="entity function">yScaleInvert</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(y1Val) {
+    <span class="keyword">var</span> inverted, y2Val;
+    y2Val <span class="keyword operator">=</span> <span class="function call">yScale</span>(y1Val);
+    inverted <span class="keyword operator">=</span> yMax2 <span class="keyword operator">-</span> y2Val;
+    <span class="keyword">return</span> inverted;
+  };
+
+  data.xScale <span class="keyword operator">=</span> xScale;
+
+  data.yScale <span class="keyword operator">=</span> yScale;
+
+  data.yScaleInvert <span class="keyword operator">=</span> yScaleInvert;
+
+  data.src <span class="keyword operator">=</span> src;
+
+  data.dest <span class="keyword operator">=</span> dest;
+
+  <span class="keyword">var</span> rendered <span class="keyword operator">=</span> options.<span class="function call">fn</span>(<span class="keyword">this</span>, {data: data});
+  <span class="keyword">return</span> rendered;
+});</code></pre>
+<h5>Intermediate Forms</h5>
+<p>Depending on the image and data, it may be useful to use SVG generation of a data transformation pipeline.</p>
+<p>As a more obvious example, say we have a paragraph of text and we want a bar graph giving the frequency of each word in the paragraph.  Directly transforming this into a diagram would be complicated - and would also result in</p>
+<div id="article_biblio"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!--
+  <div id="name-sec"><span class="scivey-span"><span class="base-sep">
+        <h3 class="base-page-scivey">|</h3></span>
+      <h4 class="base-page-scivey">scott ivey</h4></span></div>
+  -->
+</html>
