@@ -92,7 +92,7 @@
 
     <span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">g</span></span><span class="support tag close">&gt;</span>
 <span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">svg</span></span><span class="support tag close">&gt;</span></code></pre>
-<p>This template does most of its work between the <code>{{#each points}}</code> and <code>{{/each}}</code> delimiters, which represents a loop over an array stored in the <code>points</code> top-level attribute of a Javascript object.  It expects each of these points to be an object with <code>x</code> and <code>y</code> properties, which it uses to fill in the <code>cx</code> and <code>cy</code> attributes of the <code>&lt;circle&gt;</code> element contained in the loop.</p>
+<p>This template does most of its work between the <code>{{#each points}}</code> and <code>{{/each}}</code> delimiters, which together represent a loop over an array stored in the <code>points</code> top-level attribute of a Javascript object.  It expects each of these points to be an object with <code>x</code> and <code>y</code> properties, which are mapped to the <code>cx</code> and <code>cy</code> attributes of the <code>&lt;circle&gt;</code> element contained in the loop.</p>
 <p>Visually, the template takes this JSON:</p>
 <pre><code class="lang-json">{&quot;points&quot;:
     [
