@@ -309,7 +309,7 @@ Handlebars.<span class="function call">registerHelper</span>(&quot;apply&quot;, 
         <span class="support attribute">60</span> <span class="support attribute">70</span>     -<span class="support tag close">&gt;</span>        <span class="support attribute">60</span> 205</code></pre>
 <p><code>scaleBox</code> also supplies a convenience function for y-axis transformation, <code>@yScaleInvert</code>, which applies <code>@yScale</code> and then subtracts the result from the destination space&#39;s maximum <code>y</code> value.  This &quot;inverts&quot; <code>y</code>, converting Cartesian-format coordinates into screen format.</p>
 <p><code>scaleBox</code> also supplies data attributes describing the source and destination spaces: i.e. minimum, maximum and range values for each axis. <code>xMin</code>, <code>xMax</code>, <code>yMin</code>, <code>yMax</code>, <code>height</code> and <code>width</code> of the source and destination boxes are accessible as properties of  <code>@src</code> and <code>@dest</code>, respectively.  Each of these objects also has the convenience property <code>coordText</code>, a string equal to <code>xMin yMin xMax yMax</code> of the corresponding space.  This is the same format used to assign values to <code>viewBox</code> and certain other attributes.</p>
-<p>Before we get into the implementation of <code>frameBox</code>, let&#39;s see what it looks like in use on our existing point-plotting template:</p>
+<p>Before we get into the implementation of <code>scaleBox</code>, let&#39;s see what it looks like in use on our existing point-plotting template:</p>
 <pre><code class="lang-xml"><span class="support tag"><span class="support tag">&lt;?</span><span class="support tag-name">xml</span></span> <span class="support attribute">version</span>=&quot;1.0&quot;<span class="support tag close">?&gt;</span>
 
 <span class="support tag"><span class="support tag">&lt;</span><span class="support tag-name">svg</span></span> <span class="support attribute">width</span>=&quot;450&quot; <span class="support attribute">height</span>=&quot;500&quot; <span class="support attribute">version</span>=&quot;1.1&quot;
@@ -346,21 +346,21 @@ Handlebars.<span class="function call">registerHelper</span>(&quot;apply&quot;, 
             <span class="support attribute">width</span>=&quot;400&quot; <span class="support attribute">height</span>=&quot;400&quot;<span class="support tag close">/&gt;</span>
     <span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">g</span></span><span class="support tag close">&gt;</span>
 <span class="support tag"><span class="support tag">&lt;</span><span class="support tag special">/</span><span class="support tag-name">svg</span></span><span class="support tag close">&gt;</span></code></pre>
-<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3_scaleBox_circlePoints2</h5></section> <a data-lightbox="img/fig/circles3_scaleBox_circlePoints2.svg" href="img/fig/circles3_scaleBox_circlePoints2.svg" title="The `scaleBox` helper lets us transform coordinates without distorting point representations."><img class="block-fig-image" src="img/fig/circles3_scaleBox_circlePoints2.svg"></a> <section class="block-diagram-caption"><p>The `scaleBox` helper lets us transform coordinates without distorting point representations.</p></section></div>
+<p>Using the same set of point data, the template yields this image:</p>
+<div class="block-diagram block-diagram-pic fig"><section class="block-diagram-title"><h5>circles3_scaleBox_circlePoints2</h5></section> <a data-lightbox="img/fig/circles3_scaleBox_circlePoints2.svg" href="img/fig/circles3_scaleBox_circlePoints2.svg" title="The `scaleBox` helper lets us unevenly scale coordinate axes without distorting point representations."><img class="block-fig-image" src="img/fig/circles3_scaleBox_circlePoints2.svg"></a> <section class="block-diagram-caption"><p>The `scaleBox` helper lets us unevenly scale coordinate axes without distorting point representations.</p></section></div>
 <pre><code class="lang-javascript">
 Handlebars.<span class="function call">registerHelper</span>(&quot;scaleBox&quot;, <span class="keyword">function</span>(xMin1, yMin1, xMax1, yMax1, xMin2, yMin2, xMax2, yMax2, options) {
 
   <span class="keyword">var</span> data <span class="keyword operator">=</span> Handlebars.<span class="function call">createFrame</span>(options.data <span class="keyword operator">|</span><span class="keyword operator">|</span> {});
 
-  <span class="keyword">var</span> xRatio <span class="keyword operator">=</span> (xMax2 <span class="keyword operator">-</span> xMin2) / (xMax1 <span class="keyword operator">-</span> xMin1);
-
-  <span class="keyword">var</span> yRatio <span class="keyword operator">=</span> (yMax2 <span class="keyword operator">-</span> yMin2) / (yMax1 <span class="keyword operator">-</span> yMin1);
 
   <span class="keyword">var</span> src <span class="keyword operator">=</span> {
     xMin: xMin1,
     xMax: xMax1,
     yMin: yMin1,
     yMax: yMax1,
+    width: xMax1 <span class="keyword operator">-</span> xMin1,
+    height: yMax1 <span class="keyword operator">-</span> yMin1,
     coordText: &quot;&quot; <span class="keyword operator">+</span> xMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> xMax1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMax1
   };
 
@@ -369,28 +369,64 @@ Handlebars.<span class="function call">registerHelper</span>(&quot;scaleBox&quot
     xMax: xMax2,
     yMin: yMin2,
     yMax: yMax2,
+    width: xMax2 <span class="keyword operator">-</span> xMin2,
+    height: yMax2 <span class="keyword operator">-</span> yMin2,
     coordText: &quot;&quot; <span class="keyword operator">+</span> xMin2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMin2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> xMax2 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMax2
   };
 
+  <span class="keyword">var</span> xRatio <span class="keyword operator">=</span> dest.width / src.width;
+  <span class="keyword">var</span> yRatio <span class="keyword operator">=</span> dest.height / src.height;
+
+
+  <span class="comment">// map x-axis of `src`-space</span>
+  <span class="comment">// coordinates onto `dest`-space x-axis.</span>
   <span class="storage">var</span> <span class="entity function">xScale</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(x1Val) {
     <span class="keyword">var</span> x1Delta, x2Delta, x2Val;
-    x1Delta <span class="keyword operator">=</span> x1Val <span class="keyword operator">-</span> xMin1;
+
+    <span class="comment">// get the distance of `x1Val` along src </span>
+    <span class="comment">// X axis in absolute units</span>
+    x1Delta <span class="keyword operator">=</span> x1Val <span class="keyword operator">-</span> src.xMin;
+
+    <span class="comment">// scale distance by xRatio to get unit</span>
+    <span class="comment">// distance along dest X axis</span>
     x2Delta <span class="keyword operator">=</span> x1Delta <span class="keyword operator">*</span> xRatio;
-    x2Val <span class="keyword operator">=</span> x2Delta <span class="keyword operator">+</span> xMin2;
+
+    <span class="comment">// offset result by xMin of dest space</span>
+    x2Val <span class="keyword operator">=</span> x2Delta <span class="keyword operator">+</span> dest.xMin;
     <span class="keyword">return</span> x2Val;
   };
 
+
+  <span class="comment">// map y-axis of `src`-space</span>
+  <span class="comment">// coordinates onto `dest`-space y-axis.</span>
   <span class="storage">var</span> <span class="entity function">yScale</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(y1Val) {
     <span class="keyword">var</span> y1Delta, y2Delta, y2Val;
+
+
+    <span class="comment">// get the distance of `y1Val` along src </span>
+    <span class="comment">// Y axis in absolute units</span>
     y1Delta <span class="keyword operator">=</span> y1Val <span class="keyword operator">-</span> yMin1;
+
+    <span class="comment">// scale distance by yRatio to get unit</span>
+    <span class="comment">// distance along dest Y axis    </span>
     y2Delta <span class="keyword operator">=</span> y1Delta <span class="keyword operator">*</span> yRatio;
+
+    <span class="comment">// offset result by yMin of dest space.</span>
     y2Val <span class="keyword operator">=</span> y2Delta <span class="keyword operator">+</span> yMin2;
     <span class="keyword">return</span> y2Val;
   };
 
+  <span class="comment">// map y-axis of `src`-space</span>
+  <span class="comment">// coordinates onto `dest`-space y-axis,</span>
+  <span class="comment">// then invert to Cartesian form</span>
   <span class="storage">var</span> <span class="entity function">yScaleInvert</span> <span class="keyword operator">=</span> <span class="keyword">function</span>(y1Val) {
     <span class="keyword">var</span> inverted, y2Val;
+
+    <span class="comment">// get y value scaled to dest axis</span>
     y2Val <span class="keyword operator">=</span> <span class="function call">yScale</span>(y1Val);
+
+    <span class="comment">// invert y value by subtracting</span>
+    <span class="comment">// from dest.yMax</span>
     inverted <span class="keyword operator">=</span> yMax2 <span class="keyword operator">-</span> y2Val;
     <span class="keyword">return</span> inverted;
   };
