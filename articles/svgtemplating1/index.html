@@ -361,7 +361,10 @@ Handlebars.<span class="function call">registerHelper</span>(&quot;scaleBox&quot
     yMax: yMax1,
     width: xMax1 <span class="keyword operator">-</span> xMin1,
     height: yMax1 <span class="keyword operator">-</span> yMin1,
+
+    <span class="comment">// leading &quot;&quot; ensures `xMin1` is coerced into string</span>
     coordText: &quot;&quot; <span class="keyword operator">+</span> xMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMin1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> xMax1 <span class="keyword operator">+</span> &quot; &quot; <span class="keyword operator">+</span> yMax1
+
   };
 
   <span class="keyword">var</span> dest <span class="keyword operator">=</span> {
