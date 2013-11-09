@@ -870,9 +870,22 @@ pre .integer {
 pre .support, *[data-language="csharp"] .function.call {
   color: #FACD22; }
 
+pre .support.tag-name {
+  color: #EC7600; }
+pre .support.tag {
+  color: #fcfcfc; }
+pre .support.attribute {
+  color: #93C763; }
+
 pre .variable.global, pre .variable.class, pre .variable.instance {
   color: #CCC; }
 
 /* C# specific rule */
 pre .preprocessor {
   color: #66747B; }
+
+body {
+  border-right-style: solid;
+  border-top-style: solid;
+  border-radius: 10px;
+  border-color: #666666; }
