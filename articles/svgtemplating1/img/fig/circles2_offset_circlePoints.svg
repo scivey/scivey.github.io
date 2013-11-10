@@ -2,6 +2,16 @@
 
 <svg width="450" height="450" version="1.1" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<defs>
+		<style type="text/css">
+			<![CDATA[
+		      .chart-label{
+		      	font-size: 16;
+		      	font-family: "Verdana";
+		      	text-anchor: middle;
+		      }
+		    ]]>
+		</style>
+
 		<symbol id="plotted-points" viewBox="0 0 100 100">
 			
 		          <circle cx="50" cy="85" r="3" stroke-width="1" stroke="#333333" fill="#00ff00"/>
@@ -24,9 +34,9 @@
 
 		<use xlink:href="#plotted-points" x="75" y="75" width="300" height="300"/>
 
-		<text x="225" y="35" text-anchor="middle">Top</text>
-		<text x="225" y="415" text-anchor="middle">Bottom</text>
-		<text x="25" y="225" text-anchor="middle">L</text>
-		<text x="425" y="225" text-anchor="middle">R</text>
+		<text class="chart-label" x="225" y="35">Top</text>
+		<text class="chart-label" x="225" y="415">Bottom</text>
+		<text class="chart-label" x="25" y="225">L</text>
+		<text class="chart-label" x="425" y="225">R</text>
 	</g>
 </svg>
