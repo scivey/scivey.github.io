@@ -954,3 +954,13 @@ body {
 @media only screen and (max-width: 700px) {
   #home-page #home-page-inner {
     padding-left: 10%; } }
+a.scivey-link h1, a.scivey-link h2, a.scivey-link h3, a.scivey-link h4, a.scivey-link h5, a.scivey-link h6 {
+  text-decoration: none;
+  color: #333333; }
+a.scivey-link:hover {
+  text-decoration: underline;
+  color: #333333; }
+  a.scivey-link:hover h1, a.scivey-link:hover h2, a.scivey-link:hover h3, a.scivey-link:hover h4, a.scivey-link:hover h5, a.scivey-link:hover h6 {
+    text-decoration: underline; }
+a.scivey-link:visited {
+  color: #333333; }

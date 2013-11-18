@@ -55,16 +55,72 @@
        });
        */
     </script>
-    <title>scivey</title>
+    <title>scivey | Articles</title>
     <script src="/js/app/article.js"></script>
   </head>
   <body>
     <div id="page-frame">
       <div id="content-frame">
-        <div id="home-page"><span id="home-page-inner"><span class="links-part"><a href="articles/">
-                <h2>Articles</h2></a><a href="projects/">
-                <h2>Projects</h2></a></span><span class="scivey-part">
-              <h3>scivey</h3></span></span></div>
+        <div id="article-index-frame">
+          <div id="article-list-head">
+            <div class="base-page-head"><span class="base-title-half">
+                <h2 class="base-page-title">Articles</h2></span><span class="base-scivey-half">
+                <h4 class="base-page-scivey">scivey</h4></span></div>
+            <div class="base-page-head-bottom">		
+              <hr class="page-hr">
+            </div>
+          </div>
+          <div id="article-list">
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/svgtemplating1">
+                    <h4>Image Generation with SVG Templates, Part I</h4></a></div>
+                <p class="article-list-synopsis">Combine SVG fragments with Handlebars templates for lightweight static image generation and easy conversion of JSON-format data into graphical representations.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/partialsI">
+                    <h4>Partial Application</h4></a></div>
+                <p class="article-list-synopsis">Functions binding parameters of other functions.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/derivativeMultiVar2">
+                    <h4>Numerical Differentiation: Multi-Variable, Part Two</h4></a></div>
+                <p class="article-list-synopsis">Combine two or more partial derivatives to find the total and directional derivatives at a point.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/derivativeMultiVar1">
+                    <h4>Numerical Differentiation: Multi-Variable, Part One</h4></a></div>
+                <p class="article-list-synopsis">Find partial derivatives by combining the finite element method with partial application.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/derivativeSingleVar">
+                    <h4>Numerical Differentiation: Single-Variable</h4></a></div>
+                <p class="article-list-synopsis">Find the approximate slope at a point of of any f(x), using a reusable higher-order `differentiate` function.</p>
+              </div>
+            </div>
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/articles/asyncQueues">
+                    <h4>Async Queues for Non-Async-Safe Functions</h4></a></div>
+                <p class="article-list-synopsis">Some packages present asynchronous APIs but track internal state in a way that causes unexpected results when multiple calls are made in short succession.  As a short-term solution, a queue-based wrapper around the unsafe function ensures normal execution while presenting an async-safe API to dependent code.</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
