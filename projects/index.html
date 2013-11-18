@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta id="view-meta" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/lightbox.min.js"></script>
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+       showProcessingMessages: false,
+       messageStyle: "none",
+       "HTML-CSS": {
+        imageFont: null,
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+       SVG: {
+        linebreaks: { 
+         automatic: true,
+         width: "container",
+        }, 
+       },
+      });
+    </script>
+    <script src="/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link href="/css/naked.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/lightbox.css" type="text/css" rel="stylesheet"/>
+    <script>
+      /*
+      $(document).ready( function() {
+      
+       var $label = $(".dbg-width-label");
+       var $body = $("body");
+       var $pageFrame = $("#page-frame");
+       var $contentFrame = $("#content-frame");
+       var $meta = $("#view-meta");
+       var $artFrame = $("#article-frame");
+       var $contentBody = $(".content-body");
+       var sizeCheck = function() {
+        var bodSize = $body.width();
+        var pfSize = $pageFrame.width();
+        var cfSize = $contentFrame.width();
+        var vSize = $meta.attr("content");
+        var labelTxt = "B: " + bodSize + "  p: " + pfSize + "  c: " + cfSize + "<br/>";
+        var afSize = $artFrame.width();
+        var cbSize = $contentBody.width();
+        var label2 = "A: " + afSize + "  Cb: " + cbSize;
+        
+        $label.html(labelTxt + label2);
+       }
+       
+       setInterval(sizeCheck, 2000);
+       
+       });
+       */
+    </script>
+    <title>scivey | Projects</title>
+  </head>
+  <body>
+    <div id="page-frame">
+      <div id="content-frame">
+        <div id="article-index-frame">
+          <div id="article-list-head">
+            <div class="base-page-head"><span class="base-title-half">
+                <h2 class="base-page-title">Projects</h2></span><span class="base-scivey-half">
+                <h4 class="base-page-scivey">scivey</h4></span></div>
+            <div class="base-page-head-bottom">		
+              <hr class="page-hr">
+            </div>
+          </div>
+          <div id="article-list">
+            <div class="article-list-item">
+              <div class="article-list-thumb"></div>
+              <div class="article-list-text">
+                <div class="article-list-title"><a href="/uri-collection/">
+                    <h4>URICollection</h4></a></div>
+                <p class="article-list-synopsis">An immutable list container for URIs, with chaining methods for filtering and manipulation. Built for Node.js on top of URIjs and Underscore.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <!--
+  <div id="name-sec"><span class="scivey-span"><span class="base-sep">
+        <h3 class="base-page-scivey">|</h3></span>
+      <h4 class="base-page-scivey">scott ivey</h4></span></div>
+  -->
+</html>

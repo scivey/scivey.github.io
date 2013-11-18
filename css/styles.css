@@ -241,9 +241,6 @@ button {
   #page-frame {
     max-width: 799px; }
 
-  .article-body p {
-    max-width: 27.0em; }
-
   #aside-frame {
     display: none; }
 
@@ -262,9 +259,7 @@ button {
     max-width: 800px;
     border-width: 0px 2px 0px 2px;
     border-style: solid;
-    border-color: #666666; }
-    #content-frame > p {
-      max-width: 25.0em; } }
+    border-color: #666666; } }
 #article-list-head {
   margin-bottom: 4.0em; }
 
@@ -493,6 +488,10 @@ p > code {
 @media all and (min-width: 600px) {
   html {
     font-size: 112.5%;
+    line-height: 1.65; } }
+@media all and (min-width: 800px) {
+  html {
+    font-size: 120%;
     line-height: 1.65; } }
 body {
   -webkit-hyphens: auto;

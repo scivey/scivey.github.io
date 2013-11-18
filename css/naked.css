@@ -901,7 +901,6 @@ body {
   border-color: #666666; }
 
 #home-page {
-  border: 2px solid #999;
   margin-top: 10.0em; }
   #home-page .scivey-part {
     vertical-align: top;
@@ -918,7 +917,6 @@ body {
       margin-top: 43%; }
   #home-page .links-part {
     padding-right: 20px;
-    border-color: #444;
     border-right-width: 10px;
     border-style: solid;
     display: inline-block; }
@@ -943,7 +941,6 @@ body {
       padding-bottom: 0.1em; }
   #home-page #home-page-inner {
     padding-left: 35%;
-    border: 1px solid #0c0;
     display: block;
     *zoom: 1; }
     #home-page #home-page-inner:before, #home-page #home-page-inner:after {
