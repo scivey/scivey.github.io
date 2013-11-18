@@ -785,11 +785,11 @@ p > a {
     color: #3fbdbd;
     text-decoration: underline; }
 
-#article-list a {
+#article-list a, #project-list a {
   text-decoration: none; }
-  #article-list a h3, #article-list a h4, #article-list a h5 {
+  #article-list a h3, #article-list a h4, #article-list a h5, #project-list a h3, #project-list a h4, #project-list a h5 {
     text-decoration: underline; }
-    #article-list a h3:hover, #article-list a h4:hover, #article-list a h5:hover {
+    #article-list a h3:hover, #article-list a h4:hover, #article-list a h5:hover, #project-list a h3:hover, #project-list a h4:hover, #project-list a h5:hover {
       color: #d36a6a;
       text-decoration: none; }
 
@@ -899,3 +899,61 @@ body {
   border-top-style: solid;
   border-radius: 10px;
   border-color: #666666; }
+
+#home-page {
+  border: 2px solid #999;
+  margin-top: 10.0em; }
+  #home-page .scivey-part {
+    vertical-align: top;
+    border-left-width: 10px;
+    border-color: #c74343;
+    border-style: solid;
+    display: inline-block;
+    padding-left: 20px; }
+    #home-page .scivey-part h1, #home-page .scivey-part h2, #home-page .scivey-part h3, #home-page .scivey-part h4, #home-page .scivey-part h5, #home-page .scivey-part h6 {
+      color: #444;
+      vertical-align: bottom;
+      height: 50%;
+      padding-top: 0.0em;
+      margin-top: 43%; }
+  #home-page .links-part {
+    padding-right: 20px;
+    border-color: #444;
+    border-right-width: 10px;
+    border-style: solid;
+    display: inline-block; }
+    #home-page .links-part a {
+      text-decoration: none; }
+      #home-page .links-part a h1, #home-page .links-part a h2, #home-page .links-part a h3, #home-page .links-part a h4, #home-page .links-part a h5, #home-page .links-part a h6 {
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out; }
+      #home-page .links-part a:hover {
+        text-decoration: underline;
+        color: #cc5555; }
+        #home-page .links-part a:hover h1, #home-page .links-part a:hover h2, #home-page .links-part a:hover h3, #home-page .links-part a:hover h4, #home-page .links-part a:hover h5, #home-page .links-part a:hover h6 {
+          -webkit-transform: translateX(-15px);
+          -moz-transform: translateX(-15px);
+          -ms-transform: translateX(-15px);
+          -o-transform: translateX(-15px);
+          transform: translateX(-15px);
+          color: #cc5555; }
+    #home-page .links-part h1, #home-page .links-part h2, #home-page .links-part h3, #home-page .links-part h4, #home-page .links-part h5, #home-page .links-part h6 {
+      text-align: right;
+      padding-bottom: 0.1em; }
+  #home-page #home-page-inner {
+    padding-left: 35%;
+    border: 1px solid #0c0;
+    display: block;
+    *zoom: 1; }
+    #home-page #home-page-inner:before, #home-page #home-page-inner:after {
+      content: " ";
+      display: table; }
+    #home-page #home-page-inner:after {
+      clear: both; }
+    #home-page #home-page-inner > span {
+      display: inline-block; }
+
+@media only screen and (max-width: 700px) {
+  #home-page #home-page-inner {
+    padding-left: 10%; } }
